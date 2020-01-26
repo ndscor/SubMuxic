@@ -1,2 +1,3 @@
 include ':app'
+include ':app:lvl_library'
 rootProject.name='SubMuxic'

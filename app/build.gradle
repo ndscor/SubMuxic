@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
-
+def license() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("PLAYSTORE_LICENSE_KEY");
+}
 android {
     compileSdkVersion 28
 
@@ -9,7 +13,7 @@ android {
         targetSdkVersion 28
         versionCode 11
         versionName '2.1'
-
+        buildConfigField "String", "PLAYSTORE_LICENSE_KEY", "\""+license()+"\""
         buildTypes {
             release {
                 minifyEnabled false
@@ -26,6 +30,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':app:lvl_library')
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation "androidx.recyclerview:recyclerview:${versions.androidxRecyclerView}"
     implementation 'com.google.android.material:material:1.0.0'

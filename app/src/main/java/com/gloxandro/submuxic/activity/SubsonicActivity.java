@@ -18,6 +18,7 @@
  */
 package com.gloxandro.submuxic.activity;
 
+import android.app.Dialog;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,10 +30,12 @@ import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -79,6 +82,10 @@ import com.gloxandro.submuxic.util.UserUtil;
 import com.gloxandro.submuxic.util.Util;
 import com.gloxandro.submuxic.view.UpdateView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.vending.licensing.AESObfuscator;
+import com.google.android.vending.licensing.LicenseChecker;
+import com.google.android.vending.licensing.LicenseCheckerCallback;
+import com.google.android.vending.licensing.ServerManagedPolicy;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -86,6 +93,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission;
+import static com.gloxandro.submuxic.BuildConfig.PLAYSTORE_LICENSE_KEY;
 
 public class SubsonicActivity extends AppCompatActivity implements OnItemSelectedListener {
 	private static final String TAG = SubsonicActivity.class.getSimpleName();
@@ -95,6 +103,17 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 	private static final int MENU_ITEM_SERVER_BASE = 100;
 	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 	public static final int PERMISSIONS_REQUEST_LOCATION = 2;
+
+	private static final byte[] SALT = new byte[]{
+			-121, 55, 78, -12, -75, -89, 24, -99, 48, 22, -18, -17, 16, -120, -46, -123, -49, 23, -78,
+			34
+	};
+
+	private LicenseChecker mChecker;
+	private LicenseCheckerCallback mLicenseCheckerCallback;
+	boolean licensed;
+	boolean checkingLicense;
+	boolean didCheck;
 
 	private final List<Runnable> afterServiceAvailable = new ArrayList<>();
 	private boolean drawerIdle = true;
@@ -143,7 +162,11 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 
 		setUncaughtExceptionHandler();
 		super.onCreate(bundle);
+		String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+		mLicenseCheckerCallback = new MyLicenseCheckerCallback();
+		mChecker = new LicenseChecker(getApplicationContext(), new ServerManagedPolicy(this, new AESObfuscator(SALT, getPackageName(), deviceId)), PLAYSTORE_LICENSE_KEY);
 		sInstance = this;
+		CustomActionbar();
 		DownloadService.startService(this);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -186,6 +209,111 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		}
 	}
 
+	private class MyLicenseCheckerCallback implements LicenseCheckerCallback {
+
+		@Override
+		public void allow(int reason) {
+			// TODO Auto-generated method stub
+			if (isFinishing()) {
+				// Don't update UI if Activity is finishing.
+				return;
+			}
+			Log.i("License","Accepted!");
+
+			//You can do other things here, like saving the licensed status to a
+			//SharedPreference so the app only has to check the license once.
+
+			licensed = true;
+			checkingLicense = false;
+			didCheck = true;
+
+		}
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public void dontAllow(int reason) {
+			// TODO Auto-generated method stub
+			if (isFinishing()) {
+				// Don't update UI if Activity is finishing.
+				return;
+			}
+			Log.i("License","Denied!");
+			Log.i("License","Reason for denial: "+reason);
+
+			//You can do other things here, like saving the licensed status to a
+			//SharedPreference so the app only has to check the license once.
+
+			licensed = false;
+			checkingLicense = false;
+			didCheck = true;
+
+			showDialog(0);
+
+		}
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public void applicationError(int reason) {
+			// TODO Auto-generated method stub
+			Log.i("License", "Error: " + reason);
+			if (isFinishing()) {
+				// Don't update UI if Activity is finishing.
+				return;
+			}
+			licensed = true;
+			checkingLicense = false;
+			didCheck = false;
+
+			showDialog(0);
+		}
+
+
+	}
+
+	protected Dialog onCreateDialog(int id) {
+		// We have only one dialog.
+		return new AlertDialog.Builder(this)
+				.setTitle(R.string.unlicensed_dialog_title)
+				.setMessage(R.string.unlicensed_dialog_body)
+				.setPositiveButton(R.string.buy_button, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+								"http://market.android.com/details?id=" + getPackageName()));
+						startActivity(marketIntent);
+						finish();
+					}
+				})
+				.setNegativeButton(R.string.quit_button, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+				})
+				.setNeutralButton(R.string.retry_button, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						CustomActionbar();
+					}
+				})
+
+				.setCancelable(false)
+				.setOnKeyListener(new DialogInterface.OnKeyListener(){
+					public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
+						Log.i("License", "Key Listener");
+						finish();
+						return true;
+					}
+				})
+				.create();
+
+	}
+
+	private void CustomActionbar() {
+
+		didCheck = false;
+		checkingLicense = true;
+		setProgressBarIndeterminateVisibility(true);
+
+		mChecker.checkAccess(mLicenseCheckerCallback);
+	}
 
 
 	@Override
