@@ -15,9 +15,17 @@
 
 package com.gloxandro.submuxic.service;
 
-import android.content.SharedPreferences;
 import android.os.Looper;
 import android.util.Log;
+
+import com.gloxandro.submuxic.R;
+import com.gloxandro.submuxic.domain.DLNADevice;
+import com.gloxandro.submuxic.domain.MusicDirectory;
+import com.gloxandro.submuxic.domain.PlayerState;
+import com.gloxandro.submuxic.server.WebProxy;
+import com.gloxandro.submuxic.util.FileUtil;
+import com.gloxandro.submuxic.util.Pair;
+import com.gloxandro.submuxic.util.Util;
 
 import org.fourthline.cling.controlpoint.ActionCallback;
 import org.fourthline.cling.controlpoint.ControlPoint;
@@ -60,18 +68,6 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicLong;
-
-import com.gloxandro.submuxic.R;
-import com.gloxandro.submuxic.domain.DLNADevice;
-import com.gloxandro.submuxic.domain.MusicDirectory;
-import com.gloxandro.submuxic.domain.PlayerState;
-import com.gloxandro.submuxic.util.Constants;
-import com.gloxandro.submuxic.util.FileUtil;
-import com.gloxandro.submuxic.util.Pair;
-import com.gloxandro.submuxic.util.Util;
-import com.gloxandro.submuxic.server.FileProxy;
-import com.gloxandro.submuxic.server.ServerProxy;
-import com.gloxandro.submuxic.server.WebProxy;
 
 public class DLNAController extends RemoteController {
 	private static final String TAG = DLNAController.class.getSimpleName();

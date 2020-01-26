@@ -18,7 +18,6 @@
  */
 package com.gloxandro.submuxic.activity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -74,7 +73,6 @@ import com.gloxandro.submuxic.util.SilentBackgroundTask;
 import com.gloxandro.submuxic.util.ThemeUtil;
 import com.gloxandro.submuxic.util.UserUtil;
 import com.gloxandro.submuxic.util.Util;
-import com.gloxandro.submuxic.view.ChangeLog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
@@ -422,17 +420,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		showInfoDialog();
 		checkUpdates();
 
-		ChangeLog changeLog = new ChangeLog(this, Util.getPreferences(this));
-		if(changeLog.isFirstRun()) {
-			if(changeLog.isFirstRunEver()) {
-				changeLog.updateVersionInPreferences();
-			} else {
-				Dialog log = changeLog.getLogDialog();
-				if (log != null) {
-					log.show();
-				}
-			}
-		}
 	}
 
 	@Override

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "635581057311",
+    "firebase_url": "https://submuxic-256ed.firebaseio.com",
+    "project_id": "submuxic-256ed",
+    "storage_bucket": "submuxic-256ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635581057311:android:34388ce1f1bda4d3b9482a",
+        "android_client_info": {
+          "package_name": "com.gloxandro.submuxic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635581057311-8l0sgaa9dke4dqd1h68qeqq071c1g4sb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApsqJT3iTDBuoXDKsuCbsTh_TYb2P03Pk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635581057311-8l0sgaa9dke4dqd1h68qeqq071c1g4sb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

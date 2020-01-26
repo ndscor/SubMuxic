@@ -22,16 +22,16 @@ package com.gloxandro.submuxic.service;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import java.util.Iterator;
-import java.util.concurrent.LinkedBlockingQueue;
-
 import com.gloxandro.submuxic.domain.MusicDirectory;
 import com.gloxandro.submuxic.domain.RemoteStatus;
-import com.gloxandro.submuxic.util.Constants;
-import com.gloxandro.submuxic.util.Util;
 import com.gloxandro.submuxic.server.FileProxy;
 import com.gloxandro.submuxic.server.ServerProxy;
 import com.gloxandro.submuxic.server.WebProxy;
+import com.gloxandro.submuxic.util.Constants;
+import com.gloxandro.submuxic.util.Util;
+
+import java.util.Iterator;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public abstract class RemoteController {
 	private static final String TAG = RemoteController.class.getSimpleName();
@@ -50,7 +50,7 @@ public abstract class RemoteController {
 	public abstract void start();
 	public abstract void stop();
 	public abstract void shutdown();
-	
+
 	public abstract void updatePlaylist();
 	public abstract void changePosition(int seconds);
 	public abstract void changeTrack(int index, DownloadFile song);
@@ -69,7 +69,7 @@ public abstract class RemoteController {
 	public boolean isSeekable() {
 		return true;
 	}
-	
+
 	public abstract int getRemotePosition();
 	public int getRemoteDuration() {
 		return 0;
