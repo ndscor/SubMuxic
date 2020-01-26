@@ -6,7 +6,10 @@ def license() {
 }
 android {
     compileSdkVersion 28
-
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
     defaultConfig {
         applicationId "com.gloxandro.submuxic"
         minSdkVersion 21

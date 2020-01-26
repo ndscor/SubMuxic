@@ -21,13 +21,13 @@
 21
 22    <uses-sdk
 23        android:minSdkVersion="4"
-23-->C:\AndroidPdfViewer-master\AQPDFREADER\app\lvl_library\src\main\AndroidManifest.xml
+23-->C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
 24        android:targetSdkVersion="28" />
-24-->C:\AndroidPdfViewer-master\AQPDFREADER\app\lvl_library\src\main\AndroidManifest.xml
+24-->C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
 25    <!-- Devices >= 3 have version of Android Market that supports licensing. -->
 26    <!-- Required permission to check licensing. -->
 27    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
-27-->C:\AndroidPdfViewer-master\AQPDFREADER\app\lvl_library\src\main\AndroidManifest.xml:22:5-73
-27-->C:\AndroidPdfViewer-master\AQPDFREADER\app\lvl_library\src\main\AndroidManifest.xml:22:22-70
+27-->C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:22:5-73
+27-->C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:22:22-70
 28
 29</manifest>

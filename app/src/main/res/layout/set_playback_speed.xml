@@ -52,15 +52,13 @@
 		android:textSize="20dp"
 		android:paddingRight="10px"
 		android:textColor="?android:textColorPrimary"
-		android:layout_below="@+id/playback_speed_buttons"/>
+/>
 
 	<SeekBar
 		android:id="@+id/playback_speed_bar"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:max="25"
-		android:layout_toRightOf="@+id/playback_speed_label"
-		android:layout_below="@+id/playback_speed_buttons"
 		/>
 
 </RelativeLayout>
