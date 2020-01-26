@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/settings.title">
+
+	<PreferenceScreen
+		android:title="@string/settings.servers_title"
+		android:key="servers">
+	</PreferenceScreen>
+
+	<PreferenceScreen
+		android:title="@string/settings.appearance_title"
+		android:key="appearance">
+	</PreferenceScreen>
+
+	<PreferenceScreen
+		android:title="@string/settings.drawer_items_title"
+		android:key="drawer">
+	</PreferenceScreen>
+
+	<PreferenceScreen
+		android:title="@string/settings.cache_screen_title"
+		android:key="cache">
+	</PreferenceScreen>
+
+	<PreferenceScreen
+		android:title="@string/settings.sync_title"
+		android:key="sync">
+	</PreferenceScreen>
+
+	<PreferenceScreen
+		android:title="@string/settings.playback_title"
+		android:key="playback">
+	</PreferenceScreen>
+
+	<PreferenceScreen
+		android:title="@string/settings.casting"
+		android:key="cast">
+	</PreferenceScreen>
+</PreferenceScreen>

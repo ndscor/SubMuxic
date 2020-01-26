@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/refresh_layout"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<LinearLayout
+		android:id="@+id/fragment_list_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical" >
+
+		<RelativeLayout
+			android:layout_width="fill_parent"
+			android:layout_height="0dip"
+			android:layout_weight="1.0">
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/fragment_recycler"
+				android:clipToPadding="false"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scrollbars="vertical"
+				android:scrollbarStyle="outsideOverlay"/>
+
+			<com.gloxandro.submuxic.view.FastScroller
+				android:id="@+id/fragment_fast_scroller"
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:layout_alignParentRight="true"/>
+		</RelativeLayout>
+
+		<include layout="@layout/tab_progress" />
+	</LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

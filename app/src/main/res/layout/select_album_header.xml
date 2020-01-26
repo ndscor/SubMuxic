@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/select_album_header_wrapper"
+	android:layout_height="wrap_content"
+	android:layout_width="fill_parent">
+
+	<RelativeLayout
+		android:id="@+id/select_album_header"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top">
+
+		<LinearLayout
+			android:id="@+id/select_album_text_layout"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/select_album_art"
+			android:orientation="vertical"
+			android:layout_centerVertical="true">
+
+			<TextView
+				android:text="This is the album title"
+				android:id="@+id/select_album_title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:textStyle="bold"
+				android:singleLine="true"
+				android:ellipsize="marquee"
+				android:marqueeRepeatLimit="marquee_forever"
+				android:scrollHorizontally="true"
+				android:focusable="true"
+				android:focusableInTouchMode="true"
+				android:textColor="?android:textColorPrimary">
+
+				<requestFocus android:focusable="true"
+					android:focusableInTouchMode="true"
+					android:duplicateParentState="true" />
+			</TextView>
+
+			<TextView
+				android:text="This is the artist name"
+				android:id="@+id/select_album_artist"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:singleLine="true"
+				android:ellipsize="end"
+				android:textColor="?android:textColorPrimary"/>
+
+			<TextView
+				android:text="XX SONGS"
+				android:id="@+id/select_album_song_count"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingTop="14dip"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:singleLine="true"
+				android:ellipsize="none"
+				android:textColor="?android:textColorSecondary"/>
+
+			<TextView
+				android:text="0:00"
+				android:id="@+id/select_album_song_length"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:singleLine="true"
+				android:ellipsize="none"
+				android:textColor="?android:textColorSecondary"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true"
+			android:padding="10dip">
+
+			<LinearLayout
+				android:id="@+id/select_album_rate_wrapper"
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent">
+
+				<RatingBar
+					android:id="@+id/select_album_rate"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:numStars="5"
+					style="@android:style/Widget.Holo.RatingBar.Small"
+					android:layout_gravity="center_vertical"/>
+			</LinearLayout>
+
+			<ImageButton
+				android:id="@+id/select_album_star"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				style="@style/BasicButton"
+				android:src="@android:drawable/star_big_off"
+				android:layout_gravity="center_vertical"/>
+
+			<ImageView
+				android:id="@+id/select_album_share"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:scaleType="fitCenter"
+				android:src="?attr/share"
+				style="@style/BasicButton"
+				android:layout_gravity="center_vertical"/>
+		</LinearLayout>
+
+		<com.gloxandro.submuxic.view.RecyclingImageView
+			android:id="@+id/select_album_art"
+			android:layout_width="@dimen/AlbumArt.Header"
+			android:layout_height="@dimen/AlbumArt.Header"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentLeft="true"
+			android:layout_marginRight="10dip"
+			android:scaleType="fitCenter"
+			android:contentDescription="@null"/>
+	</RelativeLayout>
+
+	<FrameLayout
+		android:id="@+id/header_progress"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:clickable="true"
+		android:visibility="gone"
+		android:layout_gravity="top">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_gravity="center">
+
+			<TextView
+				android:id="@+id/tab_progress_message"
+				android:text="@string/progress.artist_info"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:textColor="?android:textColorPrimary"/>
+		</LinearLayout>
+	</FrameLayout>
+
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="1dp"
+		android:layout_gravity="bottom"
+		android:background="?attr/default_divider"/>
+</FrameLayout>
+
+

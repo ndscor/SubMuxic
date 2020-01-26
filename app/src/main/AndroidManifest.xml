@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	package="com.gloxandro.submuxic"
+	android:installLocation="internalOnly">
+
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" android:maxSdkVersion="22"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.WAKE_LOCK"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.RECORD_AUDIO" android:maxSdkVersion="22"/>
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.BLUETOOTH"/>
+	<uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+	<uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+	<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+	<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+	<uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+	<uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+	<uses-feature android:name="android.hardware.microphone" android:required="false" />
+	<uses-feature android:name="android.hardware.wifi" android:required="false" />
+	<uses-feature android:name="android.software.leanback" android:required="false"/>
+	<uses-feature android:name="android.hardware.location" android:required="false"/>
+	<uses-feature android:name="android.hardware.location.network" android:required="false"/>
+
+	<supports-screens android:anyDensity="true" android:xlargeScreens="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true"/>
+
+	<application android:label="@string/common.appname"
+		android:icon="@mipmap/submuxic_launcher"
+		android:theme="@style/Theme.SubMuxic.Startup"
+		android:allowTaskReparenting="false"
+		android:allowBackup="false"
+		android:supportsRtl="true"
+		android:resizeableActivity="true"
+		android:usesCleartextTraffic="true"
+		android:largeHeap="true"
+		tools:ignore="GoogleAppIndexingWarning,MissingTvBanner">
+
+		<activity android:name="com.gloxandro.submuxic.activity.SubsonicFragmentActivity"
+			android:configChanges="orientation|keyboardHidden"
+			android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+				<category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+			</intent-filter>
+		</activity>
+
+		<activity android:name="com.gloxandro.submuxic.activity.SettingsActivity"
+			android:configChanges="orientation|keyboardHidden"
+			android:launchMode="singleTask"/>
+
+		<activity android:name="com.gloxandro.submuxic.activity.VoiceQueryReceiverActivity"
+			android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="com.google.android.gms.actions.SEARCH_ACTION"/>
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+		</activity>
+
+		<activity android:name="com.gloxandro.submuxic.activity.QueryReceiverActivity"
+			android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.intent.action.SEARCH"/>
+			</intent-filter>
+			<meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
+		</activity>
+
+		<activity
+			android:name="com.gloxandro.submuxic.activity.EditPlayActionActivity"
+			android:label="@string/tasker.start_playing"
+			android:icon="@mipmap/submuxic_launcher">
+
+			<intent-filter>
+				<action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+			</intent-filter>
+		</activity>
+
+		<service android:name=".service.DownloadService"
+			android:label="SubMuxic Playback Service"/>
+
+		<service android:name=".service.AutoMediaBrowserService"
+			android:exported="true">
+
+			<intent-filter>
+				<action android:name="android.media.browse.MediaBrowserService"/>
+			</intent-filter>
+		</service>
+
+		<service android:name="org.fourthline.cling.android.AndroidUpnpServiceImpl"/>
+
+		<service android:name="com.gloxandro.submuxic.service.HeadphoneListenerService"
+			android:label="SubMuxic Headphone Listener"/>
+		<receiver
+			android:name="com.gloxandro.submuxic.receiver.BootReceiver">
+			<intent-filter>
+				<action
+					android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+
+		<receiver android:name="com.gloxandro.submuxic.receiver.MediaButtonIntentReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.MEDIA_BUTTON" />
+			</intent-filter>
+		</receiver>
+
+		<receiver android:name="com.gloxandro.submuxic.receiver.A2dpIntentReceiver">
+			<intent-filter>
+				<action android:name="android.music.playstatusrequest"/>
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.gloxandro.submuxic.provider.SubMuxicWidget4x1"
+			android:label="@string/widget.4x1">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget4x1"/>
+		</receiver>
+		<receiver
+			android:name="com.gloxandro.submuxic.provider.SubMuxicWidget4x2"
+			android:label="@string/widget.4x2">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget4x2"/>
+		</receiver>
+		<receiver
+			android:name="com.gloxandro.submuxic.provider.SubMuxicWidget4x3"
+			android:label="@string/widget.4x3">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget4x3"/>
+		</receiver>
+		<receiver
+			android:name="com.gloxandro.submuxic.provider.SubMuxicWidget4x4"
+			android:label="@string/widget.4x4">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget4x4"/>
+		</receiver>
+
+		<receiver
+			android:name="com.gloxandro.submuxic.receiver.PlayActionReceiver">
+
+			<intent-filter>
+				<action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+			</intent-filter>
+		</receiver>
+
+		<provider android:name="com.gloxandro.submuxic.provider.SubMuxicSearchProvider"
+			android:authorities="com.gloxandro.submuxic.provider.SubMuxicSearchProvider"/>
+		<provider android:name="com.gloxandro.submuxic.provider.PlaylistStubProvider"
+			android:authorities="com.gloxandro.submuxic.playlists.provider"
+			android:label="@string/button_bar.playlists"
+			android:exported="false"
+			android:syncable="true"/>
+		<provider android:name="com.gloxandro.submuxic.provider.PodcastStubProvider"
+			android:authorities="com.gloxandro.submuxic.podcasts.provider"
+			android:label="@string/button_bar.podcasts"
+			android:exported="false"
+			android:syncable="true"/>
+		<provider android:name="com.gloxandro.submuxic.provider.StarredStubProvider"
+			android:authorities="com.gloxandro.submuxic.starred.provider"
+			android:label="@string/main.albums_starred"
+			android:exported="false"
+			android:syncable="true"/>
+		<provider android:name="com.gloxandro.submuxic.provider.MostRecentStubProvider"
+			android:authorities="com.gloxandro.submuxic.mostrecent.provider"
+			android:label="@string/main.albums_newest"
+			android:exported="false"
+			android:syncable="true"/>
+
+		<meta-data android:name="android.app.default_searchable"
+			android:value="com.gloxandro.submuxic.activity.QueryReceiverActivity"/>
+
+	</application>
+
+</manifest>

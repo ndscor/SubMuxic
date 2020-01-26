@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:compat="http://schemas.android.com/apk/res-auto">
+	<item 
+		android:id="@+id/menu_global_search"
+		android:icon="?attr/search"
+		android:title="@string/menu.search"
+		compat:actionViewClass="androidx.appcompat.widget.SearchView"
+		compat:showAsAction="ifRoom|collapseActionView"/>
+	
+	<item 
+		android:id="@+id/menu_global_shuffle"
+		android:icon="?attr/shuffle"
+		android:title="@string/menu.shuffle"
+		compat:showAsAction="ifRoom|withText"/>
+
+	<item
+		android:id="@+id/videos"
+		compat:showAsAction="always"
+		android:icon="?attr/shuffle"
+		android:title="@string/main.videos"/>
+
+	<group android:id="@+id/rescan_server">
+		<item
+			android:id="@+id/menu_rescan"
+			android:title="@string/menu.rescan"/>
+	</group>
+		
+	<item 
+		android:id="@+id/menu_about"
+		android:title="@string/menu.about"/>
+
+
+	<item
+		android:id="@+id/menu_exit"
+		android:title="@string/menu.exit"/>
+</menu>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:compat="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/menu_global_search"
+		android:icon="?attr/search"
+		android:title="@string/menu.search"
+		compat:actionViewClass="android.support.v7.widget.SearchView"
+		compat:showAsAction="ifRoom|collapseActionView"/>
+
+	<item 
+		android:id="@+id/menu_add_podcast"
+		android:icon="?attr/add"
+		android:title="@string/menu.add_podcast"
+		compat:showAsAction="ifRoom|withText"/>
+
+	<group android:id="@+id/not_touchscreen">
+		<item
+			android:id="@+id/menu_refresh"
+			android:icon="?attr/refresh"
+			android:title="@string/menu.refresh"
+			compat:showAsAction="ifRoom|withText"/>
+	</group>
+
+	<item 
+		android:id="@+id/menu_check"
+		android:title="@string/menu.check_podcasts"/>
+
+	<item
+		android:id="@+id/menu_exit"
+		android:title="@string/menu.exit"/>
+</menu>
