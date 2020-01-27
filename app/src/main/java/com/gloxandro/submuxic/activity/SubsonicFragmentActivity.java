@@ -70,7 +70,6 @@ import com.gloxandro.submuxic.util.DrawableTint;
 import com.gloxandro.submuxic.util.FileUtil;
 import com.gloxandro.submuxic.util.KeyStoreUtil;
 import com.gloxandro.submuxic.util.SilentBackgroundTask;
-import com.gloxandro.submuxic.util.ThemeUtil;
 import com.gloxandro.submuxic.util.UserUtil;
 import com.gloxandro.submuxic.util.Util;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -112,7 +111,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		applyTheme();
 		if (savedInstanceState == null) {
 			String fragmentType = getIntent().getStringExtra(Constants.INTENT_EXTRA_FRAGMENT_TYPE);
 			boolean firstRun = false;
@@ -463,20 +461,12 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		}
 	}
 
-	private void applyTheme() {
-		theme = ThemeUtil.getTheme(this);
-		ThemeUtil.applyTheme(this, theme);
-	}
-
-
 	@Override
 	public void onResume() {
 		super.onResume();
-			applyTheme();
 		int color = Util.getbottombarColor(this);
 		Drawable colorDrawable = new ColorDrawable(color);
 		bottomBar.setBackground(colorDrawable);
-
 		if(getIntent().hasExtra(Constants.INTENT_EXTRA_VIEW_ALBUM)) {
 			SubsonicFragment fragment = new SelectDirectoryFragment();
 			Bundle args = new Bundle();

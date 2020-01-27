@@ -83,7 +83,7 @@ public class ImageLoader {
 		cacheSize = maxMemory / 4;
 
 		// Determine the density-dependent image sizes.
-		imageSizeDefault = context.getResources().getDrawable(R.drawable.submuxic_shadow).getIntrinsicHeight();
+		imageSizeDefault = context.getResources().getDrawable(R.mipmap.submuxic_launcher).getIntrinsicHeight();
 
 		DisplayMetrics metrics = context.getResources().getDisplayMetrics();
 		imageSizeLarge = Math.round(Math.min(metrics.widthPixels, metrics.heightPixels));

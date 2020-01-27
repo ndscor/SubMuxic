@@ -77,7 +77,7 @@
 				android:id="@+id/bottom_bar"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:background="@color/mr_cast_meta_black_scrim"
+				android:background="@color/deep_black"
 				android:orientation="horizontal"
 				android:elevation="12dp">
 

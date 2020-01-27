@@ -23,7 +23,7 @@ package com.gloxandro.submuxic.util;
  * @version $Id$
  */
 public final class Constants {
-
+	public static final boolean LOG_V = false;
     // Character encoding used throughout.
     public static final String UTF_8 = "UTF-8";
 

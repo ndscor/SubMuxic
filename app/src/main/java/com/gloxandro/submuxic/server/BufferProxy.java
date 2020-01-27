@@ -15,10 +15,10 @@ Copyright 2014 (C) Scott Jackson
 
 package com.gloxandro.submuxic.server;
 
+import android.content.Context;
+
 import java.io.File;
 import java.net.Socket;
-
-import android.content.Context;
 
 public class BufferProxy extends com.gloxandro.submuxic.server.FileProxy {
 	private static final String TAG = BufferProxy.class.getSimpleName();
@@ -78,3 +78,6 @@ public class BufferProxy extends com.gloxandro.submuxic.server.FileProxy {
 		}
 	}
 }
+
+
+

@@ -167,14 +167,14 @@ public final class Notifications {
 			}
 			if (bitmap == null) {
 				// set default album art
-				rv.setImageViewResource(R.id.notification_image, R.drawable.submuxic_shadow);
+				rv.setImageViewResource(R.id.notification_image, R.mipmap.submuxic_launcher);
 			} else {
 				imageLoader.setNowPlayingSmall(bitmap);
 				rv.setImageViewBitmap(R.id.notification_image, bitmap);
 			}
 		} catch (Exception x) {
 			Log.w(TAG, "Failed to get notification cover art", x);
-			rv.setImageViewResource(R.id.notification_image, R.drawable.submuxic_shadow);
+			rv.setImageViewResource(R.id.notification_image, R.mipmap.submuxic_launcher);
 		}
 
 		// set the text for the notifications

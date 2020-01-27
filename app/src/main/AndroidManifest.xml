@@ -5,7 +5,7 @@
 	android:installLocation="internalOnly">
 
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.INTERNET"/>
 
@@ -53,7 +53,9 @@
 				<category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
 			</intent-filter>
 		</activity>
-
+		<activity android:name="com.gloxandro.submuxic.activity.AboutActivity"
+			android:theme="@style/Theme.AppCompat.DayNight.Dialog"
+			/>
 		<activity android:name="com.gloxandro.submuxic.activity.SettingsActivity"
 			android:configChanges="orientation|keyboardHidden"
 			android:launchMode="singleTask"/>

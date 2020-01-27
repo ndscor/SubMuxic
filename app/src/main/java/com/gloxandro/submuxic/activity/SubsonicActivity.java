@@ -161,6 +161,7 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		}
 
 		setUncaughtExceptionHandler();
+		applyTheme();
 		super.onCreate(bundle);
 		String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 		mLicenseCheckerCallback = new MyLicenseCheckerCallback();
@@ -269,6 +270,8 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 
 
 	}
+
+
 
 	protected Dialog onCreateDialog(int id) {
 		// We have only one dialog.
