@@ -20,9 +20,9 @@
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
 			android:paddingTop="4dp"
-			android:paddingLeft="2dp">
+			android:paddingStart="2dp">
 
-			<TextView
+			<TextView android:fontFamily="sans-serif"
 				android:id="@+id/item_name"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
 				android:singleLine="true"
 				android:ellipsize="marquee"
 				android:textColor="?android:textColorPrimary"
-				android:paddingLeft="@dimen/Card.TextLeftPadding"/>
+				android:paddingStart="@dimen/Card.TextLeftPadding"/>
 
 			<ImageView
 				android:id="@+id/item_more"

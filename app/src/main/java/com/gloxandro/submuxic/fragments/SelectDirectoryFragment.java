@@ -1227,10 +1227,10 @@ public class SelectDirectoryFragment extends SubsonicFragment implements Section
 						ViewGroup.MarginLayoutParams vlp = (ViewGroup.MarginLayoutParams) coverArtView.getLayoutParams();
 						if(coverArtView.getDrawable() != null) {
 							height = coverArtView.getMeasuredHeight() + coverArtView.getPaddingBottom();
-							width = coverArtView.getWidth() + coverArtView.getPaddingRight();
+							width = coverArtView.getWidth() + coverArtView.getPaddingEnd();
 						} else {
 							height = coverArtView.getHeight();
-							width = coverArtView.getWidth() + coverArtView.getPaddingRight();
+							width = coverArtView.getWidth() + coverArtView.getPaddingEnd();
 						}
 						float textLineHeight = artistView.getPaint().getTextSize();
 						int lines = (int) Math.ceil(height / textLineHeight);

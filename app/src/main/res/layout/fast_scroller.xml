@@ -4,7 +4,7 @@
 	   android:layout_width="wrap_content"
 	   android:layout_height="match_parent">
 
-	<TextView
+	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/fastscroller_bubble"
 		android:layout_gravity="right|end"
 		android:gravity="center"
@@ -18,8 +18,8 @@
 	<ImageView
 		android:id="@+id/fastscroller_handle"
 		android:layout_width="wrap_content"
-		android:layout_marginRight="@dimen/FastScroller.RightMargin"
-		android:layout_marginLeft="12dp"
+		android:layout_marginEnd="@dimen/FastScroller.RightMargin"
+		android:layout_marginStart="12dp"
 		android:layout_height="wrap_content"
 		android:src="@drawable/fast_scroller_handle"/>
 </merge>

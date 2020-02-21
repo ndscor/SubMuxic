@@ -1790,6 +1790,13 @@ public class DownloadService extends Service {
 			case JUKEBOX_SERVER:
 				remoteController = new JukeboxController(this, handler);
 				break;
+			case CHROMECAST: case DLNA:
+				if(ref == null) {
+					remoteState = LOCAL;
+					break;
+				}
+				remoteController = (RemoteController) ref;
+				break;
 			case LOCAL: default:
 				if(wifiLock.isHeld()) {
 					wifiLock.release();
@@ -1842,6 +1849,11 @@ public class DownloadService extends Service {
 					MediaRouter.RouteInfo info = mediaRouter.getRouteForId(routeId);
 					if(info == null) {
 						setRemoteState(LOCAL, null);
+					} else if(newState == RemoteControlState.CHROMECAST) {
+						RemoteController controller = mediaRouter.getRemoteController(info);
+						if(controller != null) {
+							setRemoteState(RemoteControlState.CHROMECAST, controller);
+						}
 					}
 					mediaRouter.stopScan();
 				}
@@ -1852,8 +1864,13 @@ public class DownloadService extends Service {
 				public void run() {
 					mediaRouter.startScan();
 					MediaRouter.RouteInfo info = mediaRouter.getRouteForId(routeId);
-					if (info == null) {
+					if(info == null) {
 						handler.postDelayed(delayedReconnect, 2000L);
+					} else if(newState == RemoteControlState.CHROMECAST) {
+						RemoteController controller = mediaRouter.getRemoteController(info);
+						if(controller != null) {
+							setRemoteState(RemoteControlState.CHROMECAST, controller);
+						}
 					}
 				}
 			});

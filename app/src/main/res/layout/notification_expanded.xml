@@ -16,14 +16,14 @@
 	    android:layout_height="fill_parent"
 	    android:layout_weight="0.0"
 	    android:orientation="vertical"
-	    android:paddingLeft="11.0dip" >
+	    android:paddingStart="11.0dip" >
 
 		<LinearLayout
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal">
 
-			<TextView
+			<TextView android:fontFamily="sans-serif"
 				android:id="@+id/notification_title"
 				style="@style/NotificationText.Title"
 				android:layout_width="0dp"
@@ -44,7 +44,7 @@
 				android:visibility="invisible"/>
 		</LinearLayout>
 
-	    <TextView
+	    <TextView android:fontFamily="sans-serif"
 	        android:id="@+id/notification_artist"
 	        style="@style/NotificationText.Content"
 	        android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
 	        android:scrollHorizontally="true"
 	        android:singleLine="true" />
 
-	    <TextView
+	    <TextView android:fontFamily="sans-serif"
 	        android:id="@+id/notification_album"
 	        style="@style/NotificationText.Content"
 	        android:layout_width="wrap_content"

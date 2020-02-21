@@ -9,10 +9,10 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="4dp"
+			android:layout_marginStart="4dp"
 			android:textSize="20dp"
 			android:text="@string/tasker.edit_shuffle_mode"
 			android:textColor="?android:textColorPrimary"/>
@@ -29,10 +29,10 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="4dp"
+			android:layout_marginStart="4dp"
 			android:textSize="20dp"
 			android:text="@string/tasker.edit_shuffle_start_year"
 			android:textColor="?android:textColorPrimary"/>
@@ -58,10 +58,10 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="4dp"
+			android:layout_marginStart="4dp"
 			android:textSize="20dp"
 			android:text="@string/tasker.edit_shuffle_end_year"
 			android:textColor="?android:textColorPrimary"/>
@@ -87,10 +87,10 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="4dp"
+			android:layout_marginStart="4dp"
 			android:textSize="20dp"
 			android:text="@string/tasker.edit_shuffle_genre"
 			android:textColor="?android:textColorPrimary"/>
@@ -108,10 +108,10 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="4dp"
+			android:layout_marginStart="4dp"
 			android:textSize="20dp"
 			android:text="@string/tasker.edit_server_offline"
 			android:textColor="?android:textColorPrimary"/>

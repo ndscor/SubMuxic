@@ -27,7 +27,7 @@
 				android:id="@+id/fragment_fast_scroller"
 				android:layout_width="wrap_content"
 				android:layout_height="fill_parent"
-				android:layout_alignParentRight="true"/>
+				android:layout_alignParentEnd="true"/>
 		</RelativeLayout>
 
 		<include layout="@layout/tab_progress" />

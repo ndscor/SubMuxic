@@ -4,7 +4,7 @@
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
 
-	<TextView
+	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/value"
 		android:padding="5dip"
 		android:layout_width="fill_parent"

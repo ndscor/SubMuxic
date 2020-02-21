@@ -23,12 +23,13 @@
 				style="?android:attr/progressBarStyleInverse"
 				android:layout_width="match_parent"
 				android:layout_height="8dp"
+				android:visibility="invisible"
 				android:layout_marginTop="2dp"
 				android:theme="@style/Widget.AppCompat.ProgressBar.Horizontal" />
 
 		</FrameLayout>
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:id="@+id/tab_progress_message"
 			android:text="@string/progress.wait"
 			android:layout_width="wrap_content"

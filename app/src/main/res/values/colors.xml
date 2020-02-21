@@ -30,6 +30,9 @@
 	<color name="mailhd">#323232</color>
 	<color name="deep_black">#000000</color>
 
+	<color name="background">#59000000</color>
+	<color name="background_l">#59FFFFFF</color>
+
 	<color name="submuxic_primary">#151515</color>
 
 	<color name="dark_background">#323232</color>

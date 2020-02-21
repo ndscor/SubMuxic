@@ -4,15 +4,15 @@
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
 
-	<TextView
+	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/equalizer.frequency"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="8dp"
-		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
 		android:textColor="?android:textColorPrimary"/>
 
-	<TextView
+	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/equalizer.level"
 		android:text="0 dB"
 		android:textSize="12sp"
@@ -20,8 +20,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="8dp"
-		android:layout_alignParentRight="true"
-		android:layout_toRightOf="@+id/equalizer.frequency"
+		android:layout_alignParentEnd="true"
+		android:layout_toEndOf="@+id/equalizer.frequency"
 		android:textColor="?android:textColorSecondary"/>
 
 	<SeekBar

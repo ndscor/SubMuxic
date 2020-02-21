@@ -1,15 +1,17 @@
 package com.gloxandro.submuxic.fragments;
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebView;
 
 import com.gloxandro.submuxic.R;
-import com.gloxandro.submuxic.activity.AboutActivity;
 import com.gloxandro.submuxic.adapter.MainAdapter;
 import com.gloxandro.submuxic.adapter.SectionAdapter;
 import com.gloxandro.submuxic.domain.ServerInfo;
@@ -65,6 +67,9 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 			case R.id.menu_about:
 				aboutdialog();
 				return true;
+			case R.id.whatsnew:
+				showWhatsNewDialog();
+				return true;
 			case R.id.videos:
 				showVideos();
 				return true;
@@ -76,12 +81,53 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 		return false;
 	}
 
-	void aboutdialog() {
-		if (Constants.LOG_V)
-			Log.v(TAG, "onAboutButton()");
+	private void aboutdialog() {
+		LayoutInflater inflater = LayoutInflater.from(getActivity());
 
-		Intent intent = new Intent(getActivity(), AboutActivity.class);
-		startActivity(intent);
+		View view               = inflater.inflate(R.layout.about, null);
+
+
+		WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
+		aboutWebView.setBackgroundColor(0);
+			aboutWebView.loadUrl("file:///android_asset/about_light.html");
+
+
+		androidx.appcompat.app.AlertDialog.Builder builder         = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+
+		builder.setView(view).setTitle(this.getString(R.string.menu_about))
+
+				.setNegativeButton((R.string.common_ok), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+		builder.create().show();
+	}
+
+	private void showWhatsNewDialog() {
+		LayoutInflater inflater = LayoutInflater.from(getActivity());
+
+		View view               = inflater.inflate(R.layout.about, null);
+
+
+		WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
+		aboutWebView.setBackgroundColor(0);
+			aboutWebView.loadUrl("file:///android_asset/changelog_light.html");
+
+
+		androidx.appcompat.app.AlertDialog.Builder builder         = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+
+		builder.setView(view).setTitle(this.getString(R.string.whatsnew))
+				.setNegativeButton((R.string.common_ok), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+		builder.create().show();
 	}
 
 	@Override

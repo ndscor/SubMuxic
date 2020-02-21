@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="offline_icon" format="reference"/>
+	<attr name="list_back" format="reference"/>
 	<attr name="headers_default" format="reference"/>
     <attr name="media_button_backward" format="reference"/>
     <attr name="media_button_forward" format="reference"/>

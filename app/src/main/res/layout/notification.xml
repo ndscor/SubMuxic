@@ -17,10 +17,10 @@
         android:layout_height="wrap_content"
 		android:layout_weight="1"
         android:orientation="vertical"
-		android:paddingLeft="11.0dip"
+		android:paddingStart="11.0dip"
 		android:layout_gravity="center_vertical">
 			
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:id="@+id/notification_title"
 			style="@style/NotificationText.Title"
 			android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
 			android:focusable="true"
 			android:singleLine="true" />
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:id="@+id/notification_artist"
 			style="@style/NotificationText.Content"
 			android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
 			android:scrollHorizontally="true"
 			android:singleLine="true" />
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:id="@+id/notification_album"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

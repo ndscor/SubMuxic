@@ -7,13 +7,13 @@
     android:background="@android:color/transparent"
     android:paddingBottom="10dip">
 
-    <TextView
+    <TextView android:fontFamily="sans-serif"
         android:id="@+id/download_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:paddingLeft="8dip"
+        android:paddingStart="8dip"
         android:text="0:00"
         android:textSize="12sp"
         android:textColor="?android:textColorPrimary"
@@ -24,18 +24,18 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:indeterminate="false"
-        android:paddingLeft="55dip"
-        android:paddingRight="55dip"
+        android:paddingStart="55dip"
+        android:paddingEnd="55dip"
         android:paddingTop="3dip"
         android:paddingBottom="7dip" />
 
-    <TextView
+    <TextView android:fontFamily="sans-serif"
         android:id="@+id/download_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:paddingRight="8dip"
+        android:paddingEnd="8dip"
         android:text="-:--"
         android:textSize="12sp"
         android:textColor="?android:textColorPrimary"

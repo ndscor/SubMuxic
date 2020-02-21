@@ -24,18 +24,18 @@
                       android:layout_height="wrap_content"
                       android:layout_gravity="center_vertical">
 
-			<TextView
+			<TextView android:fontFamily="sans-serif"
 				android:id="@+id/song_track"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="left|top"
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:textColor="?android:textColorPrimary"
-				android:paddingLeft="6dip"
-				android:paddingRight="6dip"
+				android:paddingStart="6dip"
+				android:paddingEnd="6dip"
 				android:drawablePadding="6dip"/>
 
-            <TextView
+            <TextView android:fontFamily="sans-serif"
 				android:id="@+id/song_title"
 				android:layout_width="0dip"
 				android:layout_height="wrap_content"
@@ -44,8 +44,8 @@
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:singleLine="true"
 				android:ellipsize="marquee"
-				android:paddingLeft="6dip"
-				android:paddingRight="6dip"
+				android:paddingStart="6dip"
+				android:paddingEnd="6dip"
 				android:drawablePadding="6dip"
 				android:textColor="?android:textColorPrimary"/>
 
@@ -79,13 +79,13 @@
 				android:focusable="false"
 				android:visibility="gone"/>
 
-            <TextView
+            <TextView android:fontFamily="sans-serif"
 				android:id="@+id/song_status"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="right|top"
 				android:drawablePadding="1dip"
-				android:paddingRight="2dip"/>
+				android:paddingEnd="2dip"/>
 
 			<ImageView
 				android:id="@+id/song_status_icon"
@@ -103,7 +103,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical">
 
-            <TextView
+            <TextView android:fontFamily="sans-serif"
                     android:id="@+id/song_artist"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:singleLine="true"
                     android:ellipsize="middle"
-                    android:paddingLeft="6dip"
+                    android:paddingStart="6dip"
 					android:textColor="?android:textColorSecondary"/>
 
 			<RatingBar
@@ -125,15 +125,15 @@
 				style="@android:style/Widget.Holo.RatingBar.Small"
 				android:visibility="gone"/>
 
-            <TextView
+            <TextView android:fontFamily="sans-serif"
                     android:id="@+id/song_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:singleLine="true"
-                    android:paddingLeft="3dip"
-                    android:paddingRight="4dip"
+                    android:paddingStart="3dip"
+                    android:paddingEnd="4dip"
 					android:textColor="?android:textColorSecondary"/>
 
         </LinearLayout>

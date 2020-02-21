@@ -20,7 +20,6 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 
-
 		<ViewFlipper
 			android:id="@+id/download_playlist_flipper"
 			android:layout_width="fill_parent"

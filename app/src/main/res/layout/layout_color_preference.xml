@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <TextView android:fontFamily="sans-serif"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

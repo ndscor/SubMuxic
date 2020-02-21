@@ -2,6 +2,7 @@
 <resources>
 	<style name="Theme.SubMuxic.Light.Base" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 		<item name="dim_background">@color/dim_light</item>
+		<item name="list_back">@color/background_l</item>
 		<item name="videoicon">@drawable/ic_action_videocam_light</item>
 		<item name="offline_icon">@drawable/main_offline_dark</item>
 		<item name="media_button_backward">@drawable/media_backward_dark</item>
@@ -77,6 +78,7 @@
 		<item name="headers_default">@color/dim_light</item>
 	</style>
 	<style name="Theme.SubMuxic.Dark.Base" parent="@style/Theme.AppCompat">
+		<item name="list_back">@color/background</item>
 		<item name="videoicon">@drawable/ic_action_videocam</item>
 		<item name="headers_default">@color/deep_black</item>
 		<item name="dim_background">@color/dim_dark</item>
@@ -165,6 +167,7 @@
 	</style>
 
 	<style name="Theme.SubMuxic.Light.No_Color.Base" parent="Theme.SubMuxic.Light.No_Actionbar">
+		<item name="list_back">@color/background_l</item>
 		<item name="videoicon">@drawable/ic_action_videocam_light</item>
 		<item name="drawerTitleStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
 		<item name="drawerSubtitleStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse</item>

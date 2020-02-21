@@ -16,37 +16,37 @@
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
 
-			<TextView
+			<TextView android:fontFamily="sans-serif"
 				android:id="@+id/lyrics_artist"
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:gravity="center_horizontal"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:paddingLeft="10dip"
-				android:paddingRight="10dip"
+				android:paddingStart="10dip"
+				android:paddingEnd="10dip"
 				android:paddingTop="10dip"
 				android:paddingBottom="4dip"
 				android:textColor="?android:textColorPrimary"/>
 
-			<TextView
+			<TextView android:fontFamily="sans-serif"
 				android:id="@+id/lyrics_title"
 				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:gravity="center_horizontal"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:paddingLeft="10dip"
-				android:paddingRight="10dip"
+				android:paddingStart="10dip"
+				android:paddingEnd="10dip"
 				android:paddingBottom="12dip"
 				android:textColor="?android:textColorPrimary"/>
 
-			<TextView
+			<TextView android:fontFamily="sans-serif"
 				android:id="@+id/lyrics_text"
 				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:gravity="center_horizontal"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:paddingLeft="10dip"
-				android:paddingRight="10dip"
+				android:paddingStart="10dip"
+				android:paddingEnd="10dip"
 				android:textColor="?android:textColorSecondary"/>
 		</LinearLayout>
 	</ScrollView>

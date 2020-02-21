@@ -30,7 +30,9 @@
 		android:id="@+id/menu_about"
 		android:title="@string/menu.about"/>
 
-
+	<item
+		android:id="@+id/whatsnew"
+		android:title="@string/whatsnew"/>
 	<item
 		android:id="@+id/menu_exit"
 		android:title="@string/menu.exit"/>

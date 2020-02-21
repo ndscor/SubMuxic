@@ -233,6 +233,7 @@
 	<string name="download.downloading_summary_expanded">Current: %1$s
 		\nEstimated Size: %2$s</string>
 	<string name="download.failed_to_load">Failed to load</string>
+	<string name="whatsnew">What\'s New</string>
 	<string name="download.restore_play_queue">continue from where you left off on another device at</string>
 	<string name="download.thumbs_up">Thumbs Up</string>
 	<string name="download.thumbs_down">Thumbs Down</string>

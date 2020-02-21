@@ -7,7 +7,7 @@
 	android:background="?attr/headers_default"
 	android:orientation="vertical">
 
-	<TextView
+	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/item_name"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

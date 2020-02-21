@@ -44,6 +44,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.core.view.MenuItemCompat;
 import androidx.mediarouter.app.MediaRouteButton;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -114,7 +115,7 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 	private TextView positionTextView;
 	private TextView durationTextView;
 	private TextView statusTextView;
-	private SeekBar progressBar;
+	private AppCompatSeekBar progressBar;
 	private FloatingActionButton previousButton;
 	private FloatingActionButton nextButton;
 	private FloatingActionButton rewindButton;
@@ -196,7 +197,7 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		durationTextView = (TextView)rootView.findViewById(R.id.download_duration);
 		statusTextView = (TextView)rootView.findViewById(R.id.download_status);
 		statusTextView.setSelected(true);
-		progressBar = (SeekBar)rootView.findViewById(R.id.download_progress_bar);
+		progressBar = (AppCompatSeekBar) rootView.findViewById(R.id.download_progress_bar);
 		previousButton = (FloatingActionButton)rootView.findViewById(R.id.download_previous);
 		previousButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
 		nextButton = (FloatingActionButton)rootView.findViewById(R.id.download_next);

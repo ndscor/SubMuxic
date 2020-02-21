@@ -7,7 +7,7 @@ def license() {
     return properties.getProperty("PLAYSTORE_LICENSE_KEY");
 }
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -15,9 +15,9 @@ android {
     defaultConfig {
         applicationId "com.gloxandro.submuxic"
         minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 15
-        versionName '2.5'
+        targetSdkVersion 29
+        versionCode 16
+        versionName '2.6'
         buildConfigField "String", "PLAYSTORE_LICENSE_KEY", "\""+license()+"\""
         buildTypes {
             release {
@@ -40,10 +40,11 @@ dependencies {
     implementation project(':app:lvl_library')
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation "androidx.recyclerview:recyclerview:${versions.androidxRecyclerView}"
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.sothree.slidinguppanel:library:3.0.0'
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.takisoft.preferencex:preferencex:1.1.0'
+    implementation 'com.google.android.gms:play-services-cast:18.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "androidx.core:core-ktx:${versions.coreKtx}"
     implementation 'androidx.mediarouter:mediarouter:1.1.0'

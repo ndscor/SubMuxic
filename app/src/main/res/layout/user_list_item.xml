@@ -12,15 +12,15 @@
 		android:layout_height="@dimen/AlbumArt.Small"
 		android:layout_gravity="left|center_vertical"/>
 
-	<TextView
+	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/item_name"
 		android:layout_width="0dip"
 		android:layout_height="match_parent"
 		android:layout_weight="1"
 		android:textAppearance="?android:attr/textAppearanceMedium"
 		android:gravity="left|center_vertical"
-		android:paddingLeft="12dip"
-		android:paddingRight="6dip"
+		android:paddingStart="12dip"
+		android:paddingEnd="6dip"
 		android:minHeight="50dip"
 		android:background="@android:color/transparent"
 		android:textColor="?android:textColorPrimary"/>

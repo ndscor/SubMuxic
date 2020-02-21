@@ -36,7 +36,7 @@
             android:paddingTop="4dip"
 			style="@style/NotificationButton">
 
-            <TextView
+            <TextView android:fontFamily="sans-serif"
                 android:id="@+id/title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -44,8 +44,8 @@
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="20dip"
                 android:minHeight="16sp"
-                android:paddingLeft="5dip"
-                android:paddingRight="5dip"
+                android:paddingStart="5dip"
+                android:paddingEnd="5dip"
                 android:singleLine="true"
                 android:textColor="@color/appwidget_text"
                 android:textSize="16sp"
@@ -63,7 +63,7 @@
                               android:duplicateParentState="true" />
             </TextView>
 
-            <TextView
+            <TextView android:fontFamily="sans-serif"
                 android:id="@+id/artist"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                 android:fadingEdgeLength="10dip"
                 android:minHeight="12sp"
                 android:paddingBottom="2dip"
-                android:paddingLeft="5dip"
+                android:paddingStart="5dip"
                 android:singleLine="true"
                 android:text="Artist"
                 android:layout_gravity="center_horizontal"

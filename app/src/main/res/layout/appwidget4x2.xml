@@ -34,7 +34,7 @@
             android:paddingBottom="4dip"
 			style="@style/NotificationButton">
 
-            <TextView
+            <TextView android:fontFamily="sans-serif"
                 android:id="@+id/title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -42,8 +42,8 @@
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="20dip"
                 android:minHeight="16sp"
-                android:paddingLeft="4dip"
-                android:paddingRight="4dip"
+                android:paddingStart="4dip"
+                android:paddingEnd="4dip"
                 android:paddingTop="4dip"
 				android:paddingBottom="2dip"
                 android:singleLine="true"
@@ -62,7 +62,7 @@
 					android:duplicateParentState="true" />
 			</TextView>
 
-            <TextView
+            <TextView android:fontFamily="sans-serif"
                 android:id="@+id/artist"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -70,8 +70,8 @@
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="10dip"
                 android:minHeight="12sp"
-                android:paddingLeft="4dip"
-                android:paddingRight="4dip"
+                android:paddingStart="4dip"
+                android:paddingEnd="4dip"
 				android:paddingBottom="2dip"
                 android:singleLine="true"
                 android:gravity="center_horizontal"
@@ -79,7 +79,7 @@
                 android:textColor="@color/appwidget_text"
                 android:textSize="12sp" />
             
-          <TextView
+          <TextView android:fontFamily="sans-serif"
                 android:id="@+id/album"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -88,8 +88,8 @@
                 android:fadingEdgeLength="10dip"
                 android:minHeight="12sp"
                 android:paddingBottom="2dip"
-                android:paddingLeft="4dip"
-                android:paddingRight="4dip"
+                android:paddingStart="4dip"
+                android:paddingEnd="4dip"
                 android:singleLine="true"
                 android:gravity="center_horizontal"
                 android:text="Album"

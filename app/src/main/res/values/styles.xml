@@ -42,13 +42,13 @@
 	</style>
 
 	<style name="MoreButton" parent="@style/BasicButton">
-		<item name="android:paddingRight">2dp</item>
+		<item name="android:paddingEnd">2dp</item>
 	</style>
 
     <style name="PlaybackControl" parent="@style/BasicButton">
         <item name="android:scaleType">fitCenter</item>
-        <item name="android:layout_marginLeft">4dip</item>
-        <item name="android:layout_marginRight">4dip</item>
+        <item name="android:layout_marginStart">4dip</item>
+        <item name="android:layout_marginEnd">4dip</item>
         <item name="android:layout_width">@dimen/Button</item>
         <item name="android:layout_height">@dimen/Button</item>
         <item name="android:contentDescription">@null</item>
@@ -62,8 +62,8 @@
 	<style name="PlaybackControl.Large" parent="@style/PlaybackControl">
 		<item name="android:layout_width">@dimen/Button.Large</item>
 		<item name="android:layout_height">@dimen/Button.Large</item>
-		<item name="android:paddingLeft">3dp</item>
-		<item name="android:paddingRight">3dp</item>
+		<item name="android:paddingStart">3dp</item>
+		<item name="android:paddingEnd">3dp</item>
 	</style>
 
 	<style name="PlaybackControl.Match" parent="@style/PlaybackControl">
@@ -84,8 +84,8 @@
 		<item name="android:textSize">22sp</item>
 		<item name="android:paddingTop">4dip</item>
 		<item name="android:paddingBottom">4dip</item>
-		<item name="android:paddingRight">4dip</item>
-		<item name="android:paddingLeft">4dip</item>
+		<item name="android:paddingEnd">4dip</item>
+		<item name="android:paddingStart">4dip</item>
 	</style>
 
 	<style name="DownloadActionImageButton" parent="@style/BasicButton">
@@ -93,7 +93,7 @@
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:paddingTop">8dip</item>
 		<item name="android:paddingBottom">8dip</item>
-		<item name="android:paddingRight">16dip</item>
-		<item name="android:paddingLeft">16dip</item>
+		<item name="android:paddingEnd">16dip</item>
+		<item name="android:paddingStart">16dip</item>
 	</style>
 </resources>

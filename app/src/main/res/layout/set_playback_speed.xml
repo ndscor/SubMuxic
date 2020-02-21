@@ -44,13 +44,13 @@
 			android:tag="3.0"/>
 	</LinearLayout>
 
-	<TextView
+	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/playback_speed_label"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="8dp"
+		android:layout_marginStart="8dp"
 		android:textSize="20dp"
-		android:paddingRight="10px"
+		android:paddingEnd="10px"
 		android:textColor="?android:textColorPrimary"
 />
 

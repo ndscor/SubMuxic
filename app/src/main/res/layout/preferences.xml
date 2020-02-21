@@ -7,5 +7,5 @@
 	android:divider="?attr/default_divider"
 	android:scrollbarAlwaysDrawVerticalTrack="true"
 	android:paddingTop="6dp"
-	android:paddingLeft="12dp"
-	android:paddingRight="12dp"/>
+	android:paddingStart="12dp"
+	android:paddingEnd="12dp"/>

@@ -10,19 +10,19 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
-		android:layout_alignParentLeft="true"
-		android:layout_marginRight="10dip"
+		android:layout_alignParentStart="true"
+		android:layout_marginEnd="10dip"
 		android:scaleType="fitCenter"
 		android:contentDescription="@null"/>
 
 	<LinearLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_toRightOf="@+id/user_avatar"
+		android:layout_toEndOf="@+id/user_avatar"
 		android:orientation="vertical"
 		android:layout_centerVertical="true">
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:text="Username"
 			android:id="@+id/user_username"
 			android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
 				android:duplicateParentState="true" />
 		</TextView>
 
-		<TextView
+		<TextView android:fontFamily="sans-serif"
 			android:text="Email"
 			android:id="@+id/user_email"
 			android:layout_width="wrap_content"
