@@ -32,9 +32,8 @@ public final class Constants {
     public static final String REST_PROTOCOL_VERSION_SUBSONIC = "1.2.0";
 	public static final String REST_PROTOCOL_VERSION_MADSONIC = "2.0.0";
     public static final String REST_CLIENT_ID = "SubMuxic";
-    public static final String CHROMECAST_CLIENT_ID = "SubMuxicCC";
+    public static final String CHROMECAST_CLIENT_ID = "SubMuxic";
 	public static final String LAST_VERSION = "subsonic.version";
-
     // Names for intent extras.
     public static final String INTENT_EXTRA_NAME_ID = "subsonic.id";
     public static final String INTENT_EXTRA_NAME_NAME = "subsonic.name";

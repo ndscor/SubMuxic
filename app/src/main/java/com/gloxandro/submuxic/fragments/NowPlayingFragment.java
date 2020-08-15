@@ -514,7 +514,7 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		if(downloadService != null) {
 			MenuItem mediaRouteItem = menu.findItem(R.id.menu_mediaroute);
 			if(mediaRouteItem != null) {
-				MediaRouteButton mediaRouteButton = (MediaRouteButton) MenuItemCompat.getActionView(mediaRouteItem);
+				MediaRouteButton mediaRouteButton = (MediaRouteButton) mediaRouteItem.getActionView();
 				mediaRouteButton.setDialogFactory(new CustomMediaRouteDialogFactory());
 				mediaRouteButton.setRouteSelector(downloadService.getRemoteSelector());
 			}

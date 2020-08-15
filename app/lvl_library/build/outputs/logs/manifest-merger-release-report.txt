@@ -1,41 +1,41 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
+ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:1-23:12
 	package
-		ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:17:5-51
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:17:5-51
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:19:5-30
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:19:5-30
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:11-69
+		ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:16:11-69
 	android:versionCode
-		ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:18:5-28
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:18:5-28
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
 uses-permission#com.android.vending.CHECK_LICENSE
-ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:22:5-73
+ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:22:5-73
 	android:name
-		ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:22:22-70
+		ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:22:22-70
 uses-sdk
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-		ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-		ADDED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-		INJECTED from C:\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml

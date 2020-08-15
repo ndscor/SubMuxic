@@ -1,21 +1,58 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+-dontobfuscate
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Kryo
+-keep,allowshrinking class java.beans** { *; }
+-dontwarn sun.reflect.**
+-dontwarn java.beans.**
+-keepclassmembers public class com.esotericsoftware** { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+}
+
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+
+-keep class androidx.mediarouter.app.MediaRouteButton { *; }
+-keep class androidx.appcompat.widget.SearchView { *; }
+
+-dontwarn android.support.**
+
+# DLNA/Cling
+-keep class org.fourthline.cling** { *; }
+-keep interface org.fourthline.cling** { *; }
+-dontwarn javax.**
+-dontwarn org.objectweb.**
+-dontwarn org.slf4j.**
+-dontwarn org.mortbay.**
+-dontwarn org.fourthline.**
+-dontwarn org.seamless.**
+-dontwarn org.eclipse.**
+-dontwarn java.**
+-keepattributes *Annotation*, InnerClasses

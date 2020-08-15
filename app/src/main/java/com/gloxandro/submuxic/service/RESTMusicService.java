@@ -81,6 +81,7 @@ import com.gloxandro.submuxic.util.ProgressListener;
 import com.gloxandro.submuxic.util.SilentBackgroundTask;
 import com.gloxandro.submuxic.util.SongDBHandler;
 import com.gloxandro.submuxic.util.Util;
+import com.gloxandro.submuxic.util.compat.GoogleCompat;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -1891,6 +1892,16 @@ public class RESTMusicService implements MusicService {
 	}
 
 	private HttpURLConnection getConnectionDirect(Context context, String url, Map<String, String> headers, int minNetworkTimeout) throws Exception {
+		if(!hasInstalledGoogleSSL) {
+			try {
+				GoogleCompat.installProvider(context);
+			} catch(Exception e) {
+				// Just continue on anyways, doesn't really harm anything if this fails
+				Log.w(TAG, "Failed to update to use Google Play SSL", e);
+			}
+			hasInstalledGoogleSSL = true;
+		}
+
 		// Connect and add headers
 		URL urlObj = new URL(url);
 		HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();

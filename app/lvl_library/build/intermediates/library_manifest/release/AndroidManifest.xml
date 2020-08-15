@@ -21,7 +21,7 @@
 
     <uses-sdk
         android:minSdkVersion="4"
-        android:targetSdkVersion="28" />
+        android:targetSdkVersion="29" />
     <!-- Devices >= 3 have version of Android Market that supports licensing. -->
     <!-- Required permission to check licensing. -->
     <uses-permission android:name="com.android.vending.CHECK_LICENSE" />

@@ -26,10 +26,12 @@ import com.gloxandro.submuxic.provider.DLNARouteProvider;
 import com.gloxandro.submuxic.provider.JukeboxRouteProvider;
 import com.gloxandro.submuxic.service.DownloadService;
 import com.gloxandro.submuxic.service.RemoteController;
+import com.gloxandro.submuxic.util.compat.GoogleCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.gloxandro.submuxic.util.compat.GoogleCompat.playServicesAvailable;
 
 
 /**
