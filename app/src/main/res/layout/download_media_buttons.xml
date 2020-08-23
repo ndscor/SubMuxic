@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="bottom"
+	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_gravity="bottom"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<LinearLayout
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
-	android:layout_gravity="center"
-	android:background="?attr/list_back"
-	android:gravity="center"
-	android:layout_width="fill_parent"
+	android:layout_width="match_parent"
 	android:layout_height="wrap_content">
+
 	<RelativeLayout
 		android:layout_height="wrap_content"
-		android:layout_width="fill_parent"
+		android:layout_width="match_parent"
 		>
 		<TextView android:fontFamily="sans-serif"
 			android:id="@+id/download_song_title"
@@ -69,6 +76,8 @@
 		<androidx.appcompat.widget.AppCompatSeekBar
 			android:id="@+id/download_progress_bar"
 			android:layout_width="match_parent"
+			android:clickable="true"
+			android:focusable="true"
 			android:layout_centerHorizontal="true"
 			android:layout_marginStart="4dp"
 			android:progressTint="@color/deep_orange"
@@ -96,7 +105,8 @@
 	<RelativeLayout android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/repeat"
-		android:layout_marginTop="5dp"
+		android:layout_marginTop="4dp"
+		android:layout_marginBottom="4dp"
 		android:gravity="center"
 >
 
@@ -122,7 +132,7 @@
 			android:background="?attr/selectableItemBackgroundBorderless"
 			android:layout_marginEnd="10dp"
 			android:id="@+id/download_toggle_list"
-			android:src="@drawable/sdmusiclist"
+			android:src="?attr/playlist_toggle"
 			android:layout_alignParentEnd="true"
 			android:layout_centerVertical="true"
 			/>
@@ -142,6 +152,7 @@
 			android:layout_marginEnd="10dp"
 			app:borderWidth="0dp"
 			app:elevation="6dp"
+			app:backgroundTint="@color/md_deep_orange_500"
 			app:fabSize="mini"
 			android:id="@+id/download_previous"
 			android:src="?attr/media_button_backward"
@@ -156,6 +167,7 @@
 			android:layout_marginBottom="30dp"
 			android:layout_marginEnd="10dp"
 			app:borderWidth="0dp"
+			app:backgroundTint="@color/md_deep_orange_500"
 			app:elevation="6dp"
 			app:fabSize="mini"
 			android:id="@+id/download_rewind"
@@ -168,6 +180,7 @@
 			android:layout_width="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_height="wrap_content"
+			app:backgroundTint="@color/md_deep_orange_500"
 			android:layout_marginBottom="30dp"
 			android:layout_marginEnd="10dp"
 			app:borderWidth="0dp"
@@ -182,6 +195,7 @@
 			android:layout_width="wrap_content"
 			app:fabSize="normal"
 			android:layout_gravity="end|bottom"
+			app:backgroundTint="@color/md_deep_orange_500"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="30dp"
 			android:layout_marginEnd="10dp"
@@ -195,6 +209,7 @@
 		<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:layout_width="wrap_content"
 			android:layout_gravity="end|bottom"
+			app:backgroundTint="@color/md_deep_orange_500"
 			android:layout_height="wrap_content"
 			app:fabSize="normal"
 			android:layout_marginBottom="30dp"
@@ -209,6 +224,7 @@
 		<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:layout_width="wrap_content"
 			android:layout_gravity="end|bottom"
+			app:backgroundTint="@color/md_deep_orange_500"
 			android:layout_toEndOf="@+id/download_start"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="30dp"
@@ -228,6 +244,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="30dp"
 			android:layout_marginEnd="10dp"
+			app:backgroundTint="@color/md_deep_orange_500"
 			app:borderWidth="0dp"
 			app:elevation="6dp"
 			app:fabSize="mini"
@@ -240,4 +257,5 @@
 
 	</RelativeLayout>
 
+</LinearLayout>
 </LinearLayout>

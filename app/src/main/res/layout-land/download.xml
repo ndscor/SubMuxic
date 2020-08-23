@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	xmlns:card_view="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
 	tools:ignore="MissingDefaultResource">
 
@@ -17,105 +16,84 @@
 		android:orientation="horizontal">
 
 		<LinearLayout
-			android:orientation="vertical"
-			android:layout_weight="1"
+			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:layout_width="match_parent">
-			<FrameLayout
-				android:id="@+id/download_layout_container"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<androidx.coordinatorlayout.widget.CoordinatorLayout
 				android:layout_width="match_parent"
-				android:layout_gravity="fill_vertical"
-				android:layout_height="match_parent"
-				tools:ignore="MissingDefaultResource">
+				android:layout_height="wrap_content"
+				>
+
+				<com.google.android.material.card.MaterialCardView
+					android:layout_height="match_parent"
+					android:layout_width="match_parent"
+					card_view:cardCornerRadius="0dp"
+					card_view:cardBackgroundColor="?attr/toolbar_defaults"
+
+					>
+
+					<com.gloxandro.submuxic.view.RecyclingImageView
+						android:id="@+id/download_album_art_image"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:scaleType="fitXY"
+						/>
+
+					<LinearLayout
+						android:id="@+id/download_overlay_buttons"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:layout_gravity="bottom"
+						android:background="@color/overlayColor"
+						android:visibility="gone"
+						android:orientation="horizontal">
+
+						<ImageButton
+							android:id="@+id/download_rating_bad"
+							style="@style/DownloadActionImageButton"
+							android:src="@drawable/ic_action_rating_bad_dark"/>
+
+						<ImageButton
+							android:id="@+id/download_star"
+							style="@style/DownloadActionImageButton"
+							android:src="@drawable/ic_toggle_star_outline_dark"/>
+
+						<ImageButton
+							android:id="@+id/download_playback_speed"
+							style="@style/DownloadActionImageButton"
+							android:src="@drawable/ic_action_playback_speed_dark"/>
+
+						<ImageButton
+							android:id="@+id/download_bookmark"
+							style="@style/DownloadActionImageButton"
+							android:src="@drawable/ic_menu_bookmark_dark"/>
+
+						<ImageButton
+							android:id="@+id/download_rating_good"
+							style="@style/DownloadActionImageButton"
+							android:src="@drawable/ic_action_rating_good_dark"/>
+					</LinearLayout>
+					<include layout="@layout/download_playlist"/>
+				</com.google.android.material.card.MaterialCardView>
+			</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-			<com.gloxandro.submuxic.view.RecyclingImageView
-				android:id="@+id/download_album_art_image"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:scaleType="fitXY"
-				/>
 
-
-			<include layout="@layout/download_media_buttons_land"/>
-			</FrameLayout>
 		</LinearLayout>
 
-		<View
-			android:id="@+id/message_list_divider"
-			android:layout_width="1px"
-			android:layout_height="fill_parent"
-			android:background="?attr/default_divider"
-			tools:ignore="PxUsage"/>
 
 
-		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		<LinearLayout
 			android:orientation="vertical"
 			android:layout_weight="1"
+			android:gravity="center"
 			android:layout_height="match_parent"
 			android:layout_width="match_parent">
 
-				<RelativeLayout
-					android:background="?attr/dim_background"
-					android:id="@+id/download_control_layout"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent">
-
-					<ViewFlipper
-						android:id="@+id/download_playlist_flipper"
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						>
-
-						<RelativeLayout
-							android:id="@+id/download_other_controls_wrapper"
-							android:layout_width="fill_parent"
-							android:layout_height="wrap_content"
-							android:layout_gravity="center_horizontal"
-							android:orientation="vertical">
-
-							<LinearLayout
-								android:id="@+id/download_other_controls_layout"
-								android:orientation="horizontal"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_centerHorizontal="true"
-								android:layout_alignParentBottom="true">
-
-								<ImageButton
-									android:id="@+id/download_rating_bad"
-									style="@style/DownloadActionImageButton"
-									android:src="?attr/rating_bad"/>
-
-								<ImageButton
-									android:id="@+id/download_star"
-									style="@style/DownloadActionImageButton"
-									android:src="@android:drawable/star_big_off"/>
-
-								<ImageButton
-									android:id="@+id/download_playback_speed"
-									style="@style/DownloadActionImageButton"
-									android:src="?attr/playback_speed"/>
-
-								<ImageButton
-									android:id="@+id/download_bookmark"
-									style="@style/DownloadActionImageButton"
-									android:src="?attr/bookmark"/>
-
-								<ImageButton
-									android:id="@+id/download_rating_good"
-									style="@style/DownloadActionImageButton"
-									android:src="?attr/rating_good"/>
-							</LinearLayout>
-						</RelativeLayout>
-
-						<include layout="@layout/download_playlist"/>
-
-					</ViewFlipper>
-
-
-
-				</RelativeLayout>
+			<include layout="@layout/download_media_buttons_land"/>
 		</LinearLayout>
 
 	</LinearLayout>

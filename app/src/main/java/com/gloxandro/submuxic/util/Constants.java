@@ -70,6 +70,16 @@ public final class Constants {
 	public static final String INTENT_EXTRA_ENTRY_BYTES = "passedEntryBytes";
 
     // Preferences keys.
+
+	public static final String KEY_STATUS_COLOR = "statusColor";
+	public static final String KEY_BOTTOMNAVIGATIONBAR_COLOR = "bottomnavigationbar";
+	public static final String KEY_BACKGROUND_COLOR = "BackgroundColor";
+	public static final String KEY_PRIMARY_COLOR = "primaryColor";
+	public static final String KEY_SMALLBUTTONS_STYLE = "smallbuttons";
+	public static final String KEY_BOTTOMBAR_COLOR = "bottombar";
+	public static final String KEY_BUTTON_COLOR = "buttonColor";
+
+
 	public static final String PREFERENCES_KEY_SERVER_KEY = "server";
 	public static final String PREFERENCES_KEY_SERVER_COUNT = "serverCount";
 	public static final String PREFERENCES_KEY_SERVER_ADD = "serverAdd";
@@ -88,7 +98,8 @@ public final class Constants {
     public static final String PREFERENCES_KEY_INSTALL_TIME = "installTime";
     public static final String PREFERENCES_KEY_THEME = "theme";
 	public static final String PREFERENCES_KEY_DISPLAY_TRACK = "displayTrack";
-    public static final String PREFERENCES_KEY_MAX_BITRATE_WIFI = "maxBitrateWifi";
+	public static final String PREFERENCES_KEY_CUSTOM_THEME = "custom_colors";
+	public static final String PREFERENCES_KEY_MAX_BITRATE_WIFI = "maxBitrateWifi";
     public static final String PREFERENCES_KEY_MAX_BITRATE_MOBILE = "maxBitrateMobile";
 	public static final String PREFERENCES_KEY_MAX_VIDEO_BITRATE_WIFI = "maxVideoBitrateWifi";
     public static final String PREFERENCES_KEY_MAX_VIDEO_BITRATE_MOBILE = "maxVideoBitrateMobile";

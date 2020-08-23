@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -45,12 +46,15 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -94,6 +98,9 @@ import java.util.List;
 
 import static android.Manifest.permission;
 import static com.gloxandro.submuxic.BuildConfig.PLAYSTORE_LICENSE_KEY;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLACK;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLUE;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_DARK;
 
 public class SubsonicActivity extends AppCompatActivity implements OnItemSelectedListener {
 	private static final String TAG = SubsonicActivity.class.getSimpleName();
@@ -114,7 +121,6 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 	boolean licensed;
 	boolean checkingLicense;
 	boolean didCheck;
-
 	private final List<Runnable> afterServiceAvailable = new ArrayList<>();
 	private boolean drawerIdle = true;
 	private boolean destroyed = false;
@@ -135,6 +141,8 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 	View drawerHeader;
 	ImageView drawerUserAvatar;
 	ImageView drawerHeaderToggle;
+	RelativeLayout drawer_header;
+
 	private static SubsonicActivity sInstance;
 	TextView drawerServerName;
 	TextView drawerUserName;
@@ -150,6 +158,7 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 
 	@Override
 	protected void onCreate(Bundle bundle) {
+
 		applyTheme();
 		UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
 		if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
@@ -163,6 +172,7 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		setUncaughtExceptionHandler();
 		applyTheme();
 		super.onCreate(bundle);
+		SharedPreferences prefs = Util.getPreferences(this);
 		String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 		mLicenseCheckerCallback = new MyLicenseCheckerCallback();
 		mChecker = new LicenseChecker(getApplicationContext(), new ServerManagedPolicy(this, new AESObfuscator(SALT, getPackageName(), deviceId)), PLAYSTORE_LICENSE_KEY);
@@ -348,7 +358,6 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		if(drawerToggle != null) {
 			final Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
 			drawerToggle.syncState();
-			toolbar.setNavigationIcon(R.mipmap.submuxic_launcher);
 		}
 
 		if(Util.shouldStartOnHeadphones(this)) {
@@ -379,9 +388,6 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 			DrawableTint.clearCache();
 			return;
 		}
-		changeActionBarColor();
-		setStatusColor();
-		setUpNavigation();
 		getImageLoader().onUIVisible();
 		UpdateView.addActiveActivity();
 	}
@@ -416,13 +422,81 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 	protected void onResume() {
 		super.onResume();
 		applyTheme();
-		changeActionBarColor();
-		setStatusColor();
-		setUpNavigation();
+
+		SharedPreferences prefs = Util.getPreferences(this);
+		int color = Util.getStatusColor(this);
+		int BackgroundColor = Util.getBackgroundColor(this);
+		int actionbar = Util.getPrimaryColor(this);
+		int navigations = Util.getbottomnavigationColor(this);
+		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true)) {
+			final Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+			toolbar.setBackgroundColor(actionbar);
+			drawerHeader.setBackgroundColor(BackgroundColor);
+			getWindow().setNavigationBarColor(navigations);
+			Drawable colorDrawable = new ColorDrawable(BackgroundColor);
+			getWindow().setBackgroundDrawable(colorDrawable);
+			drawerList.setBackgroundColor(BackgroundColor);
+			if (THEME_DARK.equals(theme)) {
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+				getWindow().setStatusBarColor(color);  // transparent
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+			} else if (THEME_BLACK.equals(theme)) {
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+				getWindow().setStatusBarColor(color);  // transparent
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+			} else if (THEME_BLUE.equals(theme)) {
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+				getWindow().setStatusBarColor(color);  // transparent
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+
+			} else {
+				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+					getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+					getWindow().setStatusBarColor(color);  // transparent
+					getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+				}
+			}
+		} else {
+			if (THEME_DARK.equals(theme)) {
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+				getWindow().setStatusBarColor(0x00000000);  // transparent
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+			} else if (THEME_BLACK.equals(theme)) {
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+				getWindow().setStatusBarColor(0x00000000);  // transparent
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+			} else if (THEME_BLUE.equals(theme)) {
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+				getWindow().setStatusBarColor(0x00000000);  // transparent
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+
+			} else {
+				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+					getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+					getWindow().setStatusBarColor(Color.TRANSPARENT);  // transparent
+					getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+				}
+			}
+		}
+
 		// If this is in onStart is causes crashes when rotating screen in offline mode
 		// Actual root cause of error is `drawerItemSelected(newFragment);` in the offline mode branch of code
 		populateTabs();
 	}
+
+
 
 	@Override
 	protected void onStop() {
@@ -550,6 +624,7 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		drawerHeaderToggle = (ImageView) drawerHeader.findViewById(R.id.header_select_image);
 		drawerServerName = (TextView) drawerHeader.findViewById(R.id.header_server_name);
 		drawerUserName = (TextView) drawerHeader.findViewById(R.id.header_user_name);
+		drawer_header = (RelativeLayout)  findViewById(R.id.drawer_header);
 
 		drawerUserAvatar = (ImageView) drawerHeader.findViewById(R.id.header_user_avatar);
 
@@ -567,7 +642,6 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 				public void onDrawerClosed(View view) {
 					drawerIdle = true;
 					drawerOpen = false;
-					toolbar.setNavigationIcon(R.mipmap.submuxic_launcher);
 					if(!showingTabs) {
 						populateTabs();
 					}

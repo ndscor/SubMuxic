@@ -3,8 +3,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="178dp"
 	android:orientation="vertical"
+	android:id="@+id/drawer_header"
 	android:weightSum="1"
-	android:background="?attr/drawerHeaderBackground">
+	android:background="?attr/toolbar_defaults">
 
 	<LinearLayout
 		android:layout_width="match_parent"

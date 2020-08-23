@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="offline_icon" format="reference"/>
+	<attr name="corners_background" format="reference"/>
+	<attr name="offline_icon" format="reference"/>
+	<attr name="toolbar_defaults" format="reference"/>
+	<attr name="music_icon" format="reference"/>
+	<attr name="folder_icon" format="reference"/>
+	<attr name="repeat_icon" format="reference"/>
+	<attr name="playlist_toggle" format="reference"/>
+
 	<attr name="list_back" format="reference"/>
 	<attr name="headers_default" format="reference"/>
     <attr name="media_button_backward" format="reference"/>

@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
@@ -79,14 +80,19 @@ public class MainAdapter extends SectionAdapter<Integer> {
 	@Override
 	public void onBindHeaderHolder(UpdateView.UpdateViewHolder holder, String header, int sectionIndex) {
 		UpdateView view = holder.getUpdateView();
-		CheckBox checkBox = (CheckBox) view.findViewById(R.id.item_checkbox);
-
+		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.item_checkbox);
+		LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.header_layout);
+		linearLayout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				checkBox.setChecked(!checkBox.isChecked());
+			}
+		});
 		String display;
 		if ("albums".equals(header)) {
-			display = context.getResources().getString(R.string.main_albums_title);
 
 			if(!Util.isOffline(context) && ServerInfo.canAlbumListPerFolder(context)) {
-				checkBox.setVisibility(View.VISIBLE);
+				linearLayout.setVisibility(View.VISIBLE);
 				checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -95,21 +101,18 @@ public class MainAdapter extends SectionAdapter<Integer> {
 				});
 				checkBox.setChecked(Util.getAlbumListsPerFolder(context));
 			} else {
-				checkBox.setVisibility(View.GONE);
+				linearLayout.setVisibility(View.GONE);
 			}
 		} else if("videos".equals(header)) {
-			display = context.getResources().getString(R.string.main_videos);
-			checkBox.setVisibility(View.GONE);
+			linearLayout.setVisibility(View.GONE);
+
 		} else if("songs".equals(header)) {
-			display = context.getResources().getString(R.string.search_songs);
-			checkBox.setVisibility(View.GONE);
+			linearLayout.setVisibility(View.GONE);
+
 		} else {
-			display = header;
-			checkBox.setVisibility(View.GONE);
+			linearLayout.setVisibility(View.GONE);
+
 		}
 
-		if(view != null) {
-			view.setObject(display);
-		}
 	}
 }

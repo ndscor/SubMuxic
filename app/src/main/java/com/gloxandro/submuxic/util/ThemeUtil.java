@@ -27,6 +27,8 @@ import java.util.Locale;
 
 public final class ThemeUtil {
 	public static final String THEME_DARK = "dark";
+	public static final String THEME_BLACK = "black";
+	public static final String THEME_BLUE = "blue";
 
 	public static String getTheme(Context context) {
 		SharedPreferences prefs = Util.getPreferences(context);
@@ -35,22 +37,24 @@ public final class ThemeUtil {
 
 		return theme;
 	}
+
 	public static int getThemeRes(Context context) {
 		return getThemeRes(context, getTheme(context));
 	}
+
 	public static int getThemeRes(Context context, String theme) {
-		if(context instanceof SubsonicFragmentActivity || context instanceof SettingsActivity) {
-				if (THEME_DARK.equals(theme)) {
-					return R.style.Theme_SubMuxic_Dark_No_Color;
-				} else {
-					return R.style.Theme_SubMuxic_Light_No_Color;
-				}
-		} else {
+		if (context instanceof SubsonicFragmentActivity || context instanceof SettingsActivity) {
 			if (THEME_DARK.equals(theme)) {
-				return R.style.Theme_SubMuxic_Dark;
+				return R.style.Theme_SubMuxic_Dark_No_Actionbar;
+			} else if (THEME_BLACK.equals(theme)) {
+				return R.style.Theme_SubMuxic_Black_No_Actionbar;
+			} else if (THEME_BLUE.equals(theme)) {
+				return R.style.Theme_SubMuxic_Blue_No_Actionbar;
 			} else {
-				return R.style.Theme_SubMuxic_Light;
+					return R.style.Theme_SubMuxic_Light_No_Actionbar;
 			}
+		} else {
+			return R.style.Theme_SubMuxic_Light_No_Actionbar;
 		}
 	}
 

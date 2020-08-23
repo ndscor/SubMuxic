@@ -4,14 +4,12 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<androidx.appcompat.widget.Toolbar
+	<com.google.android.material.appbar.MaterialToolbar
 		android:id="@+id/main_toolbar"
 		app:layout_collapseMode="parallax"
 		app:layout_scrollFlags="scroll|enterAlways"
 		android:layout_height="?attr/actionBarSize"
 		android:layout_width="match_parent"
-		app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-		android:background="?attr/actionbarBackgroundColor"
 		app:elevation="12dp"
 		/>
 

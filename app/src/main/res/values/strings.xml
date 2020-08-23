@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="settings.background_color_title">Change background color</string>
+	<string name="settings.background_color_des">Tap to change color of background.</string>
+
+
+	<string name="settings.custom_theme">Change colors</string>
+	<string name="settings.custom_theme_des">Use custom colors for theme.</string>
 	<string name="pref_smallbutton_color_title">Small Buttons</string>
 	<string name="pref_button_color_title">Buttons</string>
 	<string name="pref_bottomnavigationbar_color_description">Tap To Change Color Of Bottom Navigation Bar</string>
@@ -254,7 +260,7 @@
 	<string name="starring_content_unstarred">Unstarred \"%s\"</string>
     <string name="starring_content_error">Failed to update \"%s\", please try later.</string>
 
-	<string name="playlist.mine">MY Playlist</string>
+	<string name="playlist.mine">Playlist</string>
 	<string name="playlist.shared">Shared Playlists</string>
 	<string name="playlist_error">Failed to grab list of playlists</string>
 	<string name="updated_playlist">Added %1$s songs to \"%2$s\"</string>
@@ -321,7 +327,10 @@
     <string name="settings.appearance_title">Appearance</string>
     <string name="settings.theme_title">Theme</string>
     <string name="settings.theme_light">Light</string>
+
+	<string name="setting_theme_global">Use app theme</string>
     <string name="settings.theme_dark">Dark</string>
+	<string name="settings.theme_blue">Blue</string>
 	<string name="settings.theme_black">Black</string>
 	<string name="settings.theme_holo">Holo</string>
 	<string name="settings.theme_day_night">Day/Night</string>
@@ -426,6 +435,7 @@
 	<string name="settings.cache_screen_title">Cache/Network</string>
 	<string name="settings.playback_title">Playback</string>
 	<string name="settings.hide_widget_title">Hide Widget</string>
+
 	<string name="settings.hide_widget_summary">Hide widget after exiting app</string>
 	<string name="settings.podcasts_enabled">Podcasts Enabled</string>
 	<string name="settings.podcasts_enabled_summary">Whether or not to display the podcast listing in the pull out drawer</string>

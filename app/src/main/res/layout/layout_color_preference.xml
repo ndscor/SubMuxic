@@ -4,13 +4,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView android:fontFamily="sans-serif"
+    <LinearLayout android:fontFamily="sans-serif"
         android:id="@+id/title"
         android:layout_width="match_parent"
+        android:minHeight="60dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:orientation="vertical" />
 
     <com.gloxandro.submuxic.colors.CommonFrameLayout
         android:layout_width="match_parent"
@@ -29,7 +28,7 @@
                 <com.gloxandro.submuxic.colors.LineColorPicker
                     android:id="@+id/color_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="96dp"
                     android:background="?selectableItemBackground"
                     android:focusable="true"
                     app:orientation="horizontal"
@@ -38,7 +37,7 @@
                 <com.gloxandro.submuxic.colors.LineColorPicker
                     android:id="@+id/shade_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="96dp"
                     android:layout_marginTop="10dp"
                     android:background="?selectableItemBackground"
                     android:focusable="true"

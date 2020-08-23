@@ -49,11 +49,15 @@
     <string-array name="themeValues">
         <item>light</item>
         <item>dark</item>
+		<item>black</item>
+		<item>blue</item>
     </string-array>
 
     <string-array name="themeNames">
         <item>@string/settings.theme_light</item>
         <item>@string/settings.theme_dark</item>
+		<item>@string/settings.theme_black</item>
+		<item>@string/settings.theme_blue</item>
     </string-array>
 	
 	<string-array name="sleepTimerValues">

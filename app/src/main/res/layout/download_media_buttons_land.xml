@@ -1,250 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:orientation="vertical"
+<LinearLayout android:layout_width="match_parent"
+	android:layout_height="wrap_content"
 	android:gravity="bottom"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_gravity="bottom"
+	xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="vertical"
-		android:layout_gravity="center"
-		android:background="?attr/list_back"
-		android:gravity="center"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<RelativeLayout
-			android:layout_height="wrap_content"
-			android:layout_width="fill_parent"
-			>
-			<TextView android:fontFamily="sans-serif"
-				android:id="@+id/download_song_title"
-				android:layout_alignParentStart="true"
-				android:layout_centerVertical="true"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_horizontal"
-				android:layout_marginStart="8dp"
-				android:layout_marginEnd="4dip"
-				android:marqueeRepeatLimit="marquee_forever"
-				android:scrollHorizontally="true"
-				android:layout_marginTop="6dp"
-				android:ellipsize="marquee"
-				android:singleLine="true"
-				style="?attr/actionbarTitleStyle"
-				android:textColor="?android:textColorPrimary"/>
 
-			<TextView android:fontFamily="sans-serif"
-				android:id="@+id/download_status"
-				android:layout_toEndOf="@+id/download_song_title"
-				android:layout_width="wrap_content"
-				android:layout_alignParentEnd="true"
-				style="?attr/actionbarSubtitleStyle"
-				android:marqueeRepeatLimit="marquee_forever"
-				android:scrollHorizontally="true"
-				android:layout_centerVertical="true"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_horizontal"
-				android:layout_marginStart="4dip"
-				android:layout_marginEnd="4dip"
-				android:ellipsize="marquee"
-				android:singleLine="true"
-				android:textColor="?android:textColorPrimary"/>
-		</RelativeLayout>
 
-		<RelativeLayout
-			android:layout_marginTop="5dp"
-			android:id="@+id/download_slider"
-			android:layout_height="wrap_content"
+		<LinearLayout
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			android:orientation="vertical"
 			android:layout_width="match_parent"
-			>
+			android:layout_height="wrap_content">
 
-
-			<TextView android:fontFamily="sans-serif"
-				android:id="@+id/download_position"
-				android:layout_width="wrap_content"
+			<RelativeLayout
 				android:layout_height="wrap_content"
-				android:layout_centerHorizontal="true"
-				android:layout_marginStart="8dp"
-				android:layout_alignParentStart="true"
-				android:text="0:00"
-				android:textSize="12sp"
-				android:textColor="?android:textColorPrimary"
-				/>
-
-			<androidx.appcompat.widget.AppCompatSeekBar
-				android:id="@+id/download_progress_bar"
 				android:layout_width="match_parent"
-				android:layout_centerHorizontal="true"
-				android:layout_marginStart="4dp"
-				android:progressTint="@color/deep_orange"
-				android:thumbTint="@color/deep_orange"
-				android:layout_marginEnd="4dp"
-				android:layout_height="wrap_content"
-				android:indeterminate="false"
-				android:layout_toEndOf="@+id/download_position"
-				android:layout_toStartOf="@+id/download_duration"
-				/>
+				>
+				<TextView android:fontFamily="sans-serif"
+					android:id="@+id/download_song_title"
+					android:layout_alignParentStart="true"
+					android:layout_centerVertical="true"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"
+					android:layout_marginStart="8dp"
+					android:layout_marginEnd="4dip"
+					android:marqueeRepeatLimit="marquee_forever"
+					android:scrollHorizontally="true"
+					android:layout_marginTop="6dp"
+					android:ellipsize="marquee"
+					android:singleLine="true"
+					style="?attr/actionbarTitleStyle"
+					android:textColor="?android:textColorPrimary"/>
 
-			<TextView android:fontFamily="sans-serif"
-				android:id="@+id/download_duration"
-				android:layout_width="wrap_content"
+				<TextView android:fontFamily="sans-serif"
+					android:id="@+id/download_status"
+					android:layout_toEndOf="@+id/download_song_title"
+					android:layout_width="wrap_content"
+					android:layout_alignParentEnd="true"
+					style="?attr/actionbarSubtitleStyle"
+					android:marqueeRepeatLimit="marquee_forever"
+					android:scrollHorizontally="true"
+					android:layout_centerVertical="true"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"
+					android:layout_marginStart="4dip"
+					android:layout_marginEnd="4dip"
+					android:ellipsize="marquee"
+					android:singleLine="true"
+					android:textColor="?android:textColorPrimary"/>
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_marginTop="5dp"
+				android:id="@+id/download_slider"
 				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				>
+
+
+				<TextView android:fontFamily="sans-serif"
+					android:id="@+id/download_position"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_marginStart="8dp"
+					android:layout_alignParentStart="true"
+					android:text="0:00"
+					android:textSize="12sp"
+					android:textColor="?android:textColorPrimary"
+					/>
+
+				<androidx.appcompat.widget.AppCompatSeekBar
+					android:id="@+id/download_progress_bar"
+					android:layout_width="match_parent"
+					android:clickable="true"
+					android:focusable="true"
+					android:layout_centerHorizontal="true"
+					android:layout_marginStart="4dp"
+					android:progressTint="@color/deep_orange"
+					android:thumbTint="@color/deep_orange"
+					android:layout_marginEnd="4dp"
+					android:layout_height="wrap_content"
+					android:indeterminate="false"
+					android:layout_toEndOf="@+id/download_position"
+					android:layout_toStartOf="@+id/download_duration"
+					/>
+
+				<TextView android:fontFamily="sans-serif"
+					android:id="@+id/download_duration"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:layout_alignParentEnd="true"
+					android:layout_marginEnd="8dp"
+					android:text="-:--"
+					android:textSize="12sp"
+					android:textColor="?android:textColorPrimary"
+					/>
+			</RelativeLayout>
+
+			<RelativeLayout android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/repeat"
+				android:layout_marginTop="4dp"
+				android:layout_marginBottom="4dp"
 				android:gravity="center"
-				android:layout_alignParentEnd="true"
-				android:layout_marginEnd="8dp"
-				android:text="-:--"
-				android:textSize="12sp"
-				android:textColor="?android:textColorPrimary"
-				/>
-		</RelativeLayout>
+				>
 
-		<RelativeLayout android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:id="@+id/repeat"
-			android:layout_marginTop="5dp"
-			android:gravity="center"
-			>
+				<ImageButton
+					android:id="@+id/download_repeat"
+					android:layout_marginStart="10dp"
+					android:src="?attr/media_button_repeat_off"
+					android:layout_alignParentStart="true"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:layout_marginEnd="10dp"
+					android:layout_centerVertical="true"
 
-			<ImageButton
-				android:id="@+id/download_repeat"
-				android:layout_marginStart="10dp"
-				android:src="?attr/media_button_repeat_off"
-				android:layout_alignParentStart="true"
-				android:layout_width="wrap_content"
+					/>
+
+
+
+
+				<ImageButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:layout_marginEnd="10dp"
+					android:id="@+id/download_toggle_list"
+					android:src="?attr/playlist_toggle"
+					android:layout_alignParentEnd="true"
+					android:layout_centerVertical="true"
+					/>
+			</RelativeLayout>
+			<RelativeLayout
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/selectableItemBackgroundBorderless"
-				android:layout_marginEnd="10dp"
-				android:layout_centerVertical="true"
-
-				/>
-
-
-
-
-			<ImageButton
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:background="?attr/selectableItemBackgroundBorderless"
-				android:layout_marginEnd="10dp"
-				android:id="@+id/download_toggle_list"
-				android:src="@drawable/sdmusiclist"
-				android:layout_alignParentEnd="true"
-				android:layout_centerVertical="true"
-				/>
-		</RelativeLayout>
-		<RelativeLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_gravity="end|bottom"
-			android:gravity="center"
-			>
-
-			<com.google.android.material.floatingactionbutton.FloatingActionButton
-				android:layout_width="wrap_content"
 				android:layout_gravity="end|bottom"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="30dp"
-				android:layout_marginEnd="10dp"
-				app:borderWidth="0dp"
-				app:elevation="6dp"
-				app:fabSize="mini"
-				android:id="@+id/download_previous"
-				android:src="?attr/media_button_backward"
-				android:layout_centerVertical="true"
-				android:layout_toStartOf="@+id/download_start"
-				/>
+				android:gravity="center"
+				>
 
-			<com.google.android.material.floatingactionbutton.FloatingActionButton
-				android:layout_width="wrap_content"
-				android:layout_gravity="end|bottom"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="30dp"
-				android:layout_marginEnd="10dp"
-				app:borderWidth="0dp"
-				app:elevation="6dp"
-				app:fabSize="mini"
-				android:id="@+id/download_rewind"
-				android:layout_toStartOf="@+id/download_start"
-				android:src="?attr/media_button_rewind"
-				android:layout_centerVertical="true"
-				/>
+				<com.google.android.material.floatingactionbutton.FloatingActionButton
+					android:layout_width="wrap_content"
+					android:layout_gravity="end|bottom"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="30dp"
+					android:layout_marginEnd="10dp"
+					app:borderWidth="0dp"
+					app:elevation="6dp"
+					app:fabSize="mini"
+					android:id="@+id/download_previous"
+					android:src="?attr/media_button_backward"
+					android:layout_centerVertical="true"
+					android:layout_toStartOf="@+id/download_start"
+					/>
 
-			<com.google.android.material.floatingactionbutton.FloatingActionButton
-				android:layout_width="wrap_content"
-				android:layout_gravity="end|bottom"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="30dp"
-				android:layout_marginEnd="10dp"
-				app:borderWidth="0dp"
-				app:elevation="6dp"
-				app:fabSize="normal"
-				android:id="@+id/download_pause"
-				android:src="?attr/media_button_pause"
-				android:layout_centerInParent="true"
-				/>
+				<com.google.android.material.floatingactionbutton.FloatingActionButton
+					android:layout_width="wrap_content"
+					android:layout_gravity="end|bottom"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="30dp"
+					android:layout_marginEnd="10dp"
+					app:borderWidth="0dp"
+					app:elevation="6dp"
+					app:fabSize="mini"
+					android:id="@+id/download_rewind"
+					android:layout_toStartOf="@+id/download_start"
+					android:src="?attr/media_button_rewind"
+					android:layout_centerVertical="true"
+					/>
 
-			<com.google.android.material.floatingactionbutton.FloatingActionButton
-				android:layout_width="wrap_content"
-				app:fabSize="normal"
-				android:layout_gravity="end|bottom"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="30dp"
-				android:layout_marginEnd="10dp"
-				app:borderWidth="0dp"
-				app:elevation="6dp"
-				android:id="@+id/download_stop"
-				android:src="?attr/media_button_stop"
-				android:layout_centerInParent="true"
-				/>
+				<com.google.android.material.floatingactionbutton.FloatingActionButton
+					android:layout_width="wrap_content"
+					android:layout_gravity="end|bottom"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="30dp"
+					android:layout_marginEnd="10dp"
+					app:borderWidth="0dp"
+					app:elevation="6dp"
+					app:fabSize="normal"
+					android:id="@+id/download_pause"
+					android:src="?attr/media_button_pause"
+					android:layout_centerInParent="true"
+					/>
 
-			<com.google.android.material.floatingactionbutton.FloatingActionButton
-				android:layout_width="wrap_content"
-				android:layout_gravity="end|bottom"
-				android:layout_height="wrap_content"
-				app:fabSize="normal"
-				android:layout_marginBottom="30dp"
-				android:layout_marginEnd="10dp"
-				app:borderWidth="0dp"
-				app:elevation="6dp"
-				android:id="@+id/download_start"
-				android:src="?attr/media_button_start"
-				android:layout_centerInParent="true"
-				/>
+				<com.google.android.material.floatingactionbutton.FloatingActionButton
+					android:layout_width="wrap_content"
+					app:fabSize="normal"
+					android:layout_gravity="end|bottom"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="30dp"
+					android:layout_marginEnd="10dp"
+					app:borderWidth="0dp"
+					app:elevation="6dp"
+					android:id="@+id/download_stop"
+					android:src="?attr/media_button_stop"
+					android:layout_centerInParent="true"
+					/>
 
-			<com.google.android.material.floatingactionbutton.FloatingActionButton
-				android:layout_width="wrap_content"
-				android:layout_gravity="end|bottom"
-				android:layout_toEndOf="@+id/download_start"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="30dp"
-				android:layout_marginEnd="10dp"
-				app:borderWidth="0dp"
-				app:elevation="6dp"
-				app:fabSize="mini"
-				android:id="@+id/download_fastforward"
-				android:src="?attr/media_button_fastforward"
-				android:layout_centerVertical="true"
-				android:visibility="invisible"/>
+				<com.google.android.material.floatingactionbutton.FloatingActionButton
+					android:layout_width="wrap_content"
+					android:layout_gravity="end|bottom"
+					android:layout_height="wrap_content"
+					app:fabSize="normal"
+					android:layout_marginBottom="30dp"
+					android:layout_marginEnd="10dp"
+					app:borderWidth="0dp"
+					app:elevation="6dp"
+					android:id="@+id/download_start"
+					android:src="?attr/media_button_start"
+					android:layout_centerInParent="true"
+					/>
 
-			<com.google.android.material.floatingactionbutton.FloatingActionButton
-				android:layout_width="wrap_content"
-				android:layout_gravity="end|bottom"
-				android:layout_toEndOf="@+id/download_start"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="30dp"
-				android:layout_marginEnd="10dp"
-				app:borderWidth="0dp"
-				app:elevation="6dp"
-				app:fabSize="mini"
-				android:id="@+id/download_next"
-				android:src="?attr/media_button_forward"
-				android:layout_centerVertical="true"
-				/>
+				<com.google.android.material.floatingactionbutton.FloatingActionButton
+					android:layout_width="wrap_content"
+					android:layout_gravity="end|bottom"
+					android:layout_toEndOf="@+id/download_start"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="30dp"
+					android:layout_marginEnd="10dp"
+					app:borderWidth="0dp"
+					app:elevation="6dp"
+					app:fabSize="mini"
+					android:id="@+id/download_fastforward"
+					android:src="?attr/media_button_fastforward"
+					android:layout_centerVertical="true"
+					android:visibility="invisible"/>
+
+				<com.google.android.material.floatingactionbutton.FloatingActionButton
+					android:layout_width="wrap_content"
+					android:layout_gravity="end|bottom"
+					android:layout_toEndOf="@+id/download_start"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="30dp"
+					android:layout_marginEnd="10dp"
+					app:borderWidth="0dp"
+					app:elevation="6dp"
+					app:fabSize="mini"
+					android:id="@+id/download_next"
+					android:src="?attr/media_button_forward"
+					android:layout_centerVertical="true"
+					/>
 
 
 
-		</RelativeLayout>
+			</RelativeLayout>
 
-	</LinearLayout>
+		</LinearLayout>
 </LinearLayout>

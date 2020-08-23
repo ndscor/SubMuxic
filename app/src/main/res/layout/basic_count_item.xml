@@ -3,18 +3,28 @@
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
-	android:minHeight="50dip">
+	android:minHeight="60dp">
+
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="8dp"
+		android:layout_marginEnd="8dp"
+		android:layout_gravity="center"
+		android:src="?attr/music_icon"
+
+		/>
 
 	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/basic_count_name"
 		android:layout_width="wrap_content"
 		android:layout_height="fill_parent"
 		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:gravity="left|center_vertical"
+		android:gravity="start|center_vertical"
 		android:paddingStart="6dip"
+		android:textAllCaps="true"
 		android:paddingEnd="6dip"
 		android:background="@android:color/transparent"
-		android:text="Text"
 		android:textColor="?android:textColorPrimary"/>
 
 	<TextView android:fontFamily="sans-serif"

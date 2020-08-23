@@ -80,7 +80,7 @@ public abstract class UpdateView<T> extends LinearLayout {
 		this.autoUpdate = autoUpdate;
 		
 		setLayoutParams(new AbsListView.LayoutParams(
-				ViewGroup.LayoutParams.FILL_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.WRAP_CONTENT));
 		
 		if(autoUpdate) {

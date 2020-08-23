@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
     android:orientation="vertical"
+    android:id="@+id/transitions"
     android:layout_width="match_parent"
-    android:background="?attr/dim_background"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/download_playlist_flipper"
+                android:visibility="gone"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="?attr/toolbar_defaults"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                >
 
     <TextView android:fontFamily="sans-serif"
         android:id="@+id/download_empty"
         android:text="@string/download.empty"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dip"
         android:textColor="?android:textColorPrimary"/>
+
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1.0">
+        android:layout_height="match_parent"
+       >
 
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    app:cardBackgroundColor="?attr/list_back"
-    android:padding="4dp"
-    android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/download_list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_margin="2dp"
+            android:layout_height="400dp"
             android:scrollbars="vertical" />
-</androidx.cardview.widget.CardView>
+
         <com.gloxandro.submuxic.view.FastScroller
             android:id="@+id/download_fast_scroller"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
-
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

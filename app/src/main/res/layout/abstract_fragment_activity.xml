@@ -6,8 +6,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:gravity="bottom"
-	sothree:umanoPanelHeight="?attr/actionBarSize"
-	sothree:umanoShadowHeight="4dp"
+	sothree:umanoPanelHeight="60dp"
+	sothree:umanoShadowHeight="0dp"
 	sothree:umanoDragView="@+id/slide_up_swipe_target">
 
 	<FrameLayout
@@ -16,19 +16,18 @@
 
 		<com.google.android.material.appbar.AppBarLayout
 			android:layout_width="match_parent"
+			app:elevation="0dp"
 			android:layout_height="wrap_content">
 
-		<androidx.appcompat.widget.Toolbar
+		<com.google.android.material.appbar.MaterialToolbar
 			android:id="@+id/main_toolbar"
-			android:layout_height="?attr/actionBarSize"
+			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-            app:layout_collapseMode="parallax"
-			app:navigationIcon="@mipmap/submuxic_launcher"
+			android:background="?attr/toolbar_defaults"
+			android:minHeight="60dp"
+			app:layout_collapseMode="parallax"
             app:layout_scrollFlags="scroll|enterAlways"
-			android:background="?attr/actionbarBackgroundColor"
-			app:elevation="12dp"
-			app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-			app:popupTheme="?attr/actionbarPopupStyle"/>
+			/>
 
 			<ProgressBar
 				android:id="@+id/progress"
@@ -56,33 +55,35 @@
 			android:id="@+id/slide_up_swipe_target"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/actionbarBackgroundColor">
+			>
 
-			<androidx.appcompat.widget.Toolbar
+			<com.google.android.material.appbar.MaterialToolbar
 				android:id="@+id/now_playing_toolbar"
-				android:layout_height="?attr/actionBarSize"
+				android:layout_height="match_parent"
 				android:layout_width="match_parent"
+				android:minHeight="60dp"
+				android:padding="6dp"
                 app:layout_collapseMode="parallax"
-				app:navigationIcon="@mipmap/submuxic_launcher"
 				app:layout_scrollFlags="scroll|enterAlways"
-				app:elevation="12dp"
+				app:elevation="0dp"
 				android:visibility="gone"
-				app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-				app:popupTheme="?attr/actionbarPopupStyle"/>
+			/>
 
 			<LinearLayout
 				android:id="@+id/bottom_bar"
-				android:layout_width="fill_parent"
+				android:layout_width="match_parent"
+				android:minHeight="60dp"
+				android:padding="6dp"
+				android:background="@android:color/transparent"
 				android:layout_height="wrap_content"
-				android:background="@color/deep_black"
 				android:orientation="horizontal"
-				android:elevation="12dp">
+			>
 
 				<com.gloxandro.submuxic.view.RecyclingImageView
 					android:id="@+id/album_art"
 					android:layout_width="?attr/actionBarSize"
 					android:layout_height="?attr/actionBarSize"
-					android:layout_gravity="left|center"
+					android:layout_gravity="start|center"
 					android:scaleType="fitCenter"/>
 
 				<LinearLayout
@@ -104,11 +105,8 @@
 						android:scrollHorizontally="true"
 						android:focusable="true"
 						android:focusableInTouchMode="true"
-						style="?attr/actionbarTitleStyle">
+					>
 
-						<requestFocus android:focusable="true"
-							android:focusableInTouchMode="true"
-							android:duplicateParentState="true" />
 					</TextView>
 
 					<TextView android:fontFamily="sans-serif"
@@ -117,7 +115,7 @@
 						android:layout_width="wrap_content"
 						android:singleLine="true"
 						android:text="@string/main.artist"
-						style="?attr/actionbarSubtitleStyle"/>
+					/>
 				</LinearLayout>
 
 
@@ -130,19 +128,19 @@
 					<com.google.android.material.floatingactionbutton.FloatingActionButton
 						android:layout_height="wrap_content"
 						android:layout_width="wrap_content"
-						app:backgroundTint="@color/orange"
+						app:backgroundTint="@color/md_deep_orange_500"
 						android:layout_marginStart="8dp"
 						android:layout_marginEnd="4dp"
 						app:fabSize="mini"
 						android:id="@+id/download_rewind"
-						app:elevation="6dp"
+						app:elevation="2dp"
 						android:src="?attr/actionbar_rewind"
 						android:visibility="gone"/>
 
 					<com.google.android.material.floatingactionbutton.FloatingActionButton
 						android:layout_height="wrap_content"
-						app:backgroundTint="@color/orange"
-						app:elevation="6dp"
+						app:backgroundTint="@color/md_deep_orange_500"
+						app:elevation="2dp"
 						app:fabSize="mini"
 						android:layout_marginStart="4dp"
 						android:layout_marginEnd="4dp"
@@ -154,8 +152,8 @@
 					<com.google.android.material.floatingactionbutton.FloatingActionButton
 						android:layout_height="wrap_content"
 						android:layout_width="wrap_content"
-						app:backgroundTint="@color/orange"
-						app:elevation="6dp"
+						app:backgroundTint="@color/md_deep_orange_500"
+						app:elevation="2dp"
 						android:layout_marginStart="4dp"
 						android:layout_marginEnd="4dp"
 						android:id="@+id/download_start"
@@ -165,10 +163,10 @@
 					<com.google.android.material.floatingactionbutton.FloatingActionButton
 						android:layout_height="wrap_content"
 						android:layout_width="wrap_content"
-						app:backgroundTint="@color/orange"
+						app:backgroundTint="@color/md_deep_orange_500"
 						android:layout_marginStart="4dp"
 						android:layout_marginEnd="4dp"
-						app:elevation="6dp"
+						app:elevation="2dp"
 						android:id="@+id/download_next"
 						app:fabSize="mini"
 						android:src="?attr/actionbar_forward"
@@ -177,8 +175,8 @@
 				<com.google.android.material.floatingactionbutton.FloatingActionButton
 					android:layout_height="wrap_content"
 					android:layout_width="wrap_content"
-					app:elevation="6dp"
-					app:backgroundTint="@color/orange"
+					app:elevation="2dp"
+					app:backgroundTint="@color/md_deep_orange_500"
 						android:id="@+id/download_fastforward"
 						android:src="?attr/actionbar_fastforward"
 					app:fabSize="mini"

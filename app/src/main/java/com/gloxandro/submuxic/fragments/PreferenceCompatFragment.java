@@ -156,7 +156,6 @@ public abstract class PreferenceCompatFragment extends SubsonicFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListView().setScrollBarStyle(View.SCROLLBAR_POSITION_DEFAULT);
 		if (mHavePrefs) {
 			bindPreferences();
 		}
@@ -295,15 +294,6 @@ public abstract class PreferenceCompatFragment extends SubsonicFragment {
 	}
 
 
-	private void setFragment(PreferenceFragment preferenceFragment) {
-		try {
-			Method m = PreferenceManager.class.getDeclaredMethod("setFragment", PreferenceFragment.class);
-			m.setAccessible(true);
-			m.invoke(mPreferenceManager, preferenceFragment);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 	public PreferenceScreen inflateFromResource(Context context, int resId, PreferenceScreen rootPreferences) {
 		PreferenceScreen preferenceScreen ;

@@ -1,29 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:minHeight="60dp"
+	android:layout_height="wrap_content"
+	android:background="?selectableItemBackground"
+	android:focusable="true"
+	android:clickable="true"
+	android:id="@+id/header_layout"
+	android:orientation="horizontal">
+
+
+`	<ImageView
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="8dp"
+	android:layout_marginEnd="8dp"
 	android:layout_gravity="center"
-	android:gravity="center"
-	android:background="?attr/headers_default"
-	android:orientation="vertical">
+	android:src="?attr/folder_icon"
+
+	/>
+
+	<TextView android:fontFamily="sans-serif"
+		android:id="@+id/checkbox_title"
+		android:layout_gravity="center"
+		android:layout_width="0dp"
+		android:textAllCaps="true"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:gravity="center_vertical"
+		android:text="@string/main.albums_per_folder"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:paddingStart="6dip"
+		android:paddingEnd="6dip"
+		android:textColor="?android:textColorPrimary"/>
+
+
+
 
 	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/item_name"
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
+		android:visibility="gone"
 		android:layout_height="wrap_content"
 		android:textAppearance="?android:attr/textAppearanceMedium"
 		android:background="@android:color/transparent"
-		android:layout_gravity="center"
-		android:textSize="32sp"
-		android:layout_marginStart="4dp"
-		android:paddingTop="8dp"
-		android:paddingBottom="8dp"/>
-
-	<CheckBox
+		/>
+	<com.google.android.material.checkbox.MaterialCheckBox
 		android:id="@+id/item_checkbox"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="@string/main.albums_per_folder"
+		android:gravity="center"
+		android:layout_marginStart="2dp"
+		android:layout_width="wrap_content"
+		android:layout_marginEnd="8dp"
 		android:layout_gravity="center"
-		android:textColor="?android:textColorPrimary"/>
+		android:layout_height="wrap_content"
+		/>
+
+
+
 </LinearLayout>

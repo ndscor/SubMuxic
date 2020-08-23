@@ -19,10 +19,13 @@
 package com.gloxandro.submuxic.activity;
 
 import android.annotation.TargetApi;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -35,6 +38,10 @@ import com.gloxandro.submuxic.util.ThemeUtil;
 import com.gloxandro.submuxic.util.Util;
 import com.gloxandro.submuxic.view.UpdateView;
 
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLACK;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLUE;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_DARK;
+
 public class SettingsActivity extends SubsonicActivity {
 	private static final String TAG = SettingsActivity.class.getSimpleName();
 	private PreferenceCompatFragment fragment;
@@ -44,6 +51,32 @@ public class SettingsActivity extends SubsonicActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		applyTheme();
 		super.onCreate(savedInstanceState);
+		if (THEME_DARK.equals(theme)) {
+			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			getWindow().setStatusBarColor(0x00000000);  // transparent
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+		} else	if (THEME_BLACK.equals(theme)) {
+			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			getWindow().setStatusBarColor(0x00000000);  // transparent
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+		} else	if (THEME_BLUE.equals(theme)) {
+			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			getWindow().setStatusBarColor(0x00000000);  // transparent
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+
+		} else {
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				getWindow().setStatusBarColor(Color.TRANSPARENT);  // transparent
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+			}
+		}
 		lastSelectedPosition = R.id.drawer_settings;
 		setContentView(R.layout.settings_activity);
 
@@ -61,29 +94,26 @@ public class SettingsActivity extends SubsonicActivity {
 		}
 
 		Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-		mainToolbar.setNavigationIcon(R.mipmap.submuxic_launcher);
 		setSupportActionBar(mainToolbar);
 	}
+
+
 
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		applyTheme();
-		changeActionBarColor();
-		setStatusColor();
-		setUpNavigation();
 		// If this is in onStart is causes crashes when rotating screen in offline mode
 		// Actual root cause of error is `drawerItemSelected(newFragment);` in the offline mode branch of code
 	}
 
 
-	private void changeActionBarColor() {
-
-		int color = Util.getPrimaryColor(this);
-		Drawable colorDrawable = new ColorDrawable(color);
-		getSupportActionBar().setBackgroundDrawable(colorDrawable);
-
+	@Override
+	public void onBackPressed()
+	{
+		recreate();
+		super.onBackPressed();  // optional depending on your needs
 	}
 
 
@@ -100,9 +130,7 @@ public class SettingsActivity extends SubsonicActivity {
 			DrawableTint.clearCache();
 			return;
 		}
-		changeActionBarColor();
-		setStatusColor();
-		setUpNavigation();
+
 		getImageLoader().onUIVisible();
 		UpdateView.addActiveActivity();
 	}

@@ -15,7 +15,8 @@
 	<!-- The navigation drawer -->
 	<com.google.android.material.navigation.NavigationView
 		android:id="@+id/left_drawer"
-		android:layout_width="wrap_content"
+		android:layout_width="320dp"
+		android:background="?attr/toolbar_defaults"
 		android:layout_height="match_parent"
 		android:layout_gravity="start"/>
 </androidx.drawerlayout.widget.DrawerLayout>

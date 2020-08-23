@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +41,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -47,9 +50,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.core.view.MenuItemCompat;
 import androidx.mediarouter.app.MediaRouteButton;
+import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
 
 import com.gloxandro.submuxic.R;
 import com.gloxandro.submuxic.activity.SubsonicFragmentActivity;
@@ -76,10 +81,12 @@ import com.gloxandro.submuxic.util.MenuUtil;
 import com.gloxandro.submuxic.util.SilentBackgroundTask;
 import com.gloxandro.submuxic.util.UpdateHelper;
 import com.gloxandro.submuxic.util.Util;
+import com.gloxandro.submuxic.view.CardView;
 import com.gloxandro.submuxic.view.FadeOutAnimation;
 import com.gloxandro.submuxic.view.FastScroller;
 import com.gloxandro.submuxic.view.UpdateView;
 import com.gloxandro.submuxic.view.compat.CustomMediaRouteDialogFactory;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shehabic.droppy.DroppyClickCallbackInterface;
 import com.shehabic.droppy.DroppyMenuPopup;
@@ -106,8 +113,9 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 	private static final int ACTION_NEXT = 2;
 	private static final int ACTION_REWIND = 3;
 	private static final int ACTION_FORWARD = 4;
+	boolean visible;
 
-	private ViewFlipper playlistFlipper;
+	private MaterialCardView playlistFlipper;
 	private TextView emptyTextView;
 	private TextView songTitleTextView;
 	private ImageView albumArtImageView;
@@ -154,9 +162,6 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		super.onCreate(savedInstanceState);
 
 		if(savedInstanceState != null) {
-			if(savedInstanceState.getInt(Constants.FRAGMENT_DOWNLOAD_FLIPPER) == 1) {
-				startFlipped = true;
-			}
 		}
 		primaryFragment = false;
 	}
@@ -164,7 +169,6 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt(Constants.FRAGMENT_DOWNLOAD_FLIPPER, playlistFlipper.getDisplayedChild());
 	}
 
 	public void setUpStatusBar() {
@@ -187,8 +191,8 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		swipeDistance = (d.getWidth() + d.getHeight()) * PERCENTAGE_OF_SCREEN_FOR_SWIPE / 100;
 		swipeVelocity = (d.getWidth() + d.getHeight()) * PERCENTAGE_OF_SCREEN_FOR_SWIPE / 100;
 		gestureScanner = new GestureDetector(this);
-
-		playlistFlipper = (ViewFlipper)rootView.findViewById(R.id.download_playlist_flipper);
+		final ViewGroup transitionsContainer = (ViewGroup) rootView.findViewById(R.id.transitions);
+		playlistFlipper = (MaterialCardView) rootView.findViewById(R.id.download_playlist_flipper);
 		emptyTextView = (TextView)rootView.findViewById(R.id.download_empty);
 		songTitleTextView = (TextView)rootView.findViewById(R.id.download_song_title);
 		songTitleTextView.setSelected(true);
@@ -199,22 +203,28 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		statusTextView.setSelected(true);
 		progressBar = (AppCompatSeekBar) rootView.findViewById(R.id.download_progress_bar);
 		previousButton = (FloatingActionButton)rootView.findViewById(R.id.download_previous);
-		previousButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
 		nextButton = (FloatingActionButton)rootView.findViewById(R.id.download_next);
-		nextButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
 
 		rewindButton = (FloatingActionButton) rootView.findViewById(R.id.download_rewind);
-		rewindButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
 
 		fastforwardButton = (FloatingActionButton) rootView.findViewById(R.id.download_fastforward);
-		fastforwardButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
 
 		pauseButton =rootView.findViewById(R.id.download_pause);
-		pauseButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
 		stopButton =rootView.findViewById(R.id.download_stop);
-		stopButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
 		startButton =rootView.findViewById(R.id.download_start);
-		startButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+
+		SharedPreferences prefs = Util.getPreferences(context);
+		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true)) {
+			stopButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			pauseButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			fastforwardButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			rewindButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			nextButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			previousButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			startButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+
+		}
+
 		repeatButton = (ImageButton)rootView.findViewById(R.id.download_repeat);
 		bookmarkButton = (ImageButton) rootView.findViewById(R.id.download_bookmark);
 		rateBadButton = (ImageButton) rootView.findViewById(R.id.download_rating_bad);
@@ -223,6 +233,7 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		toggleListButton =rootView.findViewById(R.id.download_toggle_list);
 
 		playlistView = (RecyclerView)rootView.findViewById(R.id.download_list);
+		playlistView.setVerticalScrollBarEnabled(false);
 		FastScroller fastScroller = (FastScroller) rootView.findViewById(R.id.download_fast_scroller);
 		fastScroller.attachRecyclerView(playlistView);
 		setupLayoutManager(playlistView, false);
@@ -413,11 +424,15 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 			playbackSpeedButton.setVisibility(View.GONE);
 		}
 
+
 		toggleListButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				toggleFullscreenAlbumArt();
 				setControlsVisible(true);
+				playlistFlipper.setVisibility(View.GONE);
+				TransitionManager.beginDelayedTransition(transitionsContainer);
+				visible = !visible;
+				playlistFlipper.setVisibility(visible ? View.VISIBLE : View.GONE);
 			}
 		});
 
@@ -427,7 +442,6 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 			@Override
 			public void onClick(View view) {
 				if (overlayHeight == -1 || lastY < (view.getBottom() - overlayHeight)) {
-					toggleFullscreenAlbumArt();
 					setControlsVisible(true);
 				}
 			}
@@ -751,21 +765,29 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		super.onStart();
 		if(this.primaryFragment) {
 			onResumeHandlers();
-			setUpStatusBar();
 		} else {
 			update();
-			setUpStatusBar();
 		}
 	}
 	private void onResumeHandlers() {
+		int color_fab = Util.getsmallbottonColor(getActivity());
+
+		SharedPreferences prefs = Util.getPreferences(context);
+		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true)) {
+			stopButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			pauseButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			fastforwardButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			rewindButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			nextButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			previousButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+			startButton.setBackgroundTintList(ColorStateList.valueOf(color_fab));
+
+		}
+
 		executorService = Executors.newSingleThreadScheduledExecutor();
 		setControlsVisible(true);
 
 		final DownloadService downloadService = getDownloadService();
-		if (downloadService == null || downloadService.getCurrentPlaying() == null || startFlipped) {
-			playlistFlipper.setDisplayedChild(1);
-			startFlipped = false;
-		}
 		if (downloadService != null && downloadService.getKeepScreenOn()) {
 			context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		} else {
@@ -777,6 +799,9 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		if(currentPlaying == null && downloadService != null && currentPlaying == downloadService.getCurrentPlaying()) {
 			getImageLoader().loadImage(albumArtImageView, (MusicDirectory.Entry) null, true, false);
 		}
+
+
+
 
 		context.runWhenServiceAvailable(new Runnable() {
 			@Override
@@ -804,7 +829,6 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 				downloadService.stopRemoteScan();
 				downloadService.removeOnSongChangeListener(this);
 			}
-			playlistFlipper.setDisplayedChild(0);
 		}
 	}
 
@@ -994,21 +1018,7 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		} else {
 			return (progress - 80) * 150 + getMinutes(80);
 		}
-	}
 
-	private void toggleFullscreenAlbumArt() {
-		if (playlistFlipper.getDisplayedChild() == 1) {
-			playlistFlipper.setInAnimation(AnimationUtils.loadAnimation(context, R.anim.push_down_in));
-			playlistFlipper.setOutAnimation(AnimationUtils.loadAnimation(context, R.anim.push_down_out));
-			playlistFlipper.setDisplayedChild(0);
-		} else {
-			scrollToCurrent();
-			playlistFlipper.setInAnimation(AnimationUtils.loadAnimation(context, R.anim.push_up_in));
-			playlistFlipper.setOutAnimation(AnimationUtils.loadAnimation(context, R.anim.push_up_out));
-			playlistFlipper.setDisplayedChild(1);
-
-			UpdateView.triggerUpdate();
-		}
 	}
 
 	private void start() {

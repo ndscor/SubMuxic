@@ -268,17 +268,12 @@ public class ColorPalette {
                     ContextCompat.getColor(context, R.color.md_grey_500),
                     ContextCompat.getColor(context, R.color.md_grey_600),
                     ContextCompat.getColor(context, R.color.md_grey_700),
-                    ContextCompat.getColor(context, R.color.newgray),
 
 
                     ContextCompat.getColor(context, R.color.md_grey_800),
-                    ContextCompat.getColor(context, R.color.md_grey_900),
                     ContextCompat.getColor(context, R.color.birdback),
                     ContextCompat.getColor(context, R.color.prime),
                     ContextCompat.getColor(context, R.color.accitemb),
-                    ContextCompat.getColor(context, R.color.statusblack),
-                    ContextCompat.getColor(context, R.color.actionblack),
-                    Color.parseColor("#000000")
             };
         } else {
             return new int[]{
@@ -288,7 +283,6 @@ public class ColorPalette {
                     ContextCompat.getColor(context, R.color.md_blue_grey_600),
                     ContextCompat.getColor(context, R.color.md_blue_grey_700),
                     ContextCompat.getColor(context, R.color.md_blue_grey_800),
-                    ContextCompat.getColor(context, R.color.md_blue_grey_900)
             };
         }
     }

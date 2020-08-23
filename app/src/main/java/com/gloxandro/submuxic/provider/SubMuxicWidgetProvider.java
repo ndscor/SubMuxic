@@ -157,8 +157,8 @@ public class SubMuxicWidgetProvider extends AppWidgetProvider {
 			// Hide widget
 			SharedPreferences prefs = Util.getPreferences(context);
 			if(prefs.getBoolean(Constants.PREFERENCES_KEY_HIDE_WIDGET, false)) {
-				views.setViewVisibility(R.id.widget_root, View.GONE);
-			}
+                views.setViewVisibility(R.id.widget_root, View.GONE);
+            }
 		}
 
 	// Get Entry from current playing DownloadFile

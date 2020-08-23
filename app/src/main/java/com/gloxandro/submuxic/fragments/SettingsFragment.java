@@ -44,6 +44,7 @@ import androidx.core.content.ContextCompat;
 
 import com.gloxandro.submuxic.R;
 import com.gloxandro.submuxic.activity.SubsonicActivity;
+import com.gloxandro.submuxic.colors.MaterialColorPreference;
 import com.gloxandro.submuxic.service.DownloadService;
 import com.gloxandro.submuxic.service.HeadphoneListenerService;
 import com.gloxandro.submuxic.service.MusicService;
@@ -66,12 +67,23 @@ import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static com.gloxandro.submuxic.util.Constants.KEY_PRIMARY_COLOR;
+
 public class SettingsFragment extends PreferenceCompatFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 	private final static String TAG = SettingsFragment.class.getSimpleName();
 
 	private final Map<String, ServerSettings> serverSettings = new LinkedHashMap<String, ServerSettings>();
 	private boolean testingConnection;
 	private ListPreference theme;
+
+	private CheckBoxPreference custom_colors;
+	private MaterialColorPreference background;
+	private MaterialColorPreference statusColor;
+	private MaterialColorPreference primaryColor;
+	private MaterialColorPreference bottombar;
+	private MaterialColorPreference bottomnavigationbar;
+	private MaterialColorPreference smallbuttons;
+
 	private ListPreference maxBitrateWifi;
 	private ListPreference maxBitrateMobile;
 	private ListPreference maxVideoBitrateWifi;
@@ -235,7 +247,19 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 		}
 		internalSSIDDisplay = context.getResources().getString(R.string.settings_server_local_network_ssid_hint, internalSSID);
 
+		background = (MaterialColorPreference) this.findPreference(Constants.KEY_BACKGROUND_COLOR);
+
+		statusColor = (MaterialColorPreference) findPreference(Constants.KEY_STATUS_COLOR);
+		primaryColor = (MaterialColorPreference) findPreference(KEY_PRIMARY_COLOR);
+		bottombar = (MaterialColorPreference) findPreference(Constants.KEY_BOTTOMBAR_COLOR);
+		bottomnavigationbar = (MaterialColorPreference) findPreference(Constants.KEY_BOTTOMNAVIGATIONBAR_COLOR);
+		smallbuttons = (MaterialColorPreference) findPreference(Constants.KEY_SMALLBUTTONS_STYLE);
+		custom_colors = (CheckBoxPreference) this.findPreference(Constants.PREFERENCES_KEY_CUSTOM_THEME);
 		theme = (ListPreference) this.findPreference(Constants.PREFERENCES_KEY_THEME);
+
+
+
+
 		maxBitrateWifi = (ListPreference) this.findPreference(Constants.PREFERENCES_KEY_MAX_BITRATE_WIFI);
 		maxBitrateMobile = (ListPreference) this.findPreference(Constants.PREFERENCES_KEY_MAX_BITRATE_MOBILE);
 		maxVideoBitrateWifi = (ListPreference) this.findPreference(Constants.PREFERENCES_KEY_MAX_VIDEO_BITRATE_WIFI);
@@ -301,6 +325,8 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 			});
 		}
 
+
+
 		if(syncEnabled != null) {
 			this.findPreference(Constants.PREFERENCES_KEY_SYNC_ENABLED).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 				@Override
@@ -318,7 +344,6 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 				@Override
 				public boolean onPreferenceChange(Preference preference, Object newValue) {
 					Integer syncInterval = Integer.parseInt(((String) newValue));
-
 					Account account = new Account(Constants.SYNC_ACCOUNT_NAME, Constants.SYNC_ACCOUNT_TYPE);
 					ContentResolver.addPeriodicSync(account, Constants.SYNC_ACCOUNT_PLAYLIST_AUTHORITY, new Bundle(), 60L * syncInterval);
 					ContentResolver.addPeriodicSync(account, Constants.SYNC_ACCOUNT_PODCAST_AUTHORITY, new Bundle(), 60L * syncInterval);
@@ -385,9 +410,29 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 			return;
 		}
 
+
 		if(theme != null) {
 			theme.setSummary(theme.getEntry());
+			if (custom_colors.isChecked()) {
+				primaryColor.setEnabled(true);
+				background.setEnabled(true);
+				statusColor.setEnabled(true);
+				smallbuttons.setEnabled(true);
+				bottomnavigationbar.setEnabled(true);
+				bottombar.setEnabled(true);
+			} else {
+				primaryColor.setEnabled(false);
+				background.setEnabled(false);
+				statusColor.setEnabled(false);
+				smallbuttons.setEnabled(false);
+				bottombar.setEnabled(false);
+				bottomnavigationbar.setEnabled(false);
+			}
 		}
+
+
+
+
 		if(openToTab != null) {
 			openToTab.setSummary(openToTab.getEntry());
 		}
@@ -430,6 +475,9 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 				replayGainBump.setEnabled(false);
 				replayGainUntagged.setEnabled(false);
 			}
+
+
+
 			replayGainType.setSummary(replayGainType.getEntry());
 		}
 

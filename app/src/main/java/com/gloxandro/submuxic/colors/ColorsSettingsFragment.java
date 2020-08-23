@@ -18,9 +18,10 @@ import com.gloxandro.submuxic.R;
 import com.gloxandro.submuxic.util.Util;
 import com.google.android.material.appbar.AppBarLayout;
 
-import static com.gloxandro.submuxic.util.Util.KEY_BOTTOMNAVIGATIONBAR_COLOR;
-import static com.gloxandro.submuxic.util.Util.KEY_PRIMARY_COLOR;
-import static com.gloxandro.submuxic.util.Util.KEY_STATUS_COLOR;
+import static com.gloxandro.submuxic.util.Constants.KEY_BOTTOMNAVIGATIONBAR_COLOR;
+import static com.gloxandro.submuxic.util.Constants.KEY_PRIMARY_COLOR;
+import static com.gloxandro.submuxic.util.Constants.KEY_STATUS_COLOR;
+
 
 public class ColorsSettingsFragment extends PreferenceFragment
 		implements OnPreferenceClickListener, OnPreferenceChangeListener {

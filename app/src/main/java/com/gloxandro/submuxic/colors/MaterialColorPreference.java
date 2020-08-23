@@ -35,6 +35,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
@@ -163,7 +164,7 @@ public class MaterialColorPreference extends Preference {
         private LineColorPicker mStatusColorPicker;
 
         private LineColorPicker mShadePicker;
-        private TextView mTitle;
+        private LinearLayout mTitle;
         int colorType;
 
         public ColorDialogFragment() {
@@ -214,11 +215,10 @@ public class MaterialColorPreference extends Preference {
             mColorPicker = (LineColorPicker) rootView.findViewById(R.id.color_picker);
             mStatusColorPicker = (LineColorPicker) rootView.findViewById(R.id.color_picker);
             mShadePicker = (LineColorPicker) rootView.findViewById(R.id.shade_picker);
-            mTitle = (TextView) rootView.findViewById(R.id.title);
+            mTitle = (LinearLayout) rootView.findViewById(R.id.title);
 
             int color = Util.getPrimaryColor();
             if(colorType == 0){
-                mTitle.setText(R.string.Select_color);
                 mColorPicker.setColors(ColorPalette.getBaseColors(context));
                 for (int i : mColorPicker.getColors()) {
                     for (int j : ColorPalette.getColors(context, i)) {
@@ -232,7 +232,6 @@ public class MaterialColorPreference extends Preference {
                 }
             }
             else if(colorType == 1){
-                mTitle.setText(R.string.accent_color);
                 mColorPicker.setColors(ColorPalette.getAccentColors(context));
                 mShadePicker.setVisibility(View.GONE);
                 mColorPicker.setSelectedColor(color);

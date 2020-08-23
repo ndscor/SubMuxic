@@ -20,8 +20,8 @@
 				android:clipToPadding="false"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:scrollbars="vertical"
-				android:scrollbarStyle="outsideOverlay"/>
+				android:scrollbars="none"
+				/>
 
 			<com.gloxandro.submuxic.view.FastScroller
 				android:id="@+id/fragment_fast_scroller"

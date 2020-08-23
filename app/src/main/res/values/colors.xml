@@ -34,15 +34,15 @@
 	<color name="background_l">#59FFFFFF</color>
 
 	<color name="submuxic_primary">#151515</color>
-
-	<color name="dark_background">#323232</color>
-
+	<color name="color_light_primary">#f2f2f2</color>
+	<color name="dark_background">#303030</color>
+	<color name="light_action_bar">#f2f2f2</color>
 	<color name="divider_dark">#FF212121</color>
 	<color name="divider_light">#e2e2e2</color>
 	<color name="background_light">#eeeeee</color>
 	<color name="submuxic_statusbar">#0f0f0f</color>
 
-
+	<color name="blue_background">#08152c</color>
 	<color name="lightPrimary">#2196f3</color>
 	<color name="lightPrimaryDark">#1e88e5</color>
 	<color name="lightAccent">#448aff</color>

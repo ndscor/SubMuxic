@@ -14,22 +14,47 @@
 			android:entries="@array/themeNames"/>
 
 
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="@string/settings.appearance_title">
+
+		<CheckBoxPreference
+			android:title="@string/settings.custom_theme"
+			android:summary="@string/settings.custom_theme_des"
+			android:key="custom_colors"
+			android:defaultValue="false"/>
+
 		<com.gloxandro.submuxic.colors.MaterialColorPreference
-			android:defaultValue="@color/deep_black"
+			android:dialogTitle="@string/settings.background_color_title"
+			android:key="BackgroundColor"
+			android:defaultValue="@color/grouptextcolordark"
+			android:negativeButtonText="@null"
+			android:positiveButtonText="@null"
+			android:summary="@string/settings.background_color_des"
+			android:title="@string/settings.background_color_title"
+			app:itemLayout="@layout/pref_layout_color" />
+
+
+
+		<com.gloxandro.submuxic.colors.MaterialColorPreference
 			android:dialogTitle="@string/statusbartitle"
 			android:key="statusColor"
 			android:negativeButtonText="@null"
 			android:positiveButtonText="@null"
+			android:defaultValue="@color/grouptextcolordark"
 			android:summary="@string/statusbarcolor"
 			android:title="@string/statusbartitle"
 			app:itemLayout="@layout/pref_layout_color" />
 
 
 		<com.gloxandro.submuxic.colors.MaterialColorPreference
-			android:defaultValue="@color/deep_black"
 			android:dialogTitle="@string/pref_foreground_color_title"
 			android:key="primaryColor"
 			android:negativeButtonText="@null"
+			android:defaultValue="@color/grouptextcolordark"
+			android:enabled="false"
 			android:positiveButtonText="@null"
 			android:summary="@string/pref_foreground_color_description"
 			android:title="@string/pref_foreground_color_title"
@@ -38,10 +63,10 @@
 
 
 		<com.gloxandro.submuxic.colors.MaterialColorPreference
-			android:defaultValue="@color/deep_black"
 			android:dialogTitle="@string/pref_bottombar_color_title"
 			android:key="bottombar"
 			android:negativeButtonText="@null"
+			android:defaultValue="@color/grouptextcolordark"
 			android:positiveButtonText="@null"
 			android:summary="@string/pref_bottombar_color_description"
 			android:title="@string/pref_bottombar_color_title"
@@ -50,10 +75,10 @@
 
 
 		<com.gloxandro.submuxic.colors.MaterialColorPreference
-			android:defaultValue="@color/deep_black"
 			android:dialogTitle="@string/pref_bottomnavigationbar_color_title"
 			android:key="bottomnavigationbar"
 			android:negativeButtonText="@null"
+			android:defaultValue="@color/grouptextcolordark"
 			android:positiveButtonText="@null"
 			android:summary="@string/pref_bottomnavigationbar_color_description"
 			android:title="@string/pref_bottomnavigationbar_color_title"
@@ -63,20 +88,15 @@
 
 
 		<com.gloxandro.submuxic.colors.MaterialColorPreference
-			android:defaultValue="@color/deep_orange"
 			android:dialogTitle="@string/pref_smallbutton_color_title"
 			android:key="smallbuttons"
 			android:negativeButtonText="@null"
+			android:defaultValue="@color/lightaction"
 			android:positiveButtonText="@null"
 			android:summary="@string/pref_smallbuttons_color_description"
 			android:title="@string/pref_smallbutton_color_title"
 			app:color_type="primary"
 			app:itemLayout="@layout/pref_layout_color" />
-
-	</PreferenceCategory>
-
-	<PreferenceCategory
-		android:title="@string/settings.appearance_title">
 
 		<CheckBoxPreference
 			android:title="@string/settings.track_title"

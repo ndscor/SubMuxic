@@ -65,10 +65,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.gloxandro.submuxic.R;
 import com.gloxandro.submuxic.activity.SubsonicActivity;
 import com.gloxandro.submuxic.adapter.DetailsAdapter;
+import com.gloxandro.submuxic.colors.MaterialColorPreference;
 import com.gloxandro.submuxic.domain.MusicDirectory;
 import com.gloxandro.submuxic.domain.PlayerState;
 import com.gloxandro.submuxic.domain.RepeatMode;
@@ -100,6 +103,14 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
 
+import static com.gloxandro.submuxic.util.Constants.KEY_BACKGROUND_COLOR;
+import static com.gloxandro.submuxic.util.Constants.KEY_BOTTOMBAR_COLOR;
+import static com.gloxandro.submuxic.util.Constants.KEY_BOTTOMNAVIGATIONBAR_COLOR;
+import static com.gloxandro.submuxic.util.Constants.KEY_BUTTON_COLOR;
+import static com.gloxandro.submuxic.util.Constants.KEY_PRIMARY_COLOR;
+import static com.gloxandro.submuxic.util.Constants.KEY_SMALLBUTTONS_STYLE;
+import static com.gloxandro.submuxic.util.Constants.KEY_STATUS_COLOR;
+
 /**
  * @author Sindre Mehus
  * @version $Id$
@@ -110,17 +121,6 @@ public final class Util extends AppCompatActivity {
     private static final int FRAGMENT_OPEN = 99;
 
 	private static final String EXTRA_RECREATE = "recreate";
-	public static final String KEY_STATUS_COLOR = "statusColor";
-	public static final String KEY_BOTTOMNAVIGATIONBAR_COLOR = "bottomnavigationbar";
-
-	public static final String KEY_PRIMARY_COLOR = "primaryColor";
-	public static final String KEY_SMALLBUTTONS_STYLE = "smallbuttons";
-	public static final String KEY_ACCFOLDERVIEW_COLOR = "accountfolderview";
-	public static final String KEY_BOTTOMBAR_COLOR = "bottombar";
-
-	public static final String KEY_BUTTON_COLOR = "buttonColor";
-
-
 	private static final DecimalFormat GIGA_BYTE_FORMAT = new DecimalFormat("0.00 GB");
     private static final DecimalFormat MEGA_BYTE_FORMAT = new DecimalFormat("0.00 MB");
     private static final DecimalFormat KILO_BYTE_FORMAT = new DecimalFormat("0 KB");
@@ -166,10 +166,14 @@ public final class Util extends AppCompatActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		changeActionBarColor(0);
+		SharedPreferences prefs = getPreferences(this);
+
+		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, false)) {
+
+		}
+
+
 		AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-		setStatusColor();
-		setUpNavigation();
 		res = getResources();
 		actionBarColor = getPrimaryColor(this);
 		if(null == savedInstanceState) {
@@ -248,11 +252,6 @@ public final class Util extends AppCompatActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		changeActionBarColor(0);
-		setStatusColor();
-		setUpNavigation();
-
-
 
 	}
 
@@ -274,93 +273,53 @@ public final class Util extends AppCompatActivity {
 
 
 	public static int getPrimaryColor(Context context) {
-		int newColor = ContextCompat.getColor(context, R.color.deep_black);
+		int newColor = ContextCompat.getColor(context, R.color.grouptextcolordark);
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getInt(KEY_PRIMARY_COLOR, newColor);
 	}
 
 
+	public static int getBackgroundColor(Context context) {
+		int newColor = ContextCompat.getColor(context, R.color.grouptextcolordark);
+		return PreferenceManager.getDefaultSharedPreferences(context)
+				.getInt(KEY_BACKGROUND_COLOR, newColor);
+	}
+
 
 
 	public static int getbottomnavigationColor(Context context) {
-		int newColor = ContextCompat.getColor(context, R.color.deep_black);
+		int newColor = ContextCompat.getColor(context, R.color.grouptextcolordark);
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getInt(KEY_BOTTOMNAVIGATIONBAR_COLOR, newColor);
 	}
 
-	public static int getbottomnavigationColor() {
-		return PreferenceManager.getDefaultSharedPreferences(SubsonicActivity.getInstance().getBaseContext())
-				.getInt(KEY_BOTTOMNAVIGATIONBAR_COLOR, Color.parseColor("#424242"));
-	}
-
-	public void setUpNavigation() {
-		int color = Util.getbottomnavigationColor(this);
-		getWindow().setNavigationBarColor(color);
-
-
-	}
-
-	public void setUpStatusBar() {
-		int color = com.gloxandro.submuxic.colors.Constants.getStatusBarColor(Util.getStatusColor(this));
-		getWindow().setStatusBarColor(color);
-	}
-
 
 	public static int getStatusColor(Context context) {
-		int newColor = ContextCompat.getColor(context, R.color.deep_black);
+		int newColor = ContextCompat.getColor(context, R.color.grouptextcolordark);
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getInt(KEY_STATUS_COLOR, newColor);
 	}
 
-	public static int getStatusColor() {
-		return PreferenceManager.getDefaultSharedPreferences(SubsonicActivity.getInstance().getBaseContext())
-				.getInt(KEY_STATUS_COLOR, Color.parseColor("#757575"));
-	}
-
-
-
-
-
-	public static int getbottonColor(Context context) {
-		int newColor = ContextCompat.getColor(context, R.color.actionblack);
-		return PreferenceManager.getDefaultSharedPreferences(context)
-				.getInt(KEY_BUTTON_COLOR, newColor);
-	}
-
-	public static int getbottonColor() {
-		return PreferenceManager.getDefaultSharedPreferences(SubsonicActivity.getInstance().getBaseContext())
-				.getInt(KEY_BUTTON_COLOR, Color.parseColor("#151515"));
-	}
 
 
 	public static int getsmallbottonColor(Context context) {
-		int newColor = ContextCompat.getColor(context, R.color.deep_orange);
+		int newColor = ContextCompat.getColor(context, R.color.lightaction);
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getInt(KEY_SMALLBUTTONS_STYLE, newColor);
-	}
-
-	public static int getsmallbottonColor() {
-		return PreferenceManager.getDefaultSharedPreferences(SubsonicActivity.getInstance().getBaseContext())
-				.getInt(KEY_SMALLBUTTONS_STYLE, Color.parseColor("#FF5505"));
 	}
 
 
 
 	public static int getbottombarColor(Context context) {
-		int newColor = ContextCompat.getColor(context, R.color.deep_black);
+		int newColor = ContextCompat.getColor(context, R.color.grouptextcolordark);
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getInt(KEY_BOTTOMBAR_COLOR, newColor);
-	}
-
-	public static int getbottombarColor() {
-		return PreferenceManager.getDefaultSharedPreferences(SubsonicActivity.getInstance().getBaseContext())
-				.getInt(KEY_BOTTOMBAR_COLOR, Color.parseColor("#616161"));
 	}
 
 
 	public static int getPrimaryColor() {
 		return PreferenceManager.getDefaultSharedPreferences(SubsonicActivity.getInstance().getBaseContext())
-				.getInt(KEY_PRIMARY_COLOR, Color.parseColor("#616161"));
+				.getInt(KEY_PRIMARY_COLOR, Color.parseColor("#90a4ad"));
 	}
 
 
@@ -511,7 +470,14 @@ public final class Util extends AppCompatActivity {
         return prefs.getBoolean(Constants.PREFERENCES_KEY_DISPLAY_TRACK, true);
 	}
 
-    public static int getMaxBitrate(Context context) {
+	public static boolean getCustomColor(Context context) {
+		SharedPreferences prefs = getPreferences(context);
+		return prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true);
+	}
+
+
+
+	public static int getMaxBitrate(Context context) {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
         if (networkInfo == null) {

@@ -62,7 +62,7 @@
 		android:layout_width="@dimen/Star.Small"
 		android:layout_height="@dimen/Star.Small"
 		android:scaleType="fitCenter"
-		android:layout_gravity="right|center_vertical"
+		android:layout_gravity="end|center_vertical"
 		android:background="@android:color/transparent"
 		android:focusable="false"
 		android:visibility="gone"/>
@@ -72,6 +72,6 @@
 		android:src="?attr/download_none"
 		android:layout_width="wrap_content"
 		android:layout_height="fill_parent"
-		android:layout_gravity="right|center_vertical"
+		android:layout_gravity="end|center"
 		style="@style/MoreButton"/>
 </LinearLayout>

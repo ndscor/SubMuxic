@@ -130,6 +130,8 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		}
 
 		super.onCreate(savedInstanceState);
+
+
 		if (getIntent().hasExtra(Constants.INTENT_EXTRA_NAME_EXIT)) {
 			stopService(new Intent(this, DownloadService.class));
 			finish();
@@ -277,23 +279,13 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		}
 
 		bottomBar = findViewById(R.id.bottom_bar);
-		int color = Util.getbottombarColor(this);
-		Drawable colorDrawable = new ColorDrawable(color);
-		bottomBar.setBackground(colorDrawable);
 		mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-		int color3 = Util.getPrimaryColor(this);
-		Drawable colorDrawable3 = new ColorDrawable(color3);
-		mainToolbar.setBackground(colorDrawable3);
 		nowPlayingToolbar = (Toolbar) findViewById(R.id.now_playing_toolbar);
-		int color2 = Util.getPrimaryColor(this);
-		Drawable colorDrawable2 = new ColorDrawable(color2);
-		nowPlayingToolbar.setBackground(colorDrawable2);
 		coverArtView = (ImageView) bottomBar.findViewById(R.id.album_art);
 		trackView = (TextView) bottomBar.findViewById(R.id.track_name);
 		artistView = (TextView) bottomBar.findViewById(R.id.artist_name);
 
 		setSupportActionBar(mainToolbar);
-		int color_fab_fragment = Util.getsmallbottonColor((this));
 		if (findViewById(R.id.fragment_container) != null && savedInstanceState == null) {
 			nowPlayingFragment = new NowPlayingFragment();
 			FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -302,7 +294,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		}
 
 		rewindButton = (FloatingActionButton) findViewById(R.id.download_rewind);
-		rewindButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
 		rewindButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -321,7 +312,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		});
 
 		previousButton = (FloatingActionButton) findViewById(R.id.download_previous);
-		previousButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
 		previousButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -340,7 +330,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		});
 
 		startButton = (FloatingActionButton) findViewById(R.id.download_start);
-		startButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
 		startButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -363,7 +352,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		});
 
 		nextButton = (FloatingActionButton) findViewById(R.id.download_next);
-		nextButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
 		nextButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -382,7 +370,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		});
 
 		fastforwardButton = (FloatingActionButton) findViewById(R.id.download_fastforward);
-		fastforwardButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
 		fastforwardButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -399,6 +386,7 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 				}.execute();
 			}
 		});
+
 	}
 
 	private void changeActionBarColor() {
@@ -464,9 +452,20 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 	@Override
 	public void onResume() {
 		super.onResume();
-		int color = Util.getbottombarColor(this);
-		Drawable colorDrawable = new ColorDrawable(color);
-		bottomBar.setBackground(colorDrawable);
+		int bottombar = Util.getbottombarColor(this);
+		int toolbar = Util.getbottombarColor(this);
+		int color_fab_fragment = Util.getsmallbottonColor((this));
+
+		SharedPreferences prefs = Util.getPreferences(this);
+		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true)) {
+			bottomBar.setBackgroundColor(bottombar);
+			nowPlayingToolbar.setBackgroundColor(toolbar);
+			fastforwardButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
+			nextButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
+			startButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
+			previousButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
+			rewindButton.setBackgroundTintList(ColorStateList.valueOf(color_fab_fragment));
+		}
 		if(getIntent().hasExtra(Constants.INTENT_EXTRA_VIEW_ALBUM)) {
 			SubsonicFragment fragment = new SelectDirectoryFragment();
 			Bundle args = new Bundle();
