@@ -18,6 +18,7 @@
  */
 package com.gloxandro.submuxic.activity;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.UiModeManager;
 import android.content.Context;
@@ -54,6 +55,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -85,6 +87,7 @@ import com.gloxandro.submuxic.util.ThemeUtil;
 import com.gloxandro.submuxic.util.UserUtil;
 import com.gloxandro.submuxic.util.Util;
 import com.gloxandro.submuxic.view.UpdateView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
@@ -95,8 +98,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.Manifest.permission;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.gloxandro.submuxic.BuildConfig.PLAYSTORE_LICENSE_KEY;
 import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLACK;
 import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLUE;
@@ -109,12 +111,13 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 	private static final int MENU_GROUP_SERVER = 10;
 	private static final int MENU_ITEM_SERVER_BASE = 100;
 	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-	public static final int PERMISSIONS_REQUEST_LOCATION = 2;
-
+	int REQUEST_PERMISSION_SETTING = 1;
 	private static final byte[] SALT = new byte[]{
 			-121, 55, 78, -12, -75, -89, 24, -99, 48, 22, -18, -17, 16, -120, -46, -123, -49, 23, -78,
 			34
 	};
+	private Dialog dialog;
+	private static boolean infoDialogDisplayed;
 
 	private LicenseChecker mChecker;
 	private LicenseCheckerCallback mLicenseCheckerCallback;
@@ -141,7 +144,7 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 	View drawerHeader;
 	ImageView drawerUserAvatar;
 	ImageView drawerHeaderToggle;
-	RelativeLayout drawer_header;
+	LinearLayout drawer_header;
 
 	private static SubsonicActivity sInstance;
 	TextView drawerServerName;
@@ -215,10 +218,66 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 			Util.getPreferences(this).registerOnSharedPreferenceChangeListener(preferencesListener);
 		}
 
-		if (ContextCompat.checkSelfPermission(this, permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-			ActivityCompat.requestPermissions(this, new String[]{ permission.WRITE_EXTERNAL_STORAGE }, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+			Pop_perimssion();
 		}
 	}
+
+
+	private void showInfoDialog() {
+		if (!infoDialogDisplayed) {
+			infoDialogDisplayed = true;
+			if (Util.getRestUrl(this, null).contains("demo.subsonic.org")) {
+				Util.info(this, R.string.main_welcome_title, R.string.main_welcome_text);
+			}
+		}
+	}
+
+
+	private void Pop_perimssion() {
+		dialog = new Dialog(this, R.style.permission_dialog);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		View view = LayoutInflater.from(SubsonicActivity.this).inflate(R.layout.app_dialog, null);
+		final MaterialButton dialogOk = (MaterialButton) view.findViewById(R.id.okaction);
+		final MaterialButton dialogLater = (MaterialButton) view.findViewById(R.id.later);
+		final TextView infotitle = (TextView) view.findViewById(R.id.title);
+		final TextView infosubtitle = (TextView) view.findViewById(R.id.subtitle);
+
+		dialogOk.setText(R.string.common_ok);
+		dialogLater.setText(R.string.common_cancel);
+
+		infotitle.setText(R.string.permission_title);
+		infosubtitle.setText(R.string.permission_des);
+
+		dialogOk.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+					if (checkSelfPermission(WRITE_EXTERNAL_STORAGE)
+							!= PackageManager.PERMISSION_GRANTED) {
+						requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE},
+								PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+					}
+					dialog.dismiss();
+
+				}
+			}
+		});
+
+		dialogLater.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.cancel();
+				Util.toast(SubsonicActivity.this, R.string.permission_external_storage_failed);
+				finish();
+			}
+		});
+
+
+		dialog.setContentView(view);
+		dialog.show();
+	}
+
 
 	private class MyLicenseCheckerCallback implements LicenseCheckerCallback {
 
@@ -328,17 +387,32 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		mChecker.checkAccess(mLicenseCheckerCallback);
 	}
 
-
 	@Override
-	public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-		switch (requestCode) {
-			case PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
-				// If request is cancelled, the result arrays are empty.
-				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-				} else {
-					Util.toast(this, R.string.permission_external_storage_failed);
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+			if (requestCode == REQUEST_PERMISSION_SETTING) {
+			// for each permission check if the user granted/denied them
+			// you may want to group the rationale in a single dialog,
+			// this is just an example
+			for (int i = 0, len = permissions.length; i < len; i++) {
+				String permission = permissions[i];
+				if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+					showInfoDialog();
+				}
+				else if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
 					finish();
+					boolean showRationale = false;
+					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+						showRationale = shouldShowRequestPermissionRationale(permission);
+					}
+					if (!showRationale) {
+						Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+						Uri uri = Uri.fromParts("package", getPackageName(), null);
+						intent.setData(uri);
+						startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
+					} else if (WRITE_EXTERNAL_STORAGE.equals(permission)) {
+
+					}
+
 				}
 			}
 		}
@@ -428,14 +502,17 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		int BackgroundColor = Util.getBackgroundColor(this);
 		int actionbar = Util.getPrimaryColor(this);
 		int navigations = Util.getbottomnavigationColor(this);
-		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true)) {
-			final Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-			toolbar.setBackgroundColor(actionbar);
-			drawerHeader.setBackgroundColor(BackgroundColor);
-			getWindow().setNavigationBarColor(navigations);
+
+		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_BACKGROUND, true)) {
 			Drawable colorDrawable = new ColorDrawable(BackgroundColor);
 			getWindow().setBackgroundDrawable(colorDrawable);
 			drawerList.setBackgroundColor(BackgroundColor);
+			drawerHeader.setBackgroundColor(BackgroundColor);
+		}
+		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true)) {
+			final Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+			toolbar.setBackgroundColor(actionbar);
+			getWindow().setNavigationBarColor(navigations);
 			if (THEME_DARK.equals(theme)) {
 				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 				getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -613,18 +690,26 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		drawerHeader.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(showingTabs) {
-					populateServers();
-				} else {
-					populateTabs();
-				}
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						if(showingTabs) {
+							populateServers();
+							drawerHeaderToggle.setRotation(180);
+						} else {
+							populateTabs();
+							drawerHeaderToggle.setRotation(0);
+						}
+					}
+				}, 250);
+
 			}
 		});
 
 		drawerHeaderToggle = (ImageView) drawerHeader.findViewById(R.id.header_select_image);
 		drawerServerName = (TextView) drawerHeader.findViewById(R.id.header_server_name);
 		drawerUserName = (TextView) drawerHeader.findViewById(R.id.header_user_name);
-		drawer_header = (RelativeLayout)  findViewById(R.id.drawer_header);
+		drawer_header = (LinearLayout)  findViewById(R.id.drawer_header);
 
 		drawerUserAvatar = (ImageView) drawerHeader.findViewById(R.id.header_user_avatar);
 
@@ -891,7 +976,6 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 				item.setChecked(true);
 			}
 		}
-		drawerHeaderToggle.setImageResource(R.drawable.main_select_server_dark);
 
 		showingTabs = true;
 	}
@@ -907,7 +991,6 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 			}
 		}
 		drawerList.getMenu().setGroupCheckable(MENU_GROUP_SERVER, true, true);
-		drawerHeaderToggle.setImageResource(R.drawable.main_select_tabs_dark);
 
 		showingTabs = false;
 	}

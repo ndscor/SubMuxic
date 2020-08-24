@@ -17,17 +17,27 @@
 		<item name="cornerSizeBottomLeft">100dp</item>
 	</style>
 
+	<style name="permission_dialog" parent="Theme.MaterialComponents.Light.Dialog">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:navigationBarColor">@android:color/transparent</item>
+		<item name="android:windowFullscreen">false</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="colorPrimaryDark">@android:color/transparent</item>
+	</style>
 
 	<style name="ShapeAppearanceOverlay.MaterialCardView.Cut" parent="">
 		<item name="cornerFamily">rounded</item>
-		<item name="cornerSizeTopRight">20dp</item>
-		<item name="cornerSizeTopLeft">20dp</item>
-		<item name="cornerSizeBottomRight">0dp</item>
-		<item name="cornerSizeBottomLeft">0dp</item>
+		<item name="cornerSizeTopRight">0dp</item>
+		<item name="cornerSizeTopLeft">0dp</item>
+		<item name="cornerSizeBottomRight">20dp</item>
+		<item name="cornerSizeBottomLeft">20dp</item>
 	</style>
 
 	<style name="Theme.SubMuxic.Light.Base" parent="@style/Theme.MaterialComponents.Light">
 		<item name="dim_background">@color/dim_light</item>
+		<item name="headers_icon">@drawable/ic_round_keyboard_arrow_up_black</item>
 		<item name="list_back">@color/background_l</item>
 		<item name="videoicon">@drawable/ic_action_videocam_light</item>
 		<item name="offline_icon">@drawable/main_offline_dark</item>
@@ -107,6 +117,7 @@
 	</style>
 
 	<style name="Theme.SubMuxic.Dark.Base" parent="@style/Theme.MaterialComponents">
+		<item name="headers_icon">@drawable/ic_round_keyboard_arrow_up_white</item>
 		<item name="android:windowBackground">@color/dark_background</item>
 		<item name="folder_icon">@drawable/perfolder_dark</item>
 		<item name="music_icon">@drawable/music_icon_dark</item>
@@ -184,6 +195,7 @@
 	</style>
 
 	<style name="Theme.SubMuxic.Black.Base" parent="@style/Theme.MaterialComponents">
+		<item name="headers_icon">@drawable/ic_round_keyboard_arrow_up_white</item>
 		<item name="android:windowBackground">@android:color/black</item>
 		<item name="folder_icon">@drawable/perfolder_dark</item>
 		<item name="music_icon">@drawable/music_icon_dark</item>
@@ -261,6 +273,7 @@
 	</style>
 
 	<style name="Theme.SubMuxic.Blue.Base" parent="@style/Theme.MaterialComponents">
+		<item name="headers_icon">@drawable/ic_round_keyboard_arrow_up_white</item>
 		<item name="android:windowBackground">@color/blue_background</item>
 		<item name="folder_icon">@drawable/perfolder_dark</item>
 		<item name="music_icon">@drawable/music_icon_dark</item>

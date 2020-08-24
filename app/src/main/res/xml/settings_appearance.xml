@@ -26,17 +26,6 @@
 			android:key="custom_colors"
 			android:defaultValue="false"/>
 
-		<com.gloxandro.submuxic.colors.MaterialColorPreference
-			android:dialogTitle="@string/settings.background_color_title"
-			android:key="BackgroundColor"
-			android:defaultValue="@color/grouptextcolordark"
-			android:negativeButtonText="@null"
-			android:positiveButtonText="@null"
-			android:summary="@string/settings.background_color_des"
-			android:title="@string/settings.background_color_title"
-			app:itemLayout="@layout/pref_layout_color" />
-
-
 
 		<com.gloxandro.submuxic.colors.MaterialColorPreference
 			android:dialogTitle="@string/statusbartitle"
@@ -97,6 +86,24 @@
 			android:title="@string/pref_smallbutton_color_title"
 			app:color_type="primary"
 			app:itemLayout="@layout/pref_layout_color" />
+
+		<CheckBoxPreference
+			android:title="@string/settings.enable_background"
+			android:summary="@string/settings.enable_back_des"
+			android:key="enable_custom_background"
+			android:defaultValue="false"/>
+
+		<com.gloxandro.submuxic.colors.MaterialColorPreference
+			android:dialogTitle="@string/settings.background_color_title"
+			android:key="BackgroundColor"
+			android:defaultValue="@color/grouptextcolordark"
+			android:negativeButtonText="@null"
+			android:positiveButtonText="@null"
+			android:summary="@string/settings.background_color_des"
+			android:title="@string/settings.background_color_title"
+			app:itemLayout="@layout/pref_layout_color" />
+
+
 
 		<CheckBoxPreference
 			android:title="@string/settings.track_title"

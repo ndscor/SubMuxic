@@ -160,19 +160,13 @@ public final class Util extends AppCompatActivity {
 	private boolean mRecreate = false;
 
 
-    private Util() {
+	private Util() {
     }
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		SharedPreferences prefs = getPreferences(this);
-
-		if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, false)) {
-
-		}
-
-
 		AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 		res = getResources();
 		actionBarColor = getPrimaryColor(this);
@@ -469,12 +463,6 @@ public final class Util extends AppCompatActivity {
 		SharedPreferences prefs = getPreferences(context);
         return prefs.getBoolean(Constants.PREFERENCES_KEY_DISPLAY_TRACK, true);
 	}
-
-	public static boolean getCustomColor(Context context) {
-		SharedPreferences prefs = getPreferences(context);
-		return prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true);
-	}
-
 
 
 	public static int getMaxBitrate(Context context) {

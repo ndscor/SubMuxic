@@ -76,6 +76,8 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 	private boolean testingConnection;
 	private ListPreference theme;
 
+	private CheckBoxPreference custom_background;
+
 	private CheckBoxPreference custom_colors;
 	private MaterialColorPreference background;
 	private MaterialColorPreference statusColor;
@@ -213,13 +215,6 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 			} else {
 				context.stopService(serviceIntent);
 			}
-		} else if(Constants.PREFERENCES_KEY_THEME.equals(key)) {
-			String value = sharedPreferences.getString(key, null);
-			if("day/night".equals(value) || "day/black".equals(value)) {
-				if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-					ActivityCompat.requestPermissions(context, new String[]{ Manifest.permission.ACCESS_COARSE_LOCATION }, SubsonicActivity.PERMISSIONS_REQUEST_LOCATION);
-				}
-			}
 		} else if(Constants.PREFERENCES_KEY_DLNA_CASTING_ENABLED.equals(key)) {
 			DownloadService downloadService = DownloadService.getInstance();
 			if(downloadService != null) {
@@ -255,6 +250,8 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 		bottomnavigationbar = (MaterialColorPreference) findPreference(Constants.KEY_BOTTOMNAVIGATIONBAR_COLOR);
 		smallbuttons = (MaterialColorPreference) findPreference(Constants.KEY_SMALLBUTTONS_STYLE);
 		custom_colors = (CheckBoxPreference) this.findPreference(Constants.PREFERENCES_KEY_CUSTOM_THEME);
+		custom_background = (CheckBoxPreference) this.findPreference(Constants.PREFERENCES_KEY_CUSTOM_BACKGROUND);
+
 		theme = (ListPreference) this.findPreference(Constants.PREFERENCES_KEY_THEME);
 
 
@@ -413,16 +410,21 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 
 		if(theme != null) {
 			theme.setSummary(theme.getEntry());
+
+			if (custom_background.isChecked()) {
+				background.setEnabled(true);
+			} else {
+				background.setEnabled(false);
+			}
+
 			if (custom_colors.isChecked()) {
 				primaryColor.setEnabled(true);
-				background.setEnabled(true);
 				statusColor.setEnabled(true);
 				smallbuttons.setEnabled(true);
 				bottomnavigationbar.setEnabled(true);
 				bottombar.setEnabled(true);
 			} else {
 				primaryColor.setEnabled(false);
-				background.setEnabled(false);
 				statusColor.setEnabled(false);
 				smallbuttons.setEnabled(false);
 				bottombar.setEnabled(false);

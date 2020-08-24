@@ -84,7 +84,6 @@ import java.util.List;
  */
 public class SubsonicFragmentActivity extends SubsonicActivity implements DownloadService.OnSongChangedListener {
 	private static String TAG = SubsonicFragmentActivity.class.getSimpleName();
-	private static boolean infoDialogDisplayed;
 	private static boolean sessionInitialized = false;
 	private static long ALLOWED_SKEW = 30000L;
 	public  static ProgressBar Progress_valid;
@@ -402,8 +401,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 	@Override
 	protected void onPostCreate(Bundle bundle) {
 		super.onPostCreate(bundle);
-
-		showInfoDialog();
 		checkUpdates();
 
 	}
@@ -875,16 +872,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		}.execute();
 	}
 
-
-
-	private void showInfoDialog() {
-		if (!infoDialogDisplayed) {
-			infoDialogDisplayed = true;
-			if (Util.getRestUrl(this, null).contains("demo.subsonic.org")) {
-				Util.info(this, R.string.main_welcome_title, R.string.main_welcome_text);
-			}
-		}
-	}
 
 	public Toolbar getActiveToolbar() {
 		return slideUpPanel.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED ? nowPlayingToolbar : mainToolbar;

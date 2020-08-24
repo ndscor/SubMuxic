@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="178dp"
+	android:layout_height="wrap_content"
 	android:orientation="vertical"
 	android:id="@+id/drawer_header"
-	android:weightSum="1"
 	android:background="?attr/toolbar_defaults">
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="56dp"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:orientation="vertical"
+		>
+
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="80dp"
+		android:layout_marginTop="50dp"
+		android:orientation="vertical"
+		>
+
+	<de.hdodenhof.circleimageview.CircleImageView
+		android:id="@+id/header_user_avatar"
+		android:layout_width="48dp"
+		android:layout_gravity="center"
+		android:layout_height="48dp"
+
+	/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:id="@+id/header_select"
 		android:orientation="horizontal"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentStart="true"
-		android:background="?attr/selectableItemBackground">
+	>
 
 		<LinearLayout
 			android:orientation="vertical"
-			android:layout_width="wrap_content"
+			android:layout_gravity="center"
+			android:gravity="start"
+			android:layout_weight="1"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content">
 
 			<TextView android:fontFamily="sans-serif"
@@ -37,24 +65,16 @@
 				style="?attr/drawerSubtitleStyle"/>
 		</LinearLayout>
 
-		<View
-			android:layout_width="0dp"
-			android:layout_height="0dp"
-			android:layout_weight="1"/>
-
 		<ImageView
 			android:id="@+id/header_select_image"
-			android:src="@drawable/main_select_server_dark"
-			android:layout_gravity="center_vertical"
+			android:src="?attr/headers_icon"
+			android:layout_gravity="center"
 			android:layout_width="wrap_content"
+			android:padding="5dp"
 			android:layout_height="wrap_content"
-			android:paddingEnd="20dp"/>
+			/>
 	</LinearLayout>
 
-	<de.hdodenhof.circleimageview.CircleImageView
-		android:id="@+id/header_user_avatar"
-		android:layout_width="70dp"
-		android:layout_height="70dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="38dp"/>
-</RelativeLayout>
+
+</LinearLayout>
+</LinearLayout>

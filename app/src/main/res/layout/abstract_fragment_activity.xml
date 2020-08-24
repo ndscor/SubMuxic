@@ -62,6 +62,7 @@
 				android:layout_height="match_parent"
 				android:layout_width="match_parent"
 				android:minHeight="60dp"
+				android:background="?attr/toolbar_defaults"
 				android:padding="6dp"
                 app:layout_collapseMode="parallax"
 				app:layout_scrollFlags="scroll|enterAlways"
@@ -74,7 +75,7 @@
 				android:layout_width="match_parent"
 				android:minHeight="60dp"
 				android:padding="6dp"
-				android:background="@android:color/transparent"
+				android:background="?attr/toolbar_defaults"
 				android:layout_height="wrap_content"
 				android:orientation="horizontal"
 			>
