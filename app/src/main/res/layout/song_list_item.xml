@@ -28,7 +28,7 @@
 				android:id="@+id/song_track"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="left|top"
+				android:layout_gravity="start|top"
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:textColor="?android:textColorPrimary"
 				android:paddingStart="6dip"
@@ -40,7 +40,7 @@
 				android:layout_width="0dip"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:layout_gravity="left|top"
+				android:layout_gravity="start|top"
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:singleLine="true"
 				android:ellipsize="marquee"
@@ -53,7 +53,7 @@
 				android:id="@+id/song_bookmark"
 				android:layout_width="@dimen/SongStatusIcon"
 				android:layout_height="@dimen/SongStatusIcon"
-				android:layout_gravity="right|top"
+				android:layout_gravity="end|top"
 				android:background="@null"
 				android:focusable="false"
 				android:scaleType="fitCenter"
@@ -64,7 +64,7 @@
 				android:layout_width="@dimen/Star.Small"
 				android:layout_height="@dimen/Star.Small"
 				android:scaleType="fitCenter"
-				android:layout_gravity="right|top"
+				android:layout_gravity="end|top"
 				android:background="@null"
 				android:focusable="false"
 				android:visibility="gone"/>
@@ -74,7 +74,7 @@
 				android:layout_width="@dimen/SongStatusIcon"
 				android:layout_height="@dimen/SongStatusIcon"
 				android:scaleType="fitCenter"
-				android:layout_gravity="right|top"
+				android:layout_gravity="end|top"
 				android:background="@null"
 				android:focusable="false"
 				android:visibility="gone"/>
@@ -83,8 +83,9 @@
 				android:id="@+id/song_status"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="right|top"
+				android:layout_gravity="end|top"
 				android:drawablePadding="1dip"
+				android:paddingStart="2dp"
 				android:paddingEnd="2dip"/>
 
 			<ImageView
@@ -108,10 +109,11 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="left|center_vertical"
+                    android:layout_gravity="start|center_vertical"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:singleLine="true"
                     android:ellipsize="middle"
+				android:paddingEnd="6dp"
                     android:paddingStart="6dip"
 					android:textColor="?android:textColorSecondary"/>
 
@@ -120,16 +122,15 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:isIndicator="true"
-				android:layout_centerHorizontal="true"
 				android:numStars="5"
-				style="@android:style/Widget.Holo.RatingBar.Small"
+				style="@style/Widget.AppCompat.RatingBar.Small"
 				android:visibility="gone"/>
 
             <TextView android:fontFamily="sans-serif"
                     android:id="@+id/song_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
+                    android:layout_gravity="end|center_vertical"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:singleLine="true"
                     android:paddingStart="3dip"
@@ -145,7 +146,7 @@
 		android:src="?attr/download_none"
 		android:layout_width="wrap_content"
 		android:layout_height="fill_parent"
-		android:layout_gravity="right|center_vertical"
+		android:layout_gravity="end|center_vertical"
 		style="@style/MoreButton"/>
 
 

@@ -17,12 +17,16 @@ package com.gloxandro.submuxic.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.PopupMenu;
 
 import androidx.appcompat.view.ActionMode;
@@ -40,6 +44,9 @@ import com.gloxandro.submuxic.view.UpdateView.UpdateViewHolder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.gloxandro.submuxic.activity.SubsonicActivity.theme;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_LIGHT;
 
 public abstract class SectionAdapter<T> extends RecyclerView.Adapter<UpdateViewHolder<T>> {
 	private static String TAG = SectionAdapter.class.getSimpleName();
@@ -409,8 +416,33 @@ public abstract class SectionAdapter<T> extends RecyclerView.Adapter<UpdateViewH
 			fragmentActivity.startSupportActionMode(new ActionMode.Callback() {
 				@Override
 				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-					currentActionMode = mode;
 
+					Window windoow =  ((SubsonicFragmentActivity) context).getWindow();
+
+					int color = Util.getStatusColor(context);
+					SharedPreferences prefs = Util.getPreferences(context);
+					if (THEME_LIGHT.equals(theme)) {
+						if(prefs.getBoolean(Constants.PREFERENCES_KEY_CUSTOM_THEME, true)) {
+
+							windoow.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+							if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+								windoow.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+								windoow.setStatusBarColor(color);  // transparent
+								windoow.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+							}
+							} else {
+								windoow.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+								if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+									windoow.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+									windoow.setStatusBarColor(Color.WHITE);  // transparent
+									windoow.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+								}
+						}
+					}
+
+					currentActionMode = mode;
 					T item = holder.getItem();
 					selected.add(item);
 					selectedViews.add(updateView);

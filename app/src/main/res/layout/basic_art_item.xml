@@ -9,14 +9,14 @@
 		android:id="@+id/item_art"
 		android:layout_width="@dimen/AlbumArt.Small"
 		android:layout_height="@dimen/AlbumArt.Small"
-		android:layout_gravity="left|center_vertical"/>
+		android:layout_gravity="start|center_vertical"/>
 
 	<TextView android:fontFamily="sans-serif"
 		android:id="@+id/item_name"
 		android:layout_width="0dip"
 		android:layout_height="wrap_content"
 		android:layout_weight="1"
-		android:layout_gravity="left|center_vertical"
+		android:layout_gravity="start|center_vertical"
 		android:paddingStart="10dip"
 		android:paddingEnd="3dip"
 		android:textAppearance="?android:attr/textAppearanceMedium"
@@ -29,6 +29,6 @@
 		android:src="?attr/download_none"
 		android:layout_width="wrap_content"
 		android:layout_height="fill_parent"
-		android:layout_gravity="right|center_vertical"
+		android:layout_gravity="end|center_vertical"
 		style="@style/MoreButton"/>
 </LinearLayout>

@@ -18,7 +18,9 @@ package com.gloxandro.submuxic.fragments;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +48,9 @@ import com.gloxandro.submuxic.view.FastScroller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.gloxandro.submuxic.fragments.MainFragment.theme;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_LIGHT;
 
 public abstract class SelectRecyclerFragment<T> extends SubsonicFragment implements SectionAdapter.OnItemClickedListener<T> {
 	private static final String TAG = SelectRecyclerFragment.class.getSimpleName();
@@ -64,6 +71,7 @@ public abstract class SelectRecyclerFragment<T> extends SubsonicFragment impleme
 		if(bundle != null && serialize) {
 			objects = (List<T>) bundle.getSerializable(Constants.FRAGMENT_LIST);
 		}
+
 	}
 
 	@Override
@@ -89,7 +97,6 @@ public abstract class SelectRecyclerFragment<T> extends SubsonicFragment impleme
 
 		recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_recycler);
 		recyclerViewDivider = (RecyclerView) rootView.findViewById(R.id.fragment_recycler);
-		recyclerViewDivider.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 
 		fastScroller = (FastScroller) rootView.findViewById(R.id.fragment_fast_scroller);
 		setupLayoutManager();

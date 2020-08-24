@@ -27,6 +27,17 @@
 		<item name="colorPrimaryDark">@android:color/transparent</item>
 	</style>
 
+	<style name="permission_dialog_dark" parent="Theme.MaterialComponents.Dialog">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:navigationBarColor">@android:color/transparent</item>
+		<item name="android:windowFullscreen">false</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="colorPrimaryDark">@android:color/transparent</item>
+	</style>
+
+
 	<style name="ShapeAppearanceOverlay.MaterialCardView.Cut" parent="">
 		<item name="cornerFamily">rounded</item>
 		<item name="cornerSizeTopRight">0dp</item>
@@ -37,6 +48,7 @@
 
 	<style name="Theme.SubMuxic.Light.Base" parent="@style/Theme.MaterialComponents.Light">
 		<item name="dim_background">@color/dim_light</item>
+		<item name="selected_effect">@color/touch_effect</item>
 		<item name="headers_icon">@drawable/ic_round_keyboard_arrow_up_black</item>
 		<item name="list_back">@color/background_l</item>
 		<item name="videoicon">@drawable/ic_action_videocam_light</item>
@@ -95,11 +107,11 @@
 		<item name="drawerDownloading">@drawable/ic_menu_download_dark</item>
 		<item name="drawerSettings">@drawable/ic_menu_settings_dark</item>
 		<item name="drawerArrowStyle">@style/SubMuxic.DrawerArrow</item>
-		<item name="colorAccent">@color/lightAccent</item>
+		<item name="colorAccent">@color/md_deep_orange_500</item>
 		<item name="drawerTitleStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
 		<item name="drawerSubtitleStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse</item>
 		<item name="windowActionModeOverlay">true</item>
-		<item name="actionModeBackground">?attr/colorPrimary</item>
+		<item name="actionModeBackground">@color/light_action_bar</item>
 		<item name="cardBackgroundDrawable">@drawable/card_rounded_corners_light</item>
 		<item name="drawerHeaderBackground">@drawable/cover_light</item>
 		<item name="android:windowBackground">@android:color/white</item>
@@ -110,13 +122,13 @@
 		<item name="colorPrimaryDark">@android:color/white</item>
 		<item name="playlist_toggle">@drawable/ic_baseline_playlist_play_black</item>
 		<item name="colorPrimary">@android:color/black</item>
-
 		<item name="folder_icon">@drawable/perfolder_light</item>
 		<item name="music_icon">@drawable/music_icon_light</item>
 
 	</style>
 
 	<style name="Theme.SubMuxic.Dark.Base" parent="@style/Theme.MaterialComponents">
+		<item name="selected_effect">@color/touch_effect</item>
 		<item name="headers_icon">@drawable/ic_round_keyboard_arrow_up_white</item>
 		<item name="android:windowBackground">@color/dark_background</item>
 		<item name="folder_icon">@drawable/perfolder_dark</item>
@@ -185,7 +197,7 @@
 		<item name="drawerArrowStyle">@style/SubMuxic.DrawerArrow</item>
 		<item name="colorPrimary">@android:color/white</item>
 		<item name="colorPrimaryDark">@color/dark_background</item>
-		<item name="colorAccent">@color/lightAccent</item>
+		<item name="colorAccent">@color/md_deep_orange_500</item>
 		<item name="windowActionModeOverlay">true</item>
 		<item name="actionModeBackground">@color/deep_black</item>
 		<item name="cardBackgroundDrawable">@drawable/card_rounded_corners_dark</item>
@@ -195,6 +207,7 @@
 	</style>
 
 	<style name="Theme.SubMuxic.Black.Base" parent="@style/Theme.MaterialComponents">
+		<item name="selected_effect">@color/touch_effect</item>
 		<item name="headers_icon">@drawable/ic_round_keyboard_arrow_up_white</item>
 		<item name="android:windowBackground">@android:color/black</item>
 		<item name="folder_icon">@drawable/perfolder_dark</item>
@@ -263,7 +276,7 @@
 		<item name="drawerArrowStyle">@style/SubMuxic.DrawerArrow</item>
 		<item name="colorPrimary">@android:color/white</item>
 		<item name="colorPrimaryDark">@android:color/black</item>
-		<item name="colorAccent">@color/lightAccent</item>
+		<item name="colorAccent">@color/md_deep_orange_500</item>
 		<item name="windowActionModeOverlay">true</item>
 		<item name="actionModeBackground">@color/deep_black</item>
 		<item name="cardBackgroundDrawable">@drawable/card_rounded_corners_dark</item>
@@ -273,6 +286,7 @@
 	</style>
 
 	<style name="Theme.SubMuxic.Blue.Base" parent="@style/Theme.MaterialComponents">
+		<item name="selected_effect">@color/touch_effect</item>
 		<item name="headers_icon">@drawable/ic_round_keyboard_arrow_up_white</item>
 		<item name="android:windowBackground">@color/blue_background</item>
 		<item name="folder_icon">@drawable/perfolder_dark</item>
@@ -341,7 +355,7 @@
 		<item name="drawerArrowStyle">@style/SubMuxic.DrawerArrow</item>
 		<item name="colorPrimary">@android:color/white</item>
 		<item name="colorPrimaryDark">@color/blue_background</item>
-		<item name="colorAccent">@color/lightAccent</item>
+		<item name="colorAccent">@color/md_deep_orange_500</item>
 		<item name="windowActionModeOverlay">true</item>
 		<item name="actionModeBackground">@color/deep_black</item>
 		<item name="cardBackgroundDrawable">@drawable/card_rounded_corners_dark</item>

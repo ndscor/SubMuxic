@@ -20,17 +20,14 @@ public abstract class TabBackgroundTask<T> extends BackgroundTask<T> {
 
     @Override
     public void execute() {
-        SubsonicFragmentActivity.Progress_valid.setVisibility(View.VISIBLE);
 		queue.offer(task = new Task() {
 			@Override
 			public void onDone(T result) {
-                SubsonicFragmentActivity.Progress_valid.setVisibility(View.GONE);
 				done(result);
 			}
 
 			@Override
 			public void onError(Throwable t) {
-                SubsonicFragmentActivity.Progress_valid.setVisibility(View.GONE);
 				error(t);
 			}
 		});

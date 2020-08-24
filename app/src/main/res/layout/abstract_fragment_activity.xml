@@ -29,18 +29,6 @@
             app:layout_scrollFlags="scroll|enterAlways"
 			/>
 
-			<ProgressBar
-				android:id="@+id/progress"
-				android:layout_marginTop="-7dp"
-				android:layout_marginBottom="-7dp"
-				android:visibility="gone"
-				android:indeterminate="true"
-				android:indeterminateTintMode="src_atop"
-				android:indeterminateTint="@color/deep_orange"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal" />
-
 		</com.google.android.material.appbar.AppBarLayout>
 		<include layout="@layout/abstract_fragment_container"/>
 	</FrameLayout>

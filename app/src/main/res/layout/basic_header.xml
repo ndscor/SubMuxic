@@ -5,7 +5,8 @@
 	android:layout_gravity="center"
 	android:gravity="center"
 	android:orientation="vertical">
-<TextView android:fontFamily="sans-serif" android:id="@+id/item_name"
+<TextView android:fontFamily="sans-serif"
+	android:id="@+id/item_name"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:textAppearance="?android:attr/textAppearanceMedium"
@@ -13,8 +14,10 @@
 	android:textAllCaps="true"
 	android:textStyle="bold"
 	android:textColor="?android:attr/textColorPrimary"
-	android:layout_marginStart="4dp"
+	android:layout_marginStart="10dp"
 	android:paddingTop="8dp"
 	android:paddingBottom="8dp"
  />
+
+
 </LinearLayout>

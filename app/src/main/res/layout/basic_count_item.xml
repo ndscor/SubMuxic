@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:minHeight="60dp"
+	android:layout_height="wrap_content"
+	android:background="?selectableItemBackground"
+	android:focusable="true"
+	android:clickable="true"
+	android:id="@+id/header_layout"
+	android:orientation="vertical">
+
+<LinearLayout
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/selectableItemBackground"
 	android:minHeight="60dp">
 
 	<ImageView
@@ -35,13 +44,20 @@
 		android:background="@drawable/ic_number_border"
 		android:focusable="false"
 		android:paddingEnd="10dp"
-		android:layout_marginStart="20px"
-		android:layout_marginBottom="4px"
-		android:text="99"
+		android:paddingStart="10dp"
+		android:layout_marginStart="20dp"
+		android:layout_marginBottom="4dp"
 		android:textAppearance="?android:attr/textAppearanceSmallPopupMenu"
-		android:textSize="11sp"
-		android:gravity="right|center_vertical"
+		android:textSize="12sp"
+		android:gravity="start|center_vertical"
 		android:layout_gravity="center_vertical"
 		android:textColor="?android:textColorPrimary"
 		android:visibility="gone"/>
+</LinearLayout>
+
+	<ImageView
+		android:layout_width="match_parent"
+		android:layout_height="0.5dp"
+		android:background="?attr/default_divider"/>
+
 </LinearLayout>

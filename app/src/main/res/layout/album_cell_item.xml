@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gloxandro.submuxic.view.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	app:cardBackgroundColor="?attr/toolbar_defaults"
+	app:cardCornerRadius="0dp"
+	app:cardElevation="2dp"
 	android:layout_margin="2dp">
 
 	<LinearLayout
@@ -27,7 +31,7 @@
 				android:isIndicator="true"
 				android:layout_centerHorizontal="true"
 				android:numStars="5"
-				style="@android:style/Widget.Holo.RatingBar.Small"
+				style="@style/Widget.AppCompat.RatingBar.Small"
 				android:layout_alignParentBottom="true"
 				android:visibility="gone"/>
 		</RelativeLayout>
@@ -38,6 +42,7 @@
 			android:orientation="horizontal"
 			android:paddingTop="4dp"
 			android:paddingBottom="4dp"
+			android:paddingEnd="2dp"
 			android:paddingStart="2dp">
 
 			<LinearLayout
@@ -56,34 +61,34 @@
 					android:ellipsize="marquee"
 					android:text="@string/search.albums"
 					android:textColor="?android:textColorPrimary"
+					android:paddingEnd="8dp"
 					android:paddingStart="@dimen/Card.TextLeftPadding"/>
 
-				<LinearLayout
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content">
 
 					<TextView android:fontFamily="sans-serif"
 						android:id="@+id/album_artist"
-						android:layout_width="0dp"
-						android:layout_weight="1"
+						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:textSize="12sp"
 						android:textColor="?android:textColorSecondary"
 						android:singleLine="true"
+						android:paddingEnd="8dp"
 						android:text="@string/search.artists"
 						android:paddingStart="@dimen/Card.TextLeftPadding"/>
 
-					<ImageButton
-						android:id="@+id/album_star"
-						android:layout_width="@dimen/Star.Small"
-						android:layout_height="@dimen/Star.Small"
-						android:scaleType="fitCenter"
-						android:layout_gravity="end|center_vertical"
-						android:background="@android:color/transparent"
-						android:focusable="false"
-						android:visibility="gone"/>
-				</LinearLayout>
 			</LinearLayout>
+
+
+			<ImageButton
+				android:id="@+id/album_star"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:scaleType="fitCenter"
+				android:layout_gravity="end|center"
+				android:background="@android:color/transparent"
+				android:focusable="false"
+				android:visibility="gone"/>
+
 
 			<ImageView
 				android:id="@+id/item_more"
@@ -95,4 +100,4 @@
 		</LinearLayout>
 
 	</LinearLayout>
-</com.gloxandro.submuxic.view.CardView>
+</com.google.android.material.card.MaterialCardView>

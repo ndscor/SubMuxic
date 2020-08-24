@@ -42,6 +42,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
+import static com.gloxandro.submuxic.activity.SubsonicActivity.theme;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_LIGHT;
+
 public abstract class UpdateView<T> extends LinearLayout {
 	private static final String TAG = UpdateView.class.getSimpleName();
 	private static final WeakHashMap<UpdateView, ?> INSTANCES = new WeakHashMap<UpdateView, Object>();
@@ -296,9 +299,15 @@ public abstract class UpdateView<T> extends LinearLayout {
 		View child = getChildAt(0);
 		if (checked && startBackgroundDrawable == null) {
 			startBackgroundDrawable = child.getBackground();
-			child.setBackgroundColor(DrawableTint.getColorRes(context, R.attr.colorPrimary));
+
+			if (THEME_LIGHT.equals(theme)) {
+				child.setBackgroundColor(DrawableTint.getColorRes(context, R.attr.colorControlHighlight));
+			} else {
+				child.setBackgroundColor(DrawableTint.getColorRes(context, R.attr.selected_effect));
+
+			}
 		} else if (!checked && startBackgroundDrawable != null) {
-			child.setBackgroundDrawable(startBackgroundDrawable);
+			child.setBackground(startBackgroundDrawable);
 			startBackgroundDrawable = null;
 		}
 	}

@@ -78,6 +78,7 @@
 	<attr name="drawerSubtitleStyle" format="reference"/>
 	<attr name="cardBackgroundDrawable" format="reference"/>
 	<attr name="drawerHeaderBackground" format="reference"/>
+	<attr name="selected_effect" format="reference"/>
 
 	<declare-styleable name="ColorPreference">
 		<attr name="itemLayout" format="reference" />

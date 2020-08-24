@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gloxandro.submuxic.view.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	app:cardCornerRadius="0dp"
+	app:cardBackgroundColor="?attr/toolbar_defaults"
+	app:cardElevation="2dp"
 	android:layout_height="match_parent"
 	android:layout_margin="2dp">
 
@@ -20,6 +24,7 @@
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
 			android:paddingTop="4dp"
+			android:paddingEnd="2dp"
 			android:paddingStart="2dp">
 
 			<TextView android:fontFamily="sans-serif"
@@ -31,6 +36,7 @@
 				android:singleLine="true"
 				android:ellipsize="marquee"
 				android:textColor="?android:textColorPrimary"
+				android:paddingEnd="8dp"
 				android:paddingStart="@dimen/Card.TextLeftPadding"/>
 
 			<ImageView
@@ -38,8 +44,8 @@
 				android:src="?attr/download_none"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="right|center_vertical"
+				android:layout_gravity="end|center_vertical"
 				style="@style/MoreButton"/>
 		</LinearLayout>
 	</LinearLayout>
-</com.gloxandro.submuxic.view.CardView>
+</com.google.android.material.card.MaterialCardView>

@@ -19,7 +19,6 @@
 			android:layout_centerVertical="true">
 
 			<TextView android:fontFamily="sans-serif"
-				android:text="This is the album title"
 				android:id="@+id/select_album_title"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -39,7 +38,6 @@
 			</TextView>
 
 			<TextView android:fontFamily="sans-serif"
-				android:text="This is the artist name"
 				android:id="@+id/select_album_artist"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -49,7 +47,6 @@
 				android:textColor="?android:textColorPrimary"/>
 
 			<TextView android:fontFamily="sans-serif"
-				android:text="XX SONGS"
 				android:id="@+id/select_album_song_count"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -60,7 +57,6 @@
 				android:textColor="?android:textColorSecondary"/>
 
 			<TextView android:fontFamily="sans-serif"
-				android:text="0:00"
 				android:id="@+id/select_album_song_length"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -88,7 +84,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:numStars="5"
-					style="@android:style/Widget.Holo.RatingBar.Small"
+					style="@style/Widget.AppCompat.RatingBar.Small"
 					android:layout_gravity="center_vertical"/>
 			</LinearLayout>
 
@@ -127,7 +123,8 @@
 		android:layout_height="fill_parent"
 		android:clickable="true"
 		android:visibility="gone"
-		android:layout_gravity="top">
+		android:layout_gravity="top"
+		android:focusable="true">
 
 		<LinearLayout
 			android:layout_width="wrap_content"
@@ -146,11 +143,6 @@
 		</LinearLayout>
 	</FrameLayout>
 
-	<ImageView
-		android:layout_width="fill_parent"
-		android:layout_height="1dp"
-		android:layout_gravity="bottom"
-		android:background="?attr/default_divider"/>
 </FrameLayout>
 
 

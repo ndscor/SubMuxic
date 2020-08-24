@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -32,6 +33,8 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -79,6 +82,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * Created by Scott on 10/14/13.
  */
@@ -86,7 +90,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 	private static String TAG = SubsonicFragmentActivity.class.getSimpleName();
 	private static boolean sessionInitialized = false;
 	private static long ALLOWED_SKEW = 30000L;
-	public  static ProgressBar Progress_valid;
 	private SlidingUpPanelLayout slideUpPanel;
 	private SlidingUpPanelLayout.PanelSlideListener panelSlideListener;
 	private boolean isPanelClosing = false;
@@ -129,8 +132,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		}
 
 		super.onCreate(savedInstanceState);
-
-
 		if (getIntent().hasExtra(Constants.INTENT_EXTRA_NAME_EXIT)) {
 			stopService(new Intent(this, DownloadService.class));
 			finish();
@@ -142,9 +143,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		}
 
 		setContentView(R.layout.abstract_fragment_activity);
-		Progress_valid = (ProgressBar) findViewById(R.id.progress);
-
-
 		if (findViewById(R.id.fragment_container) != null && savedInstanceState == null) {
 			String fragmentType = getIntent().getStringExtra(Constants.INTENT_EXTRA_FRAGMENT_TYPE);
 			if(fragmentType == null) {
@@ -214,18 +212,6 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 					recreateSpinner();
 				}
 			}
-
-			public void setProgressVisible(boolean visible) {
-				View view = rootView.findViewById(R.id.main_toolbar);
-				if (view != null) {
-					view.setVisibility(visible ? View.VISIBLE : View.GONE);
-					if(visible) {
-						View progress = rootView.findViewById(R.id.progress);
-						progress.setVisibility(View.VISIBLE);
-					}
-				}
-			}
-
 
 
 			@Override

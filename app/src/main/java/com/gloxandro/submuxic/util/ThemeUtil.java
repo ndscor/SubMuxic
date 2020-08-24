@@ -27,6 +27,7 @@ import java.util.Locale;
 
 public final class ThemeUtil {
 	public static final String THEME_DARK = "dark";
+	public static final String THEME_LIGHT = "light";
 	public static final String THEME_BLACK = "black";
 	public static final String THEME_BLUE = "blue";
 
@@ -43,19 +44,16 @@ public final class ThemeUtil {
 	}
 
 	public static int getThemeRes(Context context, String theme) {
-		if (context instanceof SubsonicFragmentActivity || context instanceof SettingsActivity) {
 			if (THEME_DARK.equals(theme)) {
 				return R.style.Theme_SubMuxic_Dark_No_Actionbar;
 			} else if (THEME_BLACK.equals(theme)) {
 				return R.style.Theme_SubMuxic_Black_No_Actionbar;
 			} else if (THEME_BLUE.equals(theme)) {
 				return R.style.Theme_SubMuxic_Blue_No_Actionbar;
-			} else {
-					return R.style.Theme_SubMuxic_Light_No_Actionbar;
+			} else if (THEME_LIGHT.equals(theme)) {
+				return R.style.Theme_SubMuxic_Light_No_Actionbar;
 			}
-		} else {
-			return R.style.Theme_SubMuxic_Light_No_Actionbar;
-		}
+		return 0;
 	}
 
 	public static void setTheme(Context context, String theme) {
