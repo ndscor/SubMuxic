@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<androidx.coordinatorlayout.widget.CoordinatorLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				>
+
+				<com.google.android.material.card.MaterialCardView
+					android:layout_height="400dp"
+					android:layout_width="match_parent"
+					android:padding="2dp"
+					card_view:cardCornerRadius="0dp"
+					card_view:cardBackgroundColor="?attr/toolbar_defaults"
+					>
+
+			<com.gloxandro.submuxic.view.RecyclingImageView
+				android:id="@+id/download_album_art_image"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:scaleType="fitCenter"
+				android:layout_gravity="top"/>
+
+				<LinearLayout
+					android:id="@+id/download_overlay_buttons"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom|center_horizontal"
+					android:gravity="center"
+					android:layout_marginStart="6dp"
+					android:layout_marginEnd="6dp"
+					android:background="@color/overlayColor"
+					android:visibility="gone"
+					android:orientation="horizontal">
+
+					<ImageButton
+						android:id="@+id/download_rating_bad"
+						style="@style/DownloadActionImageButton"
+						android:src="@drawable/ic_action_rating_bad_dark"/>
+
+					<ImageButton
+						android:id="@+id/download_star"
+						style="@style/DownloadActionImageButton"
+						android:src="@drawable/ic_toggle_star_outline_dark"/>
+
+					<ImageButton
+						android:id="@+id/download_playback_speed"
+						style="@style/DownloadActionImageButton"
+						android:src="@drawable/ic_action_playback_speed_dark"/>
+
+					<ImageButton
+						android:id="@+id/download_bookmark"
+						style="@style/DownloadActionImageButton"
+						android:src="@drawable/ic_menu_bookmark_dark"/>
+
+					<ImageButton
+						android:id="@+id/download_rating_good"
+						style="@style/DownloadActionImageButton"
+						android:src="@drawable/ic_action_rating_good_dark"/>
+				</LinearLayout>
+				<include layout="@layout/download_playlist"/>
+				</com.google.android.material.card.MaterialCardView>
+			</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+				</LinearLayout>
+
+				<include layout="@layout/download_media_buttons"/>
+
+			</LinearLayout>
+
+
