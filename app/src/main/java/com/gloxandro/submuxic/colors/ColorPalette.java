@@ -268,12 +268,12 @@ public class ColorPalette {
                     ContextCompat.getColor(context, R.color.md_grey_500),
                     ContextCompat.getColor(context, R.color.md_grey_600),
                     ContextCompat.getColor(context, R.color.md_grey_700),
-
-
                     ContextCompat.getColor(context, R.color.md_grey_800),
                     ContextCompat.getColor(context, R.color.birdback),
                     ContextCompat.getColor(context, R.color.prime),
                     ContextCompat.getColor(context, R.color.accitemb),
+                    ContextCompat.getColor(context, R.color.blue_background),
+                    ContextCompat.getColor(context, R.color.dark_background),
             };
         } else {
             return new int[]{

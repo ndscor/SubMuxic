@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.gloxandro.submuxic.activity.SubsonicActivity.theme;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_LIGHT;
+
 public class MainFragment extends SelectRecyclerFragment<Integer> {
 	private static final String TAG = MainFragment.class.getSimpleName();
 	public static final String SONGS_LIST_PREFIX = "songs-";
@@ -67,6 +70,9 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 			case R.id.menu_about:
 				aboutdialog();
 				return true;
+			case R.id.privacy_policy:
+				ShowPrivacyPolicy();
+				return true;
 			case R.id.whatsnew:
 				showWhatsNewDialog();
 				return true;
@@ -89,7 +95,9 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 
 		WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
 		aboutWebView.setBackgroundColor(0);
-			aboutWebView.loadUrl("file:///android_asset/about_light.html");
+
+		aboutWebView.loadUrl("file:///android_asset/about_dark.html");
+
 
 
 		androidx.appcompat.app.AlertDialog.Builder builder         = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
@@ -106,6 +114,31 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 		builder.create().show();
 	}
 
+	private void ShowPrivacyPolicy() {
+		LayoutInflater inflater = LayoutInflater.from(getActivity());
+
+		View view               = inflater.inflate(R.layout.about, null);
+
+
+		WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
+		aboutWebView.setBackgroundColor(0);
+
+		aboutWebView.loadUrl("file:///android_asset/privacydark.html");
+
+		androidx.appcompat.app.AlertDialog.Builder builder         = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+
+		builder.setView(view).setTitle(this.getString(R.string.whatsnew))
+				.setNegativeButton((R.string.common_ok), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+		builder.create().show();
+	}
+
+
 	private void showWhatsNewDialog() {
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
 
@@ -114,7 +147,10 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 
 		WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
 		aboutWebView.setBackgroundColor(0);
-			aboutWebView.loadUrl("file:///android_asset/changelog_light.html");
+
+
+		aboutWebView.loadUrl("file:///android_asset/changelog_dark.html");
+
 
 
 		androidx.appcompat.app.AlertDialog.Builder builder         = new androidx.appcompat.app.AlertDialog.Builder(getActivity());

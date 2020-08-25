@@ -98,6 +98,8 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.gloxandro.submuxic.BuildConfig.PLAYSTORE_LICENSE_KEY;
 import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLACK;
@@ -125,6 +127,9 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 	boolean licensed;
 	boolean checkingLicense;
 	boolean didCheck;
+	private static String uniqueID = null;
+	private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
+
 	private final List<Runnable> afterServiceAvailable = new ArrayList<>();
 	private boolean drawerIdle = true;
 	private boolean destroyed = false;
@@ -177,9 +182,8 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		applyTheme();
 		super.onCreate(bundle);
 		SharedPreferences prefs = Util.getPreferences(this);
-		String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 		mLicenseCheckerCallback = new MyLicenseCheckerCallback();
-		mChecker = new LicenseChecker(getApplicationContext(), new ServerManagedPolicy(this, new AESObfuscator(SALT, getPackageName(), deviceId)), PLAYSTORE_LICENSE_KEY);
+		mChecker = new LicenseChecker(getApplicationContext(), new ServerManagedPolicy(this, new AESObfuscator(SALT, getPackageName(), uniqueID)), PLAYSTORE_LICENSE_KEY);
 		sInstance = this;
 		CustomActionbar();
 		DownloadService.startService(this);
@@ -222,6 +226,21 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 			Pop_perimssion();
 		}
+	}
+
+
+	public synchronized static String id(Context context) {
+		if (uniqueID == null) {
+			SharedPreferences sharedPrefs = context.getSharedPreferences(
+					PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+			uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+			if (uniqueID == null) {
+				uniqueID = UUID.randomUUID().toString();
+				SharedPreferences.Editor editor = sharedPrefs.edit();
+				editor.putString(PREF_UNIQUE_ID, uniqueID);
+				editor.apply();
+			}
+		}    return uniqueID;
 	}
 
 
