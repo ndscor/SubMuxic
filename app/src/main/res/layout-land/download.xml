@@ -54,27 +54,27 @@
 						<ImageButton
 							android:id="@+id/download_rating_bad"
 							style="@style/DownloadActionImageButton"
-							android:src="@drawable/ic_action_rating_bad_dark"/>
+							android:src="@drawable/ic_twotone_thumb_down_24_white"/>
 
 						<ImageButton
 							android:id="@+id/download_star"
 							style="@style/DownloadActionImageButton"
-							android:src="@drawable/ic_toggle_star_outline_dark"/>
+							android:src="@drawable/ic_twotone_stars_24_white"/>
 
 						<ImageButton
 							android:id="@+id/download_playback_speed"
 							style="@style/DownloadActionImageButton"
-							android:src="@drawable/ic_action_playback_speed_dark"/>
+							android:src="@drawable/ic_twotone_timer_24_white"/>
 
 						<ImageButton
 							android:id="@+id/download_bookmark"
 							style="@style/DownloadActionImageButton"
-							android:src="@drawable/ic_menu_bookmark_dark"/>
+							android:src="@drawable/ic_twotone_bookmark_24_white"/>
 
 						<ImageButton
 							android:id="@+id/download_rating_good"
 							style="@style/DownloadActionImageButton"
-							android:src="@drawable/ic_action_rating_good_dark"/>
+							android:src="@drawable/ic_twotone_thumb_up_24_white"/>
 					</LinearLayout>
 					<include layout="@layout/download_playlist"/>
 				</com.google.android.material.card.MaterialCardView>

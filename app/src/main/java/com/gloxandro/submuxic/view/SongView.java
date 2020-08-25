@@ -35,6 +35,9 @@ import com.gloxandro.submuxic.util.Util;
 
 import java.io.File;
 
+import static com.gloxandro.submuxic.activity.SubsonicActivity.theme;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_LIGHT;
+
 /**
  * Used to display songs in a {@code ListView}.
  *
@@ -253,14 +256,28 @@ public class SongView extends UpdateView2<MusicDirectory.Entry, Boolean> {
 		}
 
 		if (isWorkDone) {
-			int moreImage = isSaved ? R.drawable.download_pinned : R.drawable.download_cached;
-			if(moreImage != this.moreImage) {
-				moreButton.setImageResource(moreImage);
-				this.moreImage = moreImage;
+			if (THEME_LIGHT.equals(theme)) {
+				int moreImage = isSaved ? R.drawable.download_black : R.drawable.catch_black;
+				if(moreImage != this.moreImage) {
+					moreButton.setImageResource(moreImage);
+					this.moreImage = moreImage;
+				}
+			} else {
+				int moreImage = isSaved ? R.drawable.download_white : R.drawable.catch_white;
+				if(moreImage != this.moreImage) {
+					moreButton.setImageResource(moreImage);
+					this.moreImage = moreImage;
+				}
 			}
-		} else if(this.moreImage != R.drawable.download_none_light) {
-			moreButton.setImageResource(DrawableTint.getDrawableRes(context, R.attr.download_none));
-			this.moreImage = R.drawable.download_none_light;
+
+		} else if(this.moreImage != R.drawable.ic_sharp_more_vert_24_black) {
+			if (THEME_LIGHT.equals(theme)) {
+				moreButton.setImageResource(DrawableTint.getDrawableRes(context, R.attr.download_menu_light));
+				this.moreImage = R.drawable.ic_sharp_more_vert_24_black;
+			} else {
+				moreButton.setImageResource(DrawableTint.getDrawableRes(context, R.attr.download_none));
+				this.moreImage = R.drawable.ic_sharp_more_vert_24_black;
+			}
 		}
 
 		if (downloadFile.isDownloading() && !downloadFile.isDownloadCancelled() && partialFileExists) {

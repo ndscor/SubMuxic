@@ -1432,46 +1432,35 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 	@Override
 	public void onMetadataUpdate(MusicDirectory.Entry song, int fieldChange) {
 		if(song != null && song.isStarred()) {
-			starButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_toggle_star));
+			starButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_round_stars_24_fill));
 		} else {
-			if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-				starButton.setImageResource(DrawableTint.getDrawableRes(context, R.attr.star_outline));
-			} else {
-				starButton.setImageResource(R.drawable.ic_toggle_star_outline_dark);
-			}
+				starButton.setImageResource(R.drawable.ic_twotone_stars_24_white);
 		}
 
 		int badRating, goodRating, bookmark;
 		if(song != null && song.getRating() == 1) {
-			rateBadButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_action_rating_bad_selected));
+			rateBadButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_round_thumb_down_24_fill));
 		} else {
-			if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-				badRating = R.drawable.ic_action_rating_bad_dark;
-			} else {
-				badRating = DrawableTint.getDrawableRes(context, R.attr.rating_bad);
-			}
+				badRating = R.drawable.ic_twotone_thumb_down_24_white;
+
 			rateBadButton.setImageResource(badRating);
 		}
 
 		if(song != null && song.getRating() == 5) {
-			rateGoodButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_action_rating_good_selected));
+			rateGoodButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_round_thumb_up_24_fill));
 		} else {
-			if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-				goodRating = R.drawable.ic_action_rating_good_dark;
-			} else {
-				goodRating = DrawableTint.getDrawableRes(context, R.attr.rating_good);
-			}
+
+				goodRating = R.drawable.ic_twotone_thumb_up_24_white;
+
 			rateGoodButton.setImageResource(goodRating);
 		}
 
 		if(song != null && song.getBookmark() != null) {
-			bookmarkButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_menu_bookmark_selected));
+			bookmarkButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_round_bookmark_24_fill));
 		} else {
-			if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-				bookmark = R.drawable.ic_menu_bookmark_dark;
-			} else {
-				bookmark = DrawableTint.getDrawableRes(context, R.attr.bookmark);
-			}
+
+				bookmark = R.drawable.ic_twotone_bookmark_24_white;
+		
 			bookmarkButton.setImageResource(bookmark);
 		}
 

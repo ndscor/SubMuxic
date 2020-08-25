@@ -32,6 +32,7 @@
 	<attr name="chat_send" format="reference"/>
 	<attr name="add" format="reference"/>
 	<attr name="download_none" format="reference"/>
+	<attr name="download_menu_light" format="reference"/>
 	<attr name="shuffle" format="reference"/>
 	<attr name="shuffle_button" format="reference"/>
 	<attr name="refresh" format="reference"/>
