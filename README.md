@@ -22,7 +22,4 @@ https://opensource.org/licenses/gpl-3.0.html
 
 ![1598363414104](https://user-images.githubusercontent.com/5296601/91191963-06a39480-e713-11ea-92b5-6ee3ec42d9b0.png)
 
-![screenshotalbum](https://user-images.githubusercontent.com/5296601/91192145-3a7eba00-e713-11ea-8a2f-27115eacc045.png)
-
-
 ![1598363436604](https://user-images.githubusercontent.com/5296601/91191969-086d5800-e713-11ea-9bd2-06d7ca49dfed.png)
