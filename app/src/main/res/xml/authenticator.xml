@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<account-authenticator
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:accountType="com.gloxandro.submuxic.subsonic.org"
+	android:icon="@mipmap/submuxic_launcher"
+	android:smallIcon="@mipmap/submuxic_launcher"
+	android:label="@string/common.appname"/>

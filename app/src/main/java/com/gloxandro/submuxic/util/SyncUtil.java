@@ -139,7 +139,7 @@ public final class SyncUtil {
 	public static String getPodcastSyncFile(Context context, int instance) {
 		return "sync-podcast-" + (Util.getRestUrl(context, null, instance, false)).hashCode() + ".ser";
 	}
-	
+
 	// Starred
 	public static ArrayList<String> getSyncedStarred(Context context, int instance) {
 		ArrayList<String> list = FileUtil.deserializeCompressed(context, getStarredSyncFile(context, instance), ArrayList.class);
@@ -154,7 +154,7 @@ public final class SyncUtil {
 	public static String getStarredSyncFile(Context context, int instance) {
 		return "sync-starred-" + (Util.getRestUrl(context, null, instance, false)).hashCode() + ".ser";
 	}
-	
+
 	// Most Recently Added
 	public static ArrayList<String> getSyncedMostRecent(Context context, int instance) {
 		ArrayList<String> list = FileUtil.deserialize(context, getMostRecentSyncFile(context, instance), ArrayList.class);

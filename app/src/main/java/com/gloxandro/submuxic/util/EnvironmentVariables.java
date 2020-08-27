@@ -18,6 +18,5 @@ package com.gloxandro.submuxic.util;
 import com.gloxandro.submuxic.BuildConfig;
 
 public final class EnvironmentVariables {
-    public static final String PASTEBIN_DEV_KEY = null;
     public static final String CAST_APPLICATION_ID = BuildConfig.CAST_ID;
 }

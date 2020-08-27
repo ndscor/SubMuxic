@@ -18,6 +18,9 @@
  */
 package com.gloxandro.submuxic.activity;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -468,6 +471,7 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 		}
 
 		UserUtil.seedCurrentUser(this);
+		createAccount();
 		runWhenServiceAvailable(new Runnable() {
 			@Override
 			public void run() {
@@ -853,6 +857,42 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 
 			@Override
 			protected void done(Void arg) {
+
+			}
+		}.execute();
+	}
+
+
+	private void createAccount() {
+		final Context context = this;
+
+		new SilentBackgroundTask<Void>(this) {
+			@Override
+			protected Void doInBackground() throws Throwable {
+				AccountManager accountManager = (AccountManager) context.getSystemService(ACCOUNT_SERVICE);
+				Account account = new Account(Constants.SYNC_ACCOUNT_NAME, Constants.SYNC_ACCOUNT_TYPE);
+				accountManager.addAccountExplicitly(account, null, null);
+
+				SharedPreferences prefs = Util.getPreferences(context);
+				boolean syncEnabled = prefs.getBoolean(Constants.PREFERENCES_KEY_SYNC_ENABLED, true);
+				int syncInterval = Integer.parseInt(prefs.getString(Constants.PREFERENCES_KEY_SYNC_INTERVAL, "60"));
+
+				// Add enabled/frequency to playlist/podcasts syncing
+				ContentResolver.setSyncAutomatically(account, Constants.SYNC_ACCOUNT_PLAYLIST_AUTHORITY, syncEnabled);
+				ContentResolver.addPeriodicSync(account, Constants.SYNC_ACCOUNT_PLAYLIST_AUTHORITY, new Bundle(), 60L * syncInterval);
+				ContentResolver.setSyncAutomatically(account, Constants.SYNC_ACCOUNT_PODCAST_AUTHORITY, syncEnabled);
+				ContentResolver.addPeriodicSync(account, Constants.SYNC_ACCOUNT_PODCAST_AUTHORITY, new Bundle(), 60L * syncInterval);
+
+				// Add for starred/recently added
+				ContentResolver.setSyncAutomatically(account, Constants.SYNC_ACCOUNT_STARRED_AUTHORITY, (syncEnabled && prefs.getBoolean(Constants.PREFERENCES_KEY_SYNC_STARRED, false)));
+				ContentResolver.addPeriodicSync(account, Constants.SYNC_ACCOUNT_STARRED_AUTHORITY, new Bundle(), 60L * syncInterval);
+				ContentResolver.setSyncAutomatically(account, Constants.SYNC_ACCOUNT_MOST_RECENT_AUTHORITY, (syncEnabled && prefs.getBoolean(Constants.PREFERENCES_KEY_SYNC_MOST_RECENT, false)));
+				ContentResolver.addPeriodicSync(account, Constants.SYNC_ACCOUNT_MOST_RECENT_AUTHORITY, new Bundle(), 60L * syncInterval);
+				return null;
+			}
+
+			@Override
+			protected void done(Void result) {
 
 			}
 		}.execute();

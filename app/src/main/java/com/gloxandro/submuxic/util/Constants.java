@@ -228,7 +228,7 @@ public final class Constants {
 
 	// Account prefs
 	public static final String SYNC_ACCOUNT_NAME = "Subsonic Account";
-	public static final String SYNC_ACCOUNT_TYPE = "subsonic.org";
+	public static final String SYNC_ACCOUNT_TYPE = "com.gloxandro.submuxic.subsonic.org";
 	public static final String SYNC_ACCOUNT_PLAYLIST_AUTHORITY = "com.gloxandro.submuxic.playlists.provider";
 	public static final String SYNC_ACCOUNT_PODCAST_AUTHORITY = "com.gloxandro.submuxic.podcasts.provider";
 	public static final String SYNC_ACCOUNT_STARRED_AUTHORITY = "com.gloxandro.submuxic.starred.provider";

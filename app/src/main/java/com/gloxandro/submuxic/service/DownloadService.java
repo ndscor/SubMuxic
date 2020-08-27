@@ -186,7 +186,7 @@ public class DownloadService extends Service {
 	private AudioNoisyReceiver audioNoisyReceiver = null;
 
 	private MediaRouteManager mediaRouter;
-	
+
 	// Variables to manage getCurrentPosition sometimes starting from an arbitrary non-zero number
 	private long subtractNextPosition = 0;
 	private int subtractPosition = 0;
@@ -412,7 +412,7 @@ public class DownloadService extends Service {
 	public IBinder onBind(Intent intent) {
 		return binder;
 	}
-	
+
 	public void post(Runnable r) {
 		handler.post(r);
 	}
@@ -596,7 +596,7 @@ public class DownloadService extends Service {
 				this.toDelete.add(forSong(entry));
 			}
 		}
-		
+
 		suggestedPlaylistName = prefs.getString(Constants.PREFERENCES_KEY_PLAYLIST_NAME, null);
 		suggestedPlaylistId = prefs.getString(Constants.PREFERENCES_KEY_PLAYLIST_ID, null);
 	}
@@ -740,7 +740,7 @@ public class DownloadService extends Service {
 			DownloadFile downloadFile = iterator.next();
 			if (!downloadFile.isCompleteFileAvailable()) {
 				iterator.remove();
-				
+
 				// Reset if the current playing song has been removed
 				if(currentPlaying == downloadFile) {
 					reset();
@@ -803,7 +803,7 @@ public class DownloadService extends Service {
 			podcast.delete();
 		}
 		toDelete.clear();
-		
+
 		// Clear bookmarks from current playing if past a certain point
 		if(cutoff) {
 			clearCurrentBookmark(true);
@@ -1155,7 +1155,7 @@ public class DownloadService extends Service {
 	}
 	private synchronized void playNext(boolean start) {
 		Util.broadcastPlaybackStatusChange(this, currentPlaying.getSong(), PlayerState.PREPARED);
-		
+
 		// Swap the media players since nextMediaPlayer is ready to play
 		subtractPosition = 0;
 		if(start) {
@@ -1165,7 +1165,7 @@ public class DownloadService extends Service {
 			nextMediaPlayer.start();
 		} else {
 			Log.i(TAG, "nextMediaPlayer already playing");
-			
+
 			// Next time the cachedPosition is updated, use that as position 0
 			subtractNextPosition = System.currentTimeMillis();
 		}
@@ -2479,7 +2479,7 @@ public class DownloadService extends Service {
 	public RemoteControlClientBase getRemoteControlClient() {
 		return mRemoteControl;
 	}
-	
+
 	private boolean isPastCutoff() {
 		return isPastCutoff(getPlayerPosition(), getPlayerDuration());
 	}
@@ -2494,7 +2494,7 @@ public class DownloadService extends Service {
 		// Make cutoff a maximum of 10 minutes
 		int cutoffPoint = Math.max((int) (duration * DELETE_CUTOFF), duration - 10 * 60 * 1000);
 		boolean isPastCutoff = duration > 0 && position > cutoffPoint;
-		
+
 		// Check to make sure song isn't within 10 seconds of where it was created
 		MusicDirectory.Entry entry = currentPlaying.getSong();
 		if(entry != null && entry.getBookmark() != null) {
@@ -2503,7 +2503,7 @@ public class DownloadService extends Service {
 				isPastCutoff = false;
 			}
 		}
-		
+
 		// Check to make sure we aren't in a series of similar content before deleting bookmark
 		if(isPastCutoff && allowSkipping) {
 			// Check to make sure:
@@ -2515,10 +2515,10 @@ public class DownloadService extends Service {
 				isPastCutoff = false;
 			}
 		}
-		
+
 		return isPastCutoff;
 	}
-	
+
 	private void clearCurrentBookmark() {
 		clearCurrentBookmark(false);
 	}
@@ -2535,12 +2535,12 @@ public class DownloadService extends Service {
 		if(entry.getBookmark() == null) {
 			return;
 		}
-		
+
 		// If delete is not specified, check position
 		if(!checkDelete) {
 			checkDelete = isPastCutoff();
 		}
-		
+
 		// If supposed to delete
 		if(checkDelete) {
 			new SilentBackgroundTask<Void>(this) {
@@ -2560,14 +2560,14 @@ public class DownloadService extends Service {
 				@Override
 				public void error(Throwable error) {
 					Log.e(TAG, "Failed to delete bookmark", error);
-					
+
 					String msg;
 					if(error instanceof OfflineException || error instanceof ServerTooOldException) {
 						msg = getErrorMessage(error);
 					} else {
 						msg = DownloadService.this.getResources().getString(R.string.bookmark_deleted_error, entry.getTitle()) + " " + getErrorMessage(error);
 					}
-					
+
 					Util.toast(DownloadService.this, msg, false);
 				}
 			}.execute();
@@ -2582,10 +2582,10 @@ public class DownloadService extends Service {
 		if(currentPlaying == null || !ServerInfo.canBookmark(this)) {
 			return;
 		}
-		
+
 		final MusicDirectory.Entry entry = currentPlaying.getSong();
 		int duration = getPlayerDuration();
-		
+
 		// If song is podcast or long go ahead and auto add a bookmark
 		if(entry.isPodcast() || entry.isAudioBook() || duration > (10L * 60L * 1000L)) {
 			final Context context = this;
@@ -2610,21 +2610,21 @@ public class DownloadService extends Service {
 					if(updateMetadata) {
 						onMetadataUpdate(METADATA_UPDATED_BOOKMARK);
 					}
-					
+
 					return null;
 				}
-				
+
 				@Override
 				public void error(Throwable error) {
 					Log.w(TAG, "Failed to create automatic bookmark", error);
-					
+
 					String msg;
 					if(error instanceof OfflineException || error instanceof ServerTooOldException) {
 						msg = getErrorMessage(error);
 					} else {
 						msg = context.getResources().getString(R.string.download_save_bookmark_failed) + getErrorMessage(error);
 					}
-					
+
 					Util.toast(context, msg, false);
 				}
 			}.execute();
@@ -2642,17 +2642,17 @@ public class DownloadService extends Service {
 			if (prefs.getBoolean(Constants.PREFERENCES_KEY_REPLAY_GAIN, false)) {
 				float[] rg = BastpUtil.getReplayGainValues(downloadFile.getFile().getCanonicalPath()); /* track, album */
 				boolean singleAlbum = false;
-				
+
 				String replayGainType = prefs.getString(Constants.PREFERENCES_KEY_REPLAY_GAIN_TYPE, "1");
 				// 1 => Smart replay gain
 				if("1".equals(replayGainType)) {
 					// Check if part of at least <REQUIRED_ALBUM_MATCHES> consequetive songs of the same album
-					
+
 					int index = downloadList.indexOf(downloadFile);
 					if(index != -1) {
 						String albumName = downloadFile.getSong().getAlbum();
 						int matched = 0;
-						
+
 						// Check forwards
 						for(int i = index + 1; i < downloadList.size() && matched < REQUIRED_ALBUM_MATCHES; i++) {
 							if(Util.equals(albumName, downloadList.get(i).getSong().getAlbum())) {
@@ -2661,7 +2661,7 @@ public class DownloadService extends Service {
 								break;
 							}
 						}
-						
+
 						// Check backwards
 						for(int i = index - 1; i >= 0 && matched < REQUIRED_ALBUM_MATCHES; i--) {
 							if(Util.equals(albumName, downloadList.get(i).getSong().getAlbum())) {
@@ -2670,7 +2670,7 @@ public class DownloadService extends Service {
 								break;
 							}
 						}
-						
+
 						if(matched >= REQUIRED_ALBUM_MATCHES) {
 							singleAlbum = true;
 						}
@@ -2682,8 +2682,8 @@ public class DownloadService extends Service {
 				}
 				// 3 => Use track tags
 				// Already false, no need to do anything here
-				
-				
+
+
 				// If playing a single album or no track gain, use album gain
 				if((singleAlbum || rg[0] == 0) && rg[1] != 0) {
 					adjust = rg[1];
@@ -2691,7 +2691,7 @@ public class DownloadService extends Service {
 					// Otherwise, give priority to track gain
 					adjust = rg[0];
 				}
-			
+
 				if (adjust == 0) {
 					/* No RG value found: decrease volume for untagged song if requested by user */
 					int untagged = Integer.parseInt(prefs.getString(Constants.PREFERENCES_KEY_REPLAY_GAIN_UNTAGGED, "0"));
@@ -2701,7 +2701,7 @@ public class DownloadService extends Service {
 					adjust += (bump - 150) / 10f;
 				}
 			}
-			
+
 			float rg_result = ((float) Math.pow(10, (adjust / 20))) * volume;
 			if (rg_result > 1.0f) {
 				rg_result = 1.0f; /* android would IGNORE the change if this is > 1 and we would end up with the wrong volume */
