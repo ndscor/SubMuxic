@@ -114,7 +114,7 @@
 					android:gravity="center"
 					android:layout_weight="1">
 
-					<com.google.android.material.floatingactionbutton.FloatingActionButton
+					<com.gloxandro.submuxic.view.AutoRepeatButton
 						android:layout_height="wrap_content"
 						android:layout_width="wrap_content"
 						app:backgroundTint="@color/md_deep_orange_500"
@@ -127,7 +127,7 @@
 						android:src="?attr/actionbar_rewind"
 						android:visibility="gone"/>
 
-					<com.google.android.material.floatingactionbutton.FloatingActionButton
+					<com.gloxandro.submuxic.view.AutoRepeatButton
 						android:layout_height="wrap_content"
 						app:backgroundTint="@color/md_deep_orange_500"
 						app:elevation="2dp"
@@ -140,7 +140,7 @@
 						android:src="?attr/actionbar_backward"
 				/>
 
-					<com.google.android.material.floatingactionbutton.FloatingActionButton
+					<com.gloxandro.submuxic.view.AutoRepeatButton
 						android:layout_height="wrap_content"
 						android:layout_width="wrap_content"
 						app:backgroundTint="@color/md_deep_orange_500"
@@ -152,7 +152,7 @@
 						app:fabSize="mini"
 						android:src="?attr/actionbar_start"/>
 
-					<com.google.android.material.floatingactionbutton.FloatingActionButton
+					<com.gloxandro.submuxic.view.AutoRepeatButton
 						android:layout_height="wrap_content"
 						android:layout_width="wrap_content"
 						app:backgroundTint="@color/md_deep_orange_500"
@@ -165,7 +165,7 @@
 						android:src="?attr/actionbar_forward"
 						/>
 
-				<com.google.android.material.floatingactionbutton.FloatingActionButton
+					<com.gloxandro.submuxic.view.AutoRepeatButton
 					android:layout_height="wrap_content"
 					android:layout_width="wrap_content"
 					app:elevation="2dp"
@@ -174,9 +174,10 @@
 					app:tint="?attr/colorPrimary"
 						android:src="?attr/actionbar_fastforward"
 					app:fabSize="mini"
+						android:visibility="gone"
 					android:layout_marginStart="4dp"
 					android:layout_marginEnd="8dp"
-						android:visibility="gone"/>
+					/>
 				</LinearLayout>
 			</LinearLayout>
 		</FrameLayout>

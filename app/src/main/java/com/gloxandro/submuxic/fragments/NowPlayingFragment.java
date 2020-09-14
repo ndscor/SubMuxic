@@ -74,6 +74,7 @@ import com.gloxandro.submuxic.util.MenuUtil;
 import com.gloxandro.submuxic.util.SilentBackgroundTask;
 import com.gloxandro.submuxic.util.UpdateHelper;
 import com.gloxandro.submuxic.util.Util;
+import com.gloxandro.submuxic.view.AutoRepeatButton;
 import com.gloxandro.submuxic.view.FadeOutAnimation;
 import com.gloxandro.submuxic.view.FastScroller;
 import com.gloxandro.submuxic.view.UpdateView;
@@ -116,10 +117,10 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 	private TextView durationTextView;
 	private TextView statusTextView;
 	private AppCompatSeekBar progressBar;
-	private FloatingActionButton previousButton;
-	private FloatingActionButton nextButton;
-	private FloatingActionButton rewindButton;
-	private FloatingActionButton fastforwardButton;
+	private AutoRepeatButton previousButton;
+	private AutoRepeatButton nextButton;
+	private AutoRepeatButton rewindButton;
+	private AutoRepeatButton fastforwardButton;
 	private View pauseButton;
 	private View stopButton;
 	private View startButton;
@@ -194,12 +195,12 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 		statusTextView = (TextView)rootView.findViewById(R.id.download_status);
 		statusTextView.setSelected(true);
 		progressBar = (AppCompatSeekBar) rootView.findViewById(R.id.download_progress_bar);
-		previousButton = (FloatingActionButton)rootView.findViewById(R.id.download_previous);
-		nextButton = (FloatingActionButton)rootView.findViewById(R.id.download_next);
+		previousButton = (AutoRepeatButton)rootView.findViewById(R.id.download_previous);
+		nextButton = (AutoRepeatButton)rootView.findViewById(R.id.download_next);
 
-		rewindButton = (FloatingActionButton) rootView.findViewById(R.id.download_rewind);
+		rewindButton = (AutoRepeatButton) rootView.findViewById(R.id.download_rewind);
 
-		fastforwardButton = (FloatingActionButton) rootView.findViewById(R.id.download_fastforward);
+		fastforwardButton = (AutoRepeatButton) rootView.findViewById(R.id.download_fastforward);
 
 		pauseButton =rootView.findViewById(R.id.download_pause);
 		stopButton =rootView.findViewById(R.id.download_stop);
@@ -300,6 +301,19 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 			}
 		});
 
+		nextButton.setOnRepeatListener(new Runnable() {
+			public void run() {
+				changeProgress(false);
+			}
+		});
+
+		rewindButton.setOnRepeatListener(new Runnable() {
+			public void run() {
+				changeProgress(true);
+			}
+		});
+
+
 
 		rewindButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -315,6 +329,21 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 				changeProgress(false);
 			}
 		});
+
+		previousButton.setOnRepeatListener(new Runnable() {
+			public void run() {
+				changeProgress(true);
+			}
+		});
+
+
+		fastforwardButton.setOnRepeatListener(new Runnable() {
+			public void run() {
+				changeProgress(false);
+			}
+		});
+
+
 
 		pauseButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -1250,23 +1279,23 @@ public class NowPlayingFragment extends SubsonicFragment implements GestureDetec
 	private void updateMediaButton(boolean shouldFastForward) {
 		DownloadService downloadService = getDownloadService();
 		if(downloadService.isCurrentPlayingSingle()) {
-			previousButton.hide();
-			nextButton.hide();
-			rewindButton.hide();
-			fastforwardButton.hide();
+			previousButton.setVisibility(View.GONE);
+			nextButton.setVisibility(View.GONE);
+			rewindButton.setVisibility(View.GONE);
+			fastforwardButton.setVisibility(View.GONE);
 		} else {
 			if (downloadService.shouldFastForward()) {
-				previousButton.hide();
-				nextButton.hide();
+				previousButton.setVisibility(View.GONE);
+				nextButton.setVisibility(View.GONE);
 
-				rewindButton.show();
-				fastforwardButton.show();
+				rewindButton.setVisibility(View.VISIBLE);
+				fastforwardButton.setVisibility(View.VISIBLE);
 			} else {
-				previousButton.show();
-				nextButton.show();
+				previousButton.setVisibility(View.VISIBLE);
+				nextButton.setVisibility(View.VISIBLE);
 
-				rewindButton.hide();
-				fastforwardButton.hide();
+				rewindButton.setVisibility(View.GONE);
+				fastforwardButton.setVisibility(View.GONE);
 			}
 		}
 	}

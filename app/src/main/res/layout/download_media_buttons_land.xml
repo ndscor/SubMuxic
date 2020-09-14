@@ -143,7 +143,7 @@
 				android:gravity="center"
 				>
 
-				<com.google.android.material.floatingactionbutton.FloatingActionButton
+				<com.gloxandro.submuxic.view.AutoRepeatButton
 					android:layout_width="wrap_content"
 					android:layout_gravity="end|bottom"
 					android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
 					android:layout_toStartOf="@+id/download_start"
 					/>
 
-				<com.google.android.material.floatingactionbutton.FloatingActionButton
+				<com.gloxandro.submuxic.view.AutoRepeatButton
 					android:layout_width="wrap_content"
 					android:layout_gravity="end|bottom"
 					android:layout_height="wrap_content"
@@ -171,13 +171,14 @@
 					app:backgroundTint="@color/md_deep_orange_500"
 					app:elevation="6dp"
 					app:fabSize="mini"
+					android:visibility="gone"
 					android:id="@+id/download_rewind"
 					android:layout_toStartOf="@+id/download_start"
 					android:src="?attr/media_button_rewind"
 					android:layout_centerVertical="true"
 					/>
 
-				<com.google.android.material.floatingactionbutton.FloatingActionButton
+				<com.gloxandro.submuxic.view.AutoRepeatButton
 					android:layout_width="wrap_content"
 					android:layout_gravity="end|bottom"
 					android:layout_height="wrap_content"
@@ -186,6 +187,7 @@
 					app:backgroundTint="@color/md_deep_orange_500"
 					app:borderWidth="0dp"
 					app:elevation="6dp"
+					android:visibility="gone"
 					app:fabSize="normal"
 					app:tint="?attr/colorPrimary"
 					android:id="@+id/download_pause"
@@ -193,7 +195,7 @@
 					android:layout_centerInParent="true"
 					/>
 
-				<com.google.android.material.floatingactionbutton.FloatingActionButton
+				<com.gloxandro.submuxic.view.AutoRepeatButton
 					android:layout_width="wrap_content"
 					app:fabSize="normal"
 					android:layout_gravity="end|bottom"
@@ -203,13 +205,14 @@
 					android:layout_marginEnd="10dp"
 					app:borderWidth="0dp"
 					app:tint="?attr/colorPrimary"
+					android:visibility="gone"
 					app:elevation="6dp"
 					android:id="@+id/download_stop"
 					android:src="?attr/media_button_stop"
 					android:layout_centerInParent="true"
 					/>
 
-				<com.google.android.material.floatingactionbutton.FloatingActionButton
+				<com.gloxandro.submuxic.view.AutoRepeatButton
 					android:layout_width="wrap_content"
 					android:layout_gravity="end|bottom"
 					android:layout_height="wrap_content"
@@ -225,7 +228,7 @@
 					android:layout_centerInParent="true"
 					/>
 
-				<com.google.android.material.floatingactionbutton.FloatingActionButton
+				<com.gloxandro.submuxic.view.AutoRepeatButton
 					android:layout_width="wrap_content"
 					android:layout_gravity="end|bottom"
 					android:layout_toEndOf="@+id/download_start"
@@ -237,12 +240,13 @@
 					app:borderWidth="0dp"
 					app:elevation="6dp"
 					app:fabSize="mini"
+					android:visibility="gone"
 					android:id="@+id/download_fastforward"
 					android:src="?attr/media_button_fastforward"
 					android:layout_centerVertical="true"
-					android:visibility="invisible"/>
+				/>
 
-				<com.google.android.material.floatingactionbutton.FloatingActionButton
+				<com.gloxandro.submuxic.view.AutoRepeatButton
 					android:layout_width="wrap_content"
 					android:layout_gravity="end|bottom"
 					android:layout_toEndOf="@+id/download_start"

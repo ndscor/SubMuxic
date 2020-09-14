@@ -78,6 +78,7 @@ import com.gloxandro.submuxic.util.KeyStoreUtil;
 import com.gloxandro.submuxic.util.SilentBackgroundTask;
 import com.gloxandro.submuxic.util.UserUtil;
 import com.gloxandro.submuxic.util.Util;
+import com.gloxandro.submuxic.view.AutoRepeatButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
@@ -105,14 +106,14 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 	private ImageView coverArtView;
 	private TextView trackView;
 	private TextView artistView;
-	private FloatingActionButton startButton;
+	private AutoRepeatButton startButton;
 	private long lastBackPressTime = 0;
 	private DownloadFile currentPlaying;
 	private PlayerState currentState;
-	private FloatingActionButton previousButton;
-	private FloatingActionButton nextButton;
-	private FloatingActionButton rewindButton;
-	private FloatingActionButton fastforwardButton;
+	private AutoRepeatButton previousButton;
+	private AutoRepeatButton nextButton;
+	private AutoRepeatButton rewindButton;
+	private AutoRepeatButton fastforwardButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -281,7 +282,7 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 			trans.commit();
 		}
 
-		rewindButton = (FloatingActionButton) findViewById(R.id.download_rewind);
+		rewindButton = (AutoRepeatButton) findViewById(R.id.download_rewind);
 		rewindButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -299,7 +300,7 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 			}
 		});
 
-		previousButton = (FloatingActionButton) findViewById(R.id.download_previous);
+		previousButton = (AutoRepeatButton) findViewById(R.id.download_previous);
 		previousButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -317,7 +318,7 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 			}
 		});
 
-		startButton = (FloatingActionButton) findViewById(R.id.download_start);
+		startButton = (AutoRepeatButton) findViewById(R.id.download_start);
 		startButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -339,7 +340,7 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 			}
 		});
 
-		nextButton = (FloatingActionButton) findViewById(R.id.download_next);
+		nextButton = (AutoRepeatButton) findViewById(R.id.download_next);
 		nextButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -357,7 +358,7 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 			}
 		});
 
-		fastforwardButton = (FloatingActionButton) findViewById(R.id.download_fastforward);
+		fastforwardButton = (AutoRepeatButton) findViewById(R.id.download_fastforward);
 		fastforwardButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -940,23 +941,23 @@ public class SubsonicFragmentActivity extends SubsonicActivity implements Downlo
 	private void updateMediaButtons(boolean shouldFastForward) {
 		DownloadService downloadService = getDownloadService();
 		if(downloadService.isCurrentPlayingSingle()) {
-			previousButton.hide();
-			nextButton.hide();
-			rewindButton.hide();
-			fastforwardButton.hide();
+			previousButton.setVisibility(View.GONE);
+			nextButton.setVisibility(View.GONE);
+			rewindButton.setVisibility(View.GONE);
+			fastforwardButton.setVisibility(View.GONE);
 		} else {
 			if (shouldFastForward) {
-				previousButton.hide();
-				nextButton.hide();
+				previousButton.setVisibility(View.GONE);
+				nextButton.setVisibility(View.GONE);
 
-				rewindButton.show();
-				fastforwardButton.show();
+				rewindButton.setVisibility(View.VISIBLE);
+				fastforwardButton.setVisibility(View.VISIBLE);
 			} else {
-				previousButton.show();
-				nextButton.show();
+				previousButton.setVisibility(View.VISIBLE);
+				nextButton.setVisibility(View.VISIBLE);
 
-				rewindButton.hide();
-				fastforwardButton.hide();
+				rewindButton.setVisibility(View.GONE);
+				fastforwardButton.setVisibility(View.GONE);
 			}
 		}
 	}
