@@ -46,10 +46,11 @@ public class AlbumView extends UpdateView2<MusicDirectory.Entry, ImageLoader> {
 	public AlbumView(Context context, boolean cell) {
 		super(context);
 
-
+		if(cell) {
 			LayoutInflater.from(context).inflate(R.layout.album_cell_item, this, true);
-
-
+		} else {
+			LayoutInflater.from(context).inflate(R.layout.album_list_item, this, true);
+		}
 		coverArtView = findViewById(R.id.album_coverart);
 		titleView = (TextView) findViewById(R.id.album_title);
 		artistView = (TextView) findViewById(R.id.album_artist);

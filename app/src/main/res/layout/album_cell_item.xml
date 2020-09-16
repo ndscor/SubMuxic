@@ -81,8 +81,8 @@
 
 			<ImageButton
 				android:id="@+id/album_star"
-				android:layout_width="20dp"
-				android:layout_height="20dp"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
 				android:scaleType="fitCenter"
 				android:layout_gravity="end|center"
 				android:background="@android:color/transparent"

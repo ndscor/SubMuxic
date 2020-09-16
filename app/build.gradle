@@ -10,7 +10,7 @@ def castid() {
     return properties.getProperty("CAST_ID");
 }
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId "com.gloxandro.submuxic"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 20
         versionName '3.0'
         buildConfigField "String", "PLAYSTORE_LICENSE_KEY", "\""+license()+"\""

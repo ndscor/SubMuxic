@@ -93,7 +93,7 @@
 		<item name="rating_bad">@drawable/ic_action_rating_bad_light</item>
 		<item name="rating_good">@drawable/ic_action_rating_good_light</item>
 		<item name="radio">@drawable/ic_twotone_radio_24_black</item>
-		<item name="star_outline">@drawable/ic_toggle_star_outline_light</item>
+		<item name="star_outline">@drawable/ic_twotone_star_24</item>
 		<item name="download">@drawable/ic_menu_download_dark</item>
 		<item name="playback_speed">@drawable/ic_action_playback_speed_light</item>
 		<item name="drawerHome">@drawable/ic_twotone_home_24_black</item>
@@ -125,6 +125,7 @@
 		<item name="colorPrimary">@android:color/black</item>
 		<item name="folder_icon">@drawable/perfolder_light</item>
 		<item name="music_icon">@drawable/music_icon_light</item>
+		<item name="starred">@drawable/ic_baseline_star_24_black</item>
 
 	</style>
 
@@ -181,7 +182,7 @@
 		<item name="rating_bad">@drawable/ic_action_rating_bad_dark</item>
 		<item name="rating_good">@drawable/ic_action_rating_good_dark</item>
 		<item name="radio">@drawable/ic_twotone_radio_24_white</item>
-		<item name="star_outline">@drawable/ic_toggle_star_outline_dark</item>
+		<item name="star_outline">@drawable/ic_twotone_star_24_white</item>
 		<item name="download">@drawable/ic_menu_download_dark</item>
 		<item name="playback_speed">@drawable/ic_action_playback_speed_dark</item>
 		<item name="drawerHome">@drawable/ic_twotone_home_white</item>
@@ -204,6 +205,7 @@
 		<item name="cardBackgroundDrawable">@drawable/card_rounded_corners_dark</item>
 		<item name="drawerHeaderBackground">@drawable/cover_dark</item>
 		<item name="toolbar_defaults">@color/dark_background</item>
+		<item name="starred">@drawable/ic_baseline_star_24</item>
 		<item name="playlist_toggle">@drawable/ic_baseline_playlist_play_white</item>
 	</style>
 
@@ -260,7 +262,7 @@
 		<item name="rating_bad">@drawable/ic_action_rating_bad_dark</item>
 		<item name="rating_good">@drawable/ic_action_rating_good_dark</item>
 		<item name="radio">@drawable/ic_twotone_radio_24_white</item>
-		<item name="star_outline">@drawable/ic_toggle_star_outline_dark</item>
+		<item name="star_outline">@drawable/ic_twotone_star_24_white</item>
 		<item name="download">@drawable/ic_menu_download_dark</item>
 		<item name="playback_speed">@drawable/ic_action_playback_speed_dark</item>
 		<item name="drawerHome">@drawable/ic_twotone_home_white</item>
@@ -284,6 +286,7 @@
 		<item name="drawerHeaderBackground">@drawable/cover_dark</item>
 		<item name="toolbar_defaults">@android:color/black</item>
 		<item name="playlist_toggle">@drawable/ic_baseline_playlist_play_white</item>
+		<item name="starred">@drawable/ic_baseline_star_24</item>
 	</style>
 
 	<style name="Theme.SubMuxic.Blue.Base" parent="@style/Theme.MaterialComponents">
@@ -339,7 +342,8 @@
 		<item name="rating_bad">@drawable/ic_action_rating_bad_dark</item>
 		<item name="rating_good">@drawable/ic_action_rating_good_dark</item>
 		<item name="radio">@drawable/ic_twotone_radio_24_white</item>
-		<item name="star_outline">@drawable/ic_toggle_star_outline_dark</item>
+		<item name="star_outline">@drawable/ic_twotone_star_24_white</item>
+		<item name="starred">@drawable/ic_baseline_star_24</item>
 		<item name="download">@drawable/ic_menu_download_dark</item>
 		<item name="playback_speed">@drawable/ic_action_playback_speed_dark</item>
 		<item name="drawerHome">@drawable/ic_twotone_home_white</item>

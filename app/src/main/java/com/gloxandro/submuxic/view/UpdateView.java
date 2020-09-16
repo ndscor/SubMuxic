@@ -275,7 +275,8 @@ public abstract class UpdateView<T> extends LinearLayout {
 			if(isStarred) {
 				if(!starred) {
 					if(starButton.getDrawable() == null) {
-						starButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_toggle_star));
+						starButton.setImageResource(DrawableTint.getDrawableRes(context, R.attr.starred));
+
 					}
 					starButton.setVisibility(View.VISIBLE);
 					starred = true;

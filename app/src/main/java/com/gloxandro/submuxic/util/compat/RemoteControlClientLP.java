@@ -283,7 +283,7 @@ public class RemoteControlClientLP extends RemoteControlClientBase {
 
 		PlaybackStateCompat.CustomAction star = new PlaybackStateCompat.CustomAction.Builder(CUSTOM_ACTION_STAR,
 					downloadService.getString(R.string.common_star),
-					currentSong.isStarred() ? R.drawable.ic_toggle_star : R.drawable.ic_toggle_star_outline)
+					currentSong.isStarred() ? R.drawable.ic_baseline_star_24 : R.drawable.ic_twotone_star_border_24_white)
 				.setExtras(showOnWearExtras).build();
 
 		builder.addCustomAction(thumbsDown).addCustomAction(star).addCustomAction(thumbsUp);

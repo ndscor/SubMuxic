@@ -6,6 +6,7 @@
 	<attr name="music_icon" format="reference"/>
 	<attr name="folder_icon" format="reference"/>
 	<attr name="headers_icon" format="reference"/>
+	<attr name="starred" format="reference"/>
 
 	<attr name="repeat_icon" format="reference"/>
 	<attr name="playlist_toggle" format="reference"/>

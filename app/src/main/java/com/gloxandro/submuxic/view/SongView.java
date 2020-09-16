@@ -243,7 +243,8 @@ public class SongView extends UpdateView2<MusicDirectory.Entry, Boolean> {
 		if(item.isStarred()) {
 			if(!starred) {
 				if(starButton.getDrawable() == null) {
-					starButton.setImageDrawable(DrawableTint.getTintedDrawable(context, R.drawable.ic_toggle_star));
+					starButton.setImageResource(DrawableTint.getDrawableRes(context, R.attr.starred));
+
 				}
 				starButton.setVisibility(View.VISIBLE);
 				starred = true;
