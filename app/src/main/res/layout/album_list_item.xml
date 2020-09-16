@@ -2,9 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:id="@id/drag_handle"
 			  android:orientation="horizontal"
-			  android:layout_width="fill_parent"
+				android:layout_marginStart="4dp"
+				android:layout_marginEnd="4dp"
+				android:layout_marginTop="2dp"
+				android:layout_marginBottom="2dp"
+				android:background="?attr/selectableItemBackground"
+			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
-			  android:background="?attr/selectableItemBackground">
+			>
 
 	<RelativeLayout
 		android:layout_width="@dimen/AlbumArt.Small"
@@ -24,9 +29,9 @@
 			android:layout_centerHorizontal="true"
 			android:numStars="5"
 			style="@style/Widget.AppCompat.RatingBar.Small"
-
 			android:layout_alignParentBottom="true"
 			android:visibility="gone"/>
+
 	</RelativeLayout>
 
 	<LinearLayout
@@ -60,8 +65,8 @@
 
 	<ImageButton
 		android:id="@+id/album_star"
-		android:layout_width="@dimen/Star.Small"
-		android:layout_height="@dimen/Star.Small"
+		android:layout_width="24dp"
+		android:layout_height="24dp"
 		android:scaleType="fitCenter"
 		android:layout_gravity="end|center_vertical"
 		android:background="@android:color/transparent"
@@ -72,7 +77,7 @@
 		android:id="@+id/item_more"
 		android:src="?attr/download_none"
 		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
+		android:layout_height="wrap_content"
 		android:layout_gravity="end|center"
 		style="@style/MoreButton"/>
 </LinearLayout>
