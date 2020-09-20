@@ -25,6 +25,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
 import com.gloxandro.submuxic.domain.MusicDirectory;
@@ -56,7 +57,11 @@ public class MediaStoreService {
 		ContentValues values = new ContentValues();
 		if(!song.isVideo()) {
 			values.put(MediaStore.MediaColumns.TITLE, song.getTitle());
-			values.put(MediaStore.MediaColumns.DATA, songFile.getAbsolutePath());
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+				values.put(MediaStore.MediaColumns.RELATIVE_PATH, songFile.getAbsolutePath());
+			} else {
+				values.put(MediaStore.MediaColumns.DATA, songFile.getAbsolutePath());
+			}
 			values.put(MediaStore.Audio.AudioColumns.ARTIST, song.getArtist());
 			values.put(MediaStore.Audio.AudioColumns.ALBUM, song.getAlbum());
 			if (song.getDuration() != null) {
@@ -89,7 +94,13 @@ public class MediaStoreService {
 			values.put(MediaStore.Video.VideoColumns.TITLE, song.getTitle());
 			values.put(MediaStore.Video.VideoColumns.DISPLAY_NAME, song.getTitle());
 			values.put(MediaStore.Video.VideoColumns.ARTIST, song.getArtist());
-			values.put(MediaStore.Video.VideoColumns.DATA, songFile.getAbsolutePath());
+
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+				values.put(MediaStore.Video.VideoColumns.RELATIVE_PATH, songFile.getAbsolutePath());
+			} else {
+				values.put(MediaStore.Video.VideoColumns.DATA, songFile.getAbsolutePath());
+			}
+
 			if (song.getDuration() != null) {
 				values.put(MediaStore.Video.VideoColumns.DURATION, song.getDuration() * 1000L);
 			}
@@ -118,18 +129,29 @@ public class MediaStoreService {
 		File file = downloadFile.getCompleteFile();
 
 		Uri uri;
-		if(song.isVideo()) {
+		if (song.isVideo()) {
 			uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
 		} else {
 			uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 		}
 
-		int n = contentResolver.delete(uri,
-				MediaStore.MediaColumns.DATA + "=?",
-				new String[]{file.getAbsolutePath()});
-		if (n > 0) {
-			Log.i(TAG, "Deleting media store row for " + song);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			int n = contentResolver.delete(uri,
+					MediaStore.MediaColumns.RELATIVE_PATH + "=?",
+					new String[]{file.getAbsolutePath()});
+			if (n > 0) {
+				Log.i(TAG, "Deleting media store row for " + song);
+			}
+		} else {
+			int n = contentResolver.delete(uri,
+					MediaStore.MediaColumns.DATA + "=?",
+					new String[]{file.getAbsolutePath()});
+			if (n > 0) {
+				Log.i(TAG, "Deleting media store row for " + song);
+			}
 		}
+
 	}
 
 	public void deleteFromMediaStore(File file) {
@@ -142,27 +164,55 @@ public class MediaStoreService {
 			uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 		}
 
-		int n = contentResolver.delete(uri,
-				MediaStore.MediaColumns.DATA + "=?",
-				new String[]{file.getAbsolutePath()});
-		if (n > 0) {
-			Log.i(TAG, "Deleting media store row for " + file);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			int n = contentResolver.delete(uri,
+					MediaStore.MediaColumns.RELATIVE_PATH + "=?",
+					new String[]{file.getAbsolutePath()});
+			if (n > 0) {
+				Log.i(TAG, "Deleting media store row for " + file);
+			}
+		} else {
+
+			int n = contentResolver.delete(uri,
+					MediaStore.MediaColumns.DATA + "=?",
+					new String[]{file.getAbsolutePath()});
+			if (n > 0) {
+				Log.i(TAG, "Deleting media store row for " + file);
+			}
 		}
+
 	}
 
 	public void renameInMediaStore(File start, File end) {
-		ContentResolver contentResolver = context.getContentResolver();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			ContentResolver contentResolver = context.getContentResolver();
 
-		ContentValues values = new ContentValues();
-		values.put(MediaStore.MediaColumns.DATA, end.getAbsolutePath());
+			ContentValues values = new ContentValues();
+			values.put(MediaStore.MediaColumns.RELATIVE_PATH, end.getAbsolutePath());
 
-		int n = contentResolver.update(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-				values,
-				MediaStore.MediaColumns.DATA + "=?",
-				new String[]{start.getAbsolutePath()});
-		if (n > 0) {
-			Log.i(TAG, "Rename media store row for " + start + " to " + end);
+			int n = contentResolver.update(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+					values,
+					MediaStore.MediaColumns.RELATIVE_PATH + "=?",
+					new String[]{start.getAbsolutePath()});
+			if (n > 0) {
+				Log.i(TAG, "Rename media store row for " + start + " to " + end);
+			}
+
+		} else {
+			ContentResolver contentResolver = context.getContentResolver();
+
+			ContentValues values = new ContentValues();
+			values.put(MediaStore.MediaColumns.DATA, end.getAbsolutePath());
+
+			int n = contentResolver.update(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+					values,
+					MediaStore.MediaColumns.DATA + "=?",
+					new String[]{start.getAbsolutePath()});
+			if (n > 0) {
+				Log.i(TAG, "Rename media store row for " + start + " to " + end);
+			}
 		}
+
 	}
 
 	private void insertAlbumArt(int albumId, DownloadFile downloadFile) {
@@ -176,7 +226,14 @@ public class MediaStoreService {
 			if (albumArtFile.exists()) {
 				ContentValues values = new ContentValues();
 				values.put(MediaStore.Audio.AlbumColumns.ALBUM_ID, albumId);
-				values.put(MediaStore.MediaColumns.DATA, albumArtFile.getPath());
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+					values.put(MediaStore.MediaColumns.RELATIVE_PATH, albumArtFile.getPath());
+				} else {
+					values.put(MediaStore.MediaColumns.DATA, albumArtFile.getPath());
+
+				}
+
+
 				contentResolver.insert(ALBUM_ART_URI, values);
 				Log.i(TAG, "Added album art: " + albumArtFile);
 			}

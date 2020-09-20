@@ -185,7 +185,6 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		mLicenseCheckerCallback = new MyLicenseCheckerCallback();
 		mChecker = new LicenseChecker(getApplicationContext(), new ServerManagedPolicy(this, new AESObfuscator(SALT, getPackageName(), uniqueID)), PLAYSTORE_LICENSE_KEY);
 		sInstance = this;
-		CustomActionbar();
 		DownloadService.startService(this);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
