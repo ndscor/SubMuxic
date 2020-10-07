@@ -2,12 +2,19 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/select_album_header_wrapper"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="10dp"
+	android:layout_marginEnd="10dp"
 	android:layout_width="fill_parent">
+
 
 	<RelativeLayout
 		android:id="@+id/select_album_header"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="4dp"
+		android:layout_marginBottom="4dp"
+		android:layout_marginStart="10dp"
+		android:layout_marginEnd="10dp"
 		android:layout_gravity="top">
 
 		<LinearLayout
@@ -142,7 +149,11 @@
 				android:textColor="?android:textColorPrimary"/>
 		</LinearLayout>
 	</FrameLayout>
-
+	<ImageView
+		android:layout_width="match_parent"
+		android:layout_height="0.5dp"
+		android:layout_gravity="bottom"
+		android:background="?attr/default_divider"/>
 </FrameLayout>
 
 

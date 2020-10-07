@@ -115,7 +115,7 @@ public class DownloadFile implements BufferFile {
 
 		return br;
 	}
-	
+
 	public Long getContentLength() {
 		return contentLength;
 	}
@@ -266,10 +266,10 @@ public class DownloadFile implements BufferFile {
 
     public void delete() {
         cancelDownload();
-        
+
         // Remove from mediaStore BEFORE deleting file since it calls getCompleteFile
 		deleteFromStore();
-		
+
 		// Delete all possible versions of the file
 		File parent = partialFile.getParentFile();
         Util.delete(partialFile);
@@ -312,7 +312,7 @@ public class DownloadFile implements BufferFile {
             }
         }
     }
-	
+
 	public void setPlaying(boolean isPlaying) {
 		try {
 			if(saveWhenDone && !isPlaying) {
@@ -332,7 +332,7 @@ public class DownloadFile implements BufferFile {
 		} catch(IOException ex) {
 			Log.w(TAG, "Failed to rename file " + completeFile + " to " + saveFile, ex);
 		}
-		
+
 		this.isPlaying = isPlaying;
 	}
 	public void renamePartial() {
@@ -346,7 +346,7 @@ public class DownloadFile implements BufferFile {
 	public boolean getPlaying() {
 		return isPlaying;
 	}
-	
+
 	private void deleteFromStore() {
 		try {
 			mediaStoreService.deleteFromMediaStore(this);
@@ -422,7 +422,7 @@ public class DownloadFile implements BufferFile {
                     wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, toString());
                     wakeLock.acquire();
                 }
-				
+
 				wifiLock = Util.createWifiLock(context, toString());
 				wifiLock.acquire();
 
@@ -534,7 +534,7 @@ public class DownloadFile implements BufferFile {
 					wifiLock.release();
 				}
 			}
-			
+
 			// Only run these if not interrupted, ie: cancelled
 			DownloadService downloadService = DownloadService.getInstance();
 			if(downloadService != null && !isCancelled()) {
@@ -544,7 +544,7 @@ public class DownloadFile implements BufferFile {
 
 			return null;
         }
-        
+
         private void checkDownloads() {
         	DownloadService downloadService = DownloadService.getInstance();
         	if(downloadService != null) {
@@ -613,7 +613,7 @@ public class DownloadFile implements BufferFile {
 					currentSpeed = lastCount / ((now - lastLog) / 1000L);
                     lastLog = now;
 					lastCount = 0;
-					
+
 					// Re-establish every few seconds whether screen is on or not
 					if(rateLimit) {
 						PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
@@ -624,7 +624,7 @@ public class DownloadFile implements BufferFile {
 						}
 					}
                 }
-                
+
                 // If screen is on and rateLimit is true, stop downloading from exhausting bandwidth
                 if(activeLimit) {
                 	Thread.sleep(10L);

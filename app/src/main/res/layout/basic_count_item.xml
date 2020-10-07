@@ -4,8 +4,6 @@
 	android:minHeight="60dp"
 	android:layout_height="wrap_content"
 	android:background="?selectableItemBackground"
-	android:focusable="true"
-	android:clickable="true"
 	android:id="@+id/header_layout"
 	android:orientation="vertical">
 

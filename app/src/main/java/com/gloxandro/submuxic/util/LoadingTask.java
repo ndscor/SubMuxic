@@ -29,7 +29,7 @@ public abstract class LoadingTask<T> extends BackgroundTask<T> {
 
     @Override
     public void execute() {
-        loading = ProgressDialog.show(tabActivity, "", "Loading. Please Wait...", true, cancellable, new DialogInterface.OnCancelListener() {
+        loading = ProgressDialog.show(tabActivity, "", "One moment..", false, cancellable, new DialogInterface.OnCancelListener() {
 			public void onCancel(DialogInterface dialog) {
 				cancel();
 			}

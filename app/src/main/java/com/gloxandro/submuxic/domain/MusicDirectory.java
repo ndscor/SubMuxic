@@ -72,7 +72,7 @@ public class MusicDirectory implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-	
+
 	 public String getId() {
 		return id;
 	}
@@ -80,7 +80,7 @@ public class MusicDirectory implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getParent() {
 		return parent;
 	}
@@ -97,7 +97,7 @@ public class MusicDirectory implements Serializable {
 	public void addChildren(List<Entry> children) {
 		this.children.addAll(children);
 	}
-    
+
 	public void replaceChildren(List<Entry> children) {
 		this.children = children;
 	}
@@ -128,7 +128,7 @@ public class MusicDirectory implements Serializable {
 		}
 		return result;
 	}
-	
+
 	public synchronized int getChildrenSize() {
 		return children.size();
 	}
@@ -136,7 +136,7 @@ public class MusicDirectory implements Serializable {
 	public void shuffleChildren() {
 		Collections.shuffle(this.children);
 	}
-	
+
 	public void sortChildren(Context context, int instance) {
 		// Only apply sorting on server version 4.7 and greater, where disc is supported
 		if(ServerInfo.checkServerVersion(context, "1.8", instance)) {
@@ -278,7 +278,7 @@ public class MusicDirectory implements Serializable {
 			this.rating = artist.getRating();
 			this.linkedArtist = artist;
 		}
-		
+
 		@TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
 		public void loadMetadata(File file) {
 			try {
@@ -355,7 +355,7 @@ public class MusicDirectory implements Serializable {
         public void setParent(String parent) {
             this.parent = parent;
         }
-		
+
 		public String getGrandParent() {
             return grandParent;
         }
@@ -534,19 +534,19 @@ public class MusicDirectory implements Serializable {
         public void setVideo(boolean video) {
             this.video = video;
         }
-		
+
 		public Integer getDiscNumber() {
 			return discNumber;
 		}
-		
+
 		public void setDiscNumber(Integer discNumber) {
 			this.discNumber = discNumber;
 		}
-        
+
         public boolean isStarred() {
             return starred;
         }
-        
+
         public void setStarred(boolean starred) {
             this.starred = starred;
 
@@ -554,7 +554,7 @@ public class MusicDirectory implements Serializable {
 				linkedArtist.setStarred(starred);
 			}
         }
-        
+
 		public int getRating() {
 			return rating == null ? 0 : rating;
 		}
@@ -569,7 +569,7 @@ public class MusicDirectory implements Serializable {
 				linkedArtist.setRating(rating);
 			}
 		}
-		
+
 		public Bookmark getBookmark() {
 			return bookmark;
 		}
@@ -592,7 +592,7 @@ public class MusicDirectory implements Serializable {
 		public boolean isAudioBook() {
 			return type == TYPE_AUDIO_BOOK;
 		}
-		
+
 		public int getCloseness() {
 			return closeness;
 		}
@@ -670,17 +670,17 @@ public class MusicDirectory implements Serializable {
 			}
 		}
 	}
-	
+
 	public static class EntryComparator implements Comparator<Entry> {
 		private boolean byYear;
 		private Collator collator;
-		
+
 		public EntryComparator(boolean byYear) {
 			this.byYear = byYear;
 			this.collator = Collator.getInstance(Locale.US);
 			this.collator.setStrength(Collator.PRIMARY);
 		}
-		
+
 		public int compare(Entry lhs, Entry rhs) {
 			if(lhs.isDirectory() && !rhs.isDirectory()) {
 				return -1;
@@ -701,10 +701,10 @@ public class MusicDirectory implements Serializable {
 
 				return collator.compare(lhs.getAlbumDisplay(), rhs.getAlbumDisplay());
 			}
-			
+
 			Integer lhsDisc = lhs.getDiscNumber();
 			Integer rhsDisc = rhs.getDiscNumber();
-			
+
 			if(lhsDisc != null && rhsDisc != null) {
 				if(lhsDisc < rhsDisc) {
 					return -1;
@@ -712,7 +712,7 @@ public class MusicDirectory implements Serializable {
 					return 1;
 				}
 			}
-			
+
 			Integer lhsTrack = lhs.getTrack();
 			Integer rhsTrack = rhs.getTrack();
 			if(lhsTrack != null && rhsTrack != null && lhsTrack != rhsTrack) {
@@ -725,7 +725,7 @@ public class MusicDirectory implements Serializable {
 
 			return collator.compare(lhs.getTitle(), rhs.getTitle());
 		}
-		
+
 		public static void sort(List<Entry> entries) {
 			sort(entries, true);
 		}

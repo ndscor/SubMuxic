@@ -19,8 +19,8 @@ android {
         applicationId "com.gloxandro.submuxic"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 24
-        versionName '3.4'
+        versionCode 25
+        versionName '3.5'
         buildConfigField "String", "PLAYSTORE_LICENSE_KEY", "\""+license()+"\""
         buildConfigField "String", "CAST_ID", "\""+castid()+"\""
         buildTypes {
@@ -46,7 +46,7 @@ dependencies {
     implementation project(':app:lvl_library')
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation "androidx.recyclerview:recyclerview:${versions.androidxRecyclerView}"
-    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.sothree.slidinguppanel:library:3.0.0'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'com.takisoft.preferencex:preferencex:1.1.0'
@@ -58,12 +58,12 @@ dependencies {
     implementation "com.takisoft.preferencex:preferencex-datetimepicker:${versions.preferencesFix}"
     implementation "com.takisoft.preferencex:preferencex-colorpicker:${versions.preferencesFix}"
     implementation "com.takisoft.preferencex:preferencex-ringtone:${versions.preferencesFix}"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     testImplementation 'junit:junit:4.13'
     implementation 'com.shehabic.droppy:Droppy:0.5.1@aar'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation group: 'org.fourthline.cling', name: 'cling-core', version:'2.1.1'
     implementation group: 'org.fourthline.cling', name: 'cling-support', version:'2.1.1'
     implementation group: 'org.eclipse.jetty', name: 'jetty-server', version:'8.1.16.v20140903'
