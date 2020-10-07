@@ -19,8 +19,8 @@ android {
         applicationId "com.gloxandro.submuxic"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 25
-        versionName '3.5'
+        versionCode 27
+        versionName '3.7'
         buildConfigField "String", "PLAYSTORE_LICENSE_KEY", "\""+license()+"\""
         buildConfigField "String", "CAST_ID", "\""+castid()+"\""
         buildTypes {
