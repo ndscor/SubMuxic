@@ -103,7 +103,6 @@ public class SettingsActivity extends SubsonicActivity {
 	@Override
 	public void onBackPressed()
 	{
-		recreate();
 		super.onBackPressed();  // optional depending on your needs
 	}
 

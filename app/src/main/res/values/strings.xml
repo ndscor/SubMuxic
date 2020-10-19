@@ -705,6 +705,8 @@
 	<string name="permission.external_storage.failed">Without the ability to write to storage SubMuxic cannot not work</string>
 	<string name="permission.title">Allow access to storage?</string>
 	<string name="permission.des">Allow SubMuxic to access storage,this permission is required to read and store music files on your device, without the ability to write to storage SubMuxic cannot not work.</string>
+	<string name="permission.title_location">Allow access to Location?</string>
+	<string name="permission.des_location">Allow SubMuxic to access Location,this permission is required to show your Local Network SSID, without the ability to Location SubMuxic cannot show Local Network SSID.</string>
 
     <plurals name="select_album_n_songs">
         <item quantity="zero">No songs</item>

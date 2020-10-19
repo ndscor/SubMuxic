@@ -17,12 +17,15 @@ package com.gloxandro.submuxic.fragments;
 
 import android.Manifest;
 import android.accounts.Account;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,14 +37,18 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.gloxandro.submuxic.BuildConfig;
 import com.gloxandro.submuxic.R;
 import com.gloxandro.submuxic.activity.SubsonicActivity;
 import com.gloxandro.submuxic.colors.MaterialColorPreference;
@@ -58,6 +65,7 @@ import com.gloxandro.submuxic.util.Util;
 import com.gloxandro.submuxic.view.CacheLocationPreference;
 import com.gloxandro.submuxic.view.EditPasswordPreference;
 import com.gloxandro.submuxic.view.ErrorDialog;
+import com.google.android.material.button.MaterialButton;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -65,9 +73,17 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.gloxandro.submuxic.util.Constants.KEY_PRIMARY_COLOR;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLACK;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_BLUE;
+import static com.gloxandro.submuxic.util.ThemeUtil.THEME_DARK;
 
 public class SettingsFragment extends PreferenceCompatFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 	private final static String TAG = SettingsFragment.class.getSimpleName();
@@ -115,7 +131,8 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 	private String internalSSIDDisplay;
 	private EditTextPreference cacheSize;
 	private ListPreference openToTab;
-
+	private Dialog dialog;
+	public static final int PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
 	private int serverCount = 3;
 	private SharedPreferences settings;
 	private DecimalFormat megabyteFromat;
@@ -167,7 +184,13 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 		} else if("playback".equals(name)) {
 			xml = R.xml.settings_playback;
 		} else if("servers".equals(name)) {
-			xml = R.xml.settings_servers;
+			if (ContextCompat.checkSelfPermission(	getActivity(), ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
+				Pop_perimssion();
+			} else {
+				xml = R.xml.settings_servers;
+			}
+
+
 		}
 
 		if(xml != 0) {
@@ -175,6 +198,59 @@ public class SettingsFragment extends PreferenceCompatFragment implements Shared
 			newFragment.setArguments(args);
 			replaceFragment(newFragment);
 		}
+	}
+
+
+	private void Pop_perimssion() {
+		if (THEME_DARK.equals(theme)) {
+			dialog = new Dialog(getActivity(), R.style.permission_dialog_dark);
+		} else if (THEME_BLACK.equals(theme)) {
+			dialog = new Dialog(getActivity(), R.style.permission_dialog_dark);
+		} else if (THEME_BLUE.equals(theme)) {
+			dialog = new Dialog(getActivity(), R.style.permission_dialog_dark);
+		} else {
+			dialog = new Dialog(getActivity(), R.style.permission_dialog);
+		}
+
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		View view = LayoutInflater.from(getActivity()).inflate(R.layout.app_dialog, null);
+		final MaterialButton dialogOk = (MaterialButton) view.findViewById(R.id.okaction);
+		final MaterialButton dialogLater = (MaterialButton) view.findViewById(R.id.later);
+		final TextView infotitle = (TextView) view.findViewById(R.id.title);
+		final TextView infosubtitle = (TextView) view.findViewById(R.id.subtitle);
+
+		dialogOk.setText(R.string.common_ok);
+		dialogLater.setText(R.string.common_cancel);
+
+		infotitle.setText(R.string.permission_title_location);
+		infosubtitle.setText(R.string.permission_des_location);
+
+		dialogOk.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+					if (getActivity().checkSelfPermission(ACCESS_FINE_LOCATION )
+							!= PackageManager.PERMISSION_GRANTED) {
+						requestPermissions(new String[]{ACCESS_FINE_LOCATION},
+								PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+					}
+					dialog.dismiss();
+
+				}
+			}
+		});
+
+		dialogLater.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.cancel();
+				Util.toast(getActivity(), R.string.permission_external_storage_failed);
+			}
+		});
+
+
+		dialog.setContentView(view);
+		dialog.show();
 	}
 
 	@Override

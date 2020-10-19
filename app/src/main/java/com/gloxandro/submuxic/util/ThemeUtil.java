@@ -21,11 +21,12 @@ import android.content.res.Configuration;
 
 import com.gloxandro.submuxic.R;
 import com.gloxandro.submuxic.activity.SettingsActivity;
+import com.gloxandro.submuxic.activity.SubsonicActivity;
 import com.gloxandro.submuxic.activity.SubsonicFragmentActivity;
 
 import java.util.Locale;
 
-public final class ThemeUtil {
+public final class ThemeUtil  {
 	public static final String THEME_DARK = "dark";
 	public static final String THEME_LIGHT = "light";
 	public static final String THEME_BLACK = "black";

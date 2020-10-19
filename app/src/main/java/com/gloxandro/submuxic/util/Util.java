@@ -1293,7 +1293,7 @@ public final class Util extends AppCompatActivity {
 	}
 	public static String getSSID(Context context) {
 		if (isWifiConnected(context)) {
-			WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+			WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 			if (wifiManager.getConnectionInfo() != null && wifiManager.getConnectionInfo().getSSID() != null) {
 				return wifiManager.getConnectionInfo().getSSID().replace("\"", "");
 			}
