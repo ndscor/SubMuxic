@@ -47,7 +47,7 @@
 						android:layout_height="wrap_content"
 						android:gravity="center"
 						android:layout_gravity="bottom"
-						android:background="@color/overlayColor"
+						android:background="@color/orange"
 						android:visibility="gone"
 						android:orientation="horizontal">
 

@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaDescriptionCompat;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -537,7 +538,7 @@ public class AutoMediaBrowserService extends MediaBrowserServiceCompat {
 			}, 100);
 		} else {
 			RemoteControlClientLP remoteControlClient = (RemoteControlClientLP) downloadService.getRemoteControlClient();
-			setSessionToken(remoteControlClient.getMediaSession().getSessionToken());
+			setSessionToken(MediaSessionCompat.Token.fromToken(remoteControlClient.getMediaSession().getSessionToken()));
 		}
 	}
 }

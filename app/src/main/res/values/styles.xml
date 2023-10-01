@@ -88,6 +88,22 @@
 		<item name="android:paddingStart">4dip</item>
 	</style>
 
+
+
+
+	<style name="FullWidth.Dialog" parent="Theme.MaterialComponents.Light.Dialog">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:navigationBarColor">@android:color/transparent</item>
+		<item name="android:windowFullscreen">false</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="colorPrimaryDark">@android:color/transparent</item>
+	</style>
+
+
+
+
 	<style name="DownloadActionImageButton" parent="@style/BasicButton">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>

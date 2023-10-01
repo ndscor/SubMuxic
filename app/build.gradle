@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
 def license() {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -10,22 +12,24 @@ def castid() {
     return properties.getProperty("CAST_ID");
 }
 android {
-    compileSdkVersion 30
+    compileSdkVersion 34
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
     defaultConfig {
         applicationId "com.gloxandro.submuxic"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 29
-        versionName '3.9'
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode 30
+        versionName '4.0'
         buildConfigField "String", "PLAYSTORE_LICENSE_KEY", "\""+license()+"\""
         buildConfigField "String", "CAST_ID", "\""+castid()+"\""
+
+
         buildTypes {
             release {
-                minifyEnabled false
+                minifyEnabled true
                 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             }
         }
@@ -35,40 +39,65 @@ android {
         exclude 'META-INF/beans.xml'
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+    namespace 'com.gloxandro.submuxic'
 
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':app:lvl_library')
+
+
+    implementation 'com.google.dagger:hilt-android:2.40.5'
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    annotationProcessor 'androidx.hilt:hilt-compiler:1.0.0'
+    annotationProcessor 'com.google.dagger:hilt-android-compiler:2.38.1'
+
+
+
     implementation 'androidx.viewpager:viewpager:1.0.0'
-    implementation "androidx.recyclerview:recyclerview:${versions.androidxRecyclerView}"
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation "androidx.recyclerview:recyclerview:1.3.1"
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.sothree.slidinguppanel:library:3.0.0'
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'com.takisoft.preferencex:preferencex:1.1.0'
-    implementation 'com.google.android.gms:play-services-cast:19.0.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation "androidx.core:core-ktx:${versions.coreKtx}"
-    implementation 'androidx.mediarouter:mediarouter:1.1.0'
+    implementation 'com.google.android.gms:play-services-cast:21.3.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.mediarouter:mediarouter:1.6.0'
+
+
+
     implementation "com.takisoft.preferencex:preferencex:${versions.preferencesFix}"
     implementation "com.takisoft.preferencex:preferencex-datetimepicker:${versions.preferencesFix}"
     implementation "com.takisoft.preferencex:preferencex-colorpicker:${versions.preferencesFix}"
     implementation "com.takisoft.preferencex:preferencex-ringtone:${versions.preferencesFix}"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    testImplementation 'junit:junit:4.13'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
     implementation 'com.shehabic.droppy:Droppy:0.5.1@aar'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation group: 'org.fourthline.cling', name: 'cling-core', version:'2.1.1'
-    implementation group: 'org.fourthline.cling', name: 'cling-support', version:'2.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation group: 'org.fourthline.cling', name: 'cling-core', version:'2.1.0'
+    implementation group: 'org.fourthline.cling', name: 'cling-support', version:'2.1.0'
+
+    constraints{
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0'
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0'
+    }
+
+
+
+
+
     implementation group: 'org.eclipse.jetty', name: 'jetty-server', version:'8.1.16.v20140903'
     implementation group: 'org.eclipse.jetty', name: 'jetty-servlet', version:'8.1.16.v20140903'
     implementation group: 'org.eclipse.jetty', name: 'jetty-client', version:'8.1.16.v20140903'
+
+
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
 
 }

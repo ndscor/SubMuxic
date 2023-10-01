@@ -19,15 +19,11 @@
 19    android:versionCode="2"
 20    android:versionName="1.5" >
 21
-22    <uses-sdk
-23        android:minSdkVersion="4"
-23-->C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-24        android:targetSdkVersion="29" />
-24-->C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml
-25    <!-- Devices >= 3 have version of Android Market that supports licensing. -->
-26    <!-- Required permission to check licensing. -->
-27    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
-27-->C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:22:5-73
-27-->C:\Users\Dewords\StudioProjects\SubMuxic\app\lvl_library\src\main\AndroidManifest.xml:22:22-70
-28
-29</manifest>
+22    <uses-sdk android:minSdkVersion="4" />
+23    <!-- Devices >= 3 have version of Android Market that supports licensing. -->
+24    <!-- Required permission to check licensing. -->
+25    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+25-->/Users/dewords/Desktop/SubMuxic Pro/app/lvl_library/src/main/AndroidManifest.xml:21:5-73
+25-->/Users/dewords/Desktop/SubMuxic Pro/app/lvl_library/src/main/AndroidManifest.xml:21:22-70
+26
+27</manifest>

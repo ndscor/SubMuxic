@@ -3,14 +3,13 @@
     buildscript {
         ext {
             buildConfig = [
-                    'compileSdk': 30,
-                    'minSdk': 21,
+                    'compileSdk': 34,
+                    'minSdk': 23,
                     'buildTools': '28.0.3'
             ]
 
             versions = [
                     'coreKtx': '1.3.2',
-                    'kotlin': '1.3.21',
                     'androidxAppCompat': '1.2.0-alpha02',
                     'androidxRecyclerView': '1.1.0',
                     'androidxLifecycleExtensions': '2.0.0',
@@ -25,7 +24,9 @@
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.2'
+        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -38,6 +39,7 @@ allprojects {
         jcenter()
         maven {
             url 'http://4thline.org/m2'
+            allowInsecureProtocol = true
         }
         configurations.all {
             resolutionStrategy {

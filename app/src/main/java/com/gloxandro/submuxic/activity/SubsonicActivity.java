@@ -60,6 +60,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -182,10 +183,12 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 		applyTheme();
 		super.onCreate(bundle);
 		SharedPreferences prefs = Util.getPreferences(this);
+
 		mLicenseCheckerCallback = new MyLicenseCheckerCallback();
 		mChecker = new LicenseChecker(getApplicationContext(), new ServerManagedPolicy(this, new AESObfuscator(SALT, getPackageName(), uniqueID)), PLAYSTORE_LICENSE_KEY);
 		sInstance = this;
 		CustomActionbar();
+
 		DownloadService.startService(this);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -223,10 +226,57 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 			Util.getPreferences(this).registerOnSharedPreferenceChangeListener(preferencesListener);
 		}
 
-		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-			Pop_perimssion();
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+				ActivityCompat.requestPermissions(this,
+						permissions(),
+						1);
+			}
+		} else {
+			if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+				ActivityCompat.requestPermissions(this,
+						permissions(),
+						1);
+			}
 		}
+
 	}
+
+	public static String[] storage_permissions = {
+			Manifest.permission.WRITE_EXTERNAL_STORAGE,
+			Manifest.permission.READ_EXTERNAL_STORAGE
+	};
+
+	@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+	public static String[] storage_permissions_33 = {
+			Manifest.permission.READ_MEDIA_AUDIO,
+			Manifest.permission.READ_MEDIA_VIDEO,
+	};
+
+	private void CustomActionbar() {
+
+		didCheck = false;
+		checkingLicense = true;
+		setProgressBarIndeterminateVisibility(true);
+
+		mChecker.checkAccess(mLicenseCheckerCallback);
+	}
+
+
+
+	public static String[] permissions() {
+		String[] p;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			p = storage_permissions_33;
+		} else {
+			p = storage_permissions;
+		}
+		return p;
+	}
+
+
+
 
 
 	public synchronized static String id(Context context) {
@@ -391,7 +441,6 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 				})
 				.setNeutralButton(R.string.retry_button, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						CustomActionbar();
 					}
 				})
 
@@ -407,18 +456,12 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 
 	}
 
-	private void CustomActionbar() {
 
-		didCheck = false;
-		checkingLicense = true;
-		setProgressBarIndeterminateVisibility(true);
-
-		mChecker.checkAccess(mLicenseCheckerCallback);
-	}
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-			if (requestCode == REQUEST_PERMISSION_SETTING) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (requestCode == REQUEST_PERMISSION_SETTING) {
 			// for each permission check if the user granted/denied them
 			// you may want to group the rationale in a single dialog,
 			// this is just an example
@@ -426,13 +469,10 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 				String permission = permissions[i];
 				if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
 					showInfoDialog();
-				}
-				else if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+				} else if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
 					finish();
 					boolean showRationale = false;
-					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-						showRationale = shouldShowRequestPermissionRationale(permission);
-					}
+					showRationale = shouldShowRequestPermissionRationale(permission);
 					if (!showRationale) {
 						Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
 						Uri uri = Uri.fromParts("package", getPackageName(), null);
@@ -1531,7 +1571,7 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 			try {
 
 				PackageInfo packageInfo = context.getPackageManager().getPackageInfo("com.gloxandro.submuxic", 0);
-				file = new File(Environment.getExternalStorageDirectory(), "SubMuxic-stacktrace.txt");
+				file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString(), "SubMuxic-stacktrace.txt");
 				printWriter = new PrintWriter(file);
 				printWriter.println("Android API level: " + Build.VERSION.SDK);
 				printWriter.println("Subsonic version name: " + packageInfo.versionName);

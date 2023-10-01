@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.RemoteControlClient;
 import android.os.Handler;
 import android.os.Looper;
@@ -55,7 +56,7 @@ import static com.gloxandro.submuxic.domain.PlayerState.PREPARING;
 /**
  * @author Sindre Mehus
  */
-public class DownloadServiceLifecycleSupport {
+public class DownloadServiceLifecycleSupport implements AudioManager.OnAudioFocusChangeListener {
 	private static final String TAG = DownloadServiceLifecycleSupport.class.getSimpleName();
 	public static final String FILENAME_DOWNLOADS_SER = "downloadstate2.ser";
 	private static final int DEBOUNCE_TIME = 200;
@@ -63,8 +64,12 @@ public class DownloadServiceLifecycleSupport {
 	private final DownloadService downloadService;
 	private Looper eventLooper;
 	private Handler eventHandler;
+
+	private AudioManager mAudioManager;
+
+
+
 	private BroadcastReceiver ejectEventReceiver;
-	private PhoneStateListener phoneStateListener;
 	private boolean externalStorageAvailable= true;
 	private ReentrantLock lock = new ReentrantLock();
 	private final AtomicBoolean setup = new AtomicBoolean(false);
@@ -107,7 +112,10 @@ public class DownloadServiceLifecycleSupport {
 		this.downloadService = downloadService;
 	}
 
-	public void onCreate() {
+	public void onCreate(Context context) {
+		mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+		mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -156,11 +164,6 @@ public class DownloadServiceLifecycleSupport {
 		Util.registerMediaButtonEventReceiver(downloadService);
 
 		// Pause temporarily on incoming phone calls.
-		phoneStateListener = new MyPhoneStateListener();
-
-		// Android 6.0 removes requirement for android.Manifest.permission.READ_PHONE_STATE;
-		TelephonyManager telephonyManager = (TelephonyManager) downloadService.getSystemService(Context.TELEPHONY_SERVICE);
-		telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
 		// Register the handler for outside intents.
 		IntentFilter commandFilter = new IntentFilter();
@@ -256,12 +259,11 @@ public class DownloadServiceLifecycleSupport {
 
 	public void onDestroy() {
 		serializeDownloadQueue();
+		mAudioManager.abandonAudioFocus(this);
 		eventLooper.quit();
 		downloadService.unregisterReceiver(ejectEventReceiver);
 		downloadService.unregisterReceiver(intentReceiver);
 
-		TelephonyManager telephonyManager = (TelephonyManager) downloadService.getSystemService(Context.TELEPHONY_SERVICE);
-		telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
 	}
 
 	public boolean isExternalStorageAvailable() {
@@ -385,6 +387,23 @@ public class DownloadServiceLifecycleSupport {
 			lastChange = state.changed;
 		}
 	}
+	@Override
+	public void onAudioFocusChange(int focusChange) {
+		if(focusChange<=0) {
+			if (downloadService.getPlayerState() == PlayerState.STARTED) {
+				downloadService.pause(true);
+			}
+		} else {
+				if(downloadService.getPlayerState() == PlayerState.PAUSED_TEMP) {
+					downloadService.start();
+			}
+		}
+
+
+
+	}
+
+
 
 	public Date getLastChange() {
 		return lastChange;
@@ -459,35 +478,7 @@ public class DownloadServiceLifecycleSupport {
 	 * Logic taken from packages/apps/Music.  Will pause when an incoming
 	 * call rings or if a call (incoming or outgoing) is connected.
 	 */
-	private class MyPhoneStateListener extends PhoneStateListener {
-		private boolean resumeAfterCall;
 
-		@Override
-		public void onCallStateChanged(final int state, String incomingNumber) {
-			eventHandler.post(new Runnable() {
-				@Override
-				public void run() {
-					switch (state) {
-						case TelephonyManager.CALL_STATE_RINGING:
-						case TelephonyManager.CALL_STATE_OFFHOOK:
-							if (downloadService.getPlayerState() == PlayerState.STARTED) {
-								resumeAfterCall = true;
-								downloadService.pause(true);
-							}
-							break;
-						case TelephonyManager.CALL_STATE_IDLE:
-							if (resumeAfterCall) {
-								resumeAfterCall = false;
-								if(downloadService.getPlayerState() == PlayerState.PAUSED_TEMP) {
-									downloadService.start();
-								}
-							}
-							break;
-						default:
-							break;
-					}
-				}
-			});
-		}
-	}
+
+
 }

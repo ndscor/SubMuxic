@@ -1,5 +1,6 @@
 package com.gloxandro.submuxic.fragments;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,7 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gloxandro.submuxic.R;
 import com.gloxandro.submuxic.adapter.MainAdapter;
@@ -27,6 +32,7 @@ import com.gloxandro.submuxic.view.UpdateView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static com.gloxandro.submuxic.activity.SubsonicActivity.theme;
 import static com.gloxandro.submuxic.util.ThemeUtil.THEME_LIGHT;
@@ -68,7 +74,7 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 
 		switch (item.getItemId()) {
 			case R.id.menu_about:
-				aboutdialog();
+				about_submuxic();
 				return true;
 			case R.id.privacy_policy:
 				ShowPrivacyPolicy();
@@ -86,6 +92,37 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 
 		return false;
 	}
+
+
+
+	private void about_submuxic () {
+		Dialog dialog = new Dialog(requireActivity(), R.style.FullWidth_Dialog);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_about, null);
+		final ImageView dialogOk = (ImageView) view.findViewById(R.id.okaction);
+		final TextView infotitle = (TextView) view.findViewById(R.id.info_title);
+
+		final WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
+		aboutWebView.setBackgroundColor(0);
+
+		aboutWebView.loadUrl("file:///android_asset/about_dark.html");
+
+
+		infotitle.setText(R.string.main_about_title);
+		dialogOk.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+
+			}
+		});
+
+
+		dialog.setContentView(view);
+		dialog.show();
+	}
+
+
 
 	private void aboutdialog() {
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -114,57 +151,61 @@ public class MainFragment extends SelectRecyclerFragment<Integer> {
 		builder.create().show();
 	}
 
-	private void ShowPrivacyPolicy() {
-		LayoutInflater inflater = LayoutInflater.from(getActivity());
+	private void ShowPrivacyPolicy () {
+		Dialog dialog = new Dialog(requireActivity(), R.style.FullWidth_Dialog);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_about, null);
+		final ImageView dialogOk = (ImageView) view.findViewById(R.id.okaction);
+		final TextView infotitle = (TextView) view.findViewById(R.id.info_title);
 
-		View view               = inflater.inflate(R.layout.about, null);
-
-
-		WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
+		final WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
 		aboutWebView.setBackgroundColor(0);
 
 		aboutWebView.loadUrl("file:///android_asset/privacydark.html");
 
-		androidx.appcompat.app.AlertDialog.Builder builder         = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
-		builder.setView(view).setTitle(this.getString(R.string.whatsnew))
-				.setNegativeButton((R.string.common_ok), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
+		infotitle.setText(R.string.menu_privacy);
+		dialogOk.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
 
-		builder.create().show();
+			}
+		});
+
+
+		dialog.setContentView(view);
+		dialog.show();
 	}
 
+	private void showWhatsNewDialog () {
+		Dialog dialog = new Dialog(requireActivity(), R.style.FullWidth_Dialog);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_about, null);
+		final ImageView dialogOk = (ImageView) view.findViewById(R.id.okaction);
+		final TextView infotitle = (TextView) view.findViewById(R.id.info_title);
 
-	private void showWhatsNewDialog() {
-		LayoutInflater inflater = LayoutInflater.from(getActivity());
-
-		View view               = inflater.inflate(R.layout.about, null);
-
-
-		WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
+		final WebView aboutWebView = (WebView) view.findViewById(R.id.aboutWebView);
 		aboutWebView.setBackgroundColor(0);
-
 
 		aboutWebView.loadUrl("file:///android_asset/changelog_dark.html");
 
 
+		infotitle.setText(R.string.whatsnew);
+		dialogOk.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
 
-		androidx.appcompat.app.AlertDialog.Builder builder         = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+			}
+		});
 
-		builder.setView(view).setTitle(this.getString(R.string.whatsnew))
-				.setNegativeButton((R.string.common_ok), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
 
-		builder.create().show();
+		dialog.setContentView(view);
+		dialog.show();
 	}
+
+
 
 	@Override
 	public int getOptionsMenu() {

@@ -298,7 +298,7 @@ public class DownloadService extends Service {
 		instance = this;
 		shufflePlayBuffer = new ShufflePlayBuffer(this);
 		artistRadioBuffer = new ArtistRadioBuffer(this);
-		lifecycleSupport.onCreate();
+		lifecycleSupport.onCreate(getBaseContext());
 
 		if(Build.VERSION.SDK_INT >= 26) {
 			Notifications.shutGoogleUpNotification(this);
