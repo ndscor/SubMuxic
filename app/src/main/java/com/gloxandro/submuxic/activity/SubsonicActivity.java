@@ -228,7 +228,7 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+			if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_AUDIO ) != PackageManager.PERMISSION_GRANTED) {
 				ActivityCompat.requestPermissions(this,
 						permissions(),
 						1);
@@ -252,6 +252,8 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 	public static String[] storage_permissions_33 = {
 			Manifest.permission.READ_MEDIA_AUDIO,
 			Manifest.permission.READ_MEDIA_VIDEO,
+			Manifest.permission.READ_MEDIA_IMAGES,
+
 	};
 
 	private void CustomActionbar() {
@@ -441,6 +443,9 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 				})
 				.setNeutralButton(R.string.retry_button, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
+						mLicenseCheckerCallback = new MyLicenseCheckerCallback();
+						mChecker = new LicenseChecker(getApplicationContext(), new ServerManagedPolicy(getBaseContext(), new AESObfuscator(SALT, getPackageName(), uniqueID)), PLAYSTORE_LICENSE_KEY);
+						CustomActionbar();
 					}
 				})
 
@@ -1570,8 +1575,9 @@ public class SubsonicActivity extends AppCompatActivity implements OnItemSelecte
 			PrintWriter printWriter = null;
 			try {
 
-				PackageInfo packageInfo = context.getPackageManager().getPackageInfo("com.gloxandro.submuxic", 0);
-				file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString(), "SubMuxic-stacktrace.txt");
+				PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+				file = new File(Environment.getExternalStorageDirectory(), "dsub-stacktrace.txt");
+
 				printWriter = new PrintWriter(file);
 				printWriter.println("Android API level: " + Build.VERSION.SDK);
 				printWriter.println("Subsonic version name: " + packageInfo.versionName);

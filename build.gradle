@@ -20,11 +20,11 @@
         }
     repositories {
         google()
-        jcenter()
+        mavenCentral()
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.android.tools.build:gradle:8.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
 
 
@@ -36,12 +36,12 @@
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven {
             url 'http://4thline.org/m2'
             allowInsecureProtocol = true
         }
-        configurations.all {
+        configurations.configureEach {
             resolutionStrategy {
                 force "androidx.appcompat:appcompat:1.2.0-alpha02"
 
@@ -50,6 +50,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }

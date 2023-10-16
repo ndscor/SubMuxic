@@ -48,7 +48,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class AutoMediaBrowserService extends MediaBrowserServiceCompat {
 	private static final String TAG = AutoMediaBrowserService.class.getSimpleName();
 	private static final String BROWSER_ROOT = "root";
@@ -538,7 +537,8 @@ public class AutoMediaBrowserService extends MediaBrowserServiceCompat {
 			}, 100);
 		} else {
 			RemoteControlClientLP remoteControlClient = (RemoteControlClientLP) downloadService.getRemoteControlClient();
-			setSessionToken(MediaSessionCompat.Token.fromToken(remoteControlClient.getMediaSession().getSessionToken()));
+
+			setSessionToken(remoteControlClient.getMediaSession().getSessionToken());
 		}
 	}
 }

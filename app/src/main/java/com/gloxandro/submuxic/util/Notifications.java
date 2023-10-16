@@ -63,7 +63,7 @@ public final class Notifications {
 
 	private final static Pair<Integer, Integer> NOTIFICATION_TEXT_COLORS = new Pair<Integer, Integer>();
 
-	public static void showPlayingNotification(final Context context, final DownloadService downloadService, final Handler handler, MusicDirectory.Entry song) {
+	public static void showPlayingNotification(final Context context, final DownloadService downloadService, final Handler handler, MusicDirectory.Entry song, boolean usingMediaStyleNotification) {
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			getPlayingNotificationChannel(context);
 		}
@@ -486,7 +486,7 @@ public final class Notifications {
 
 			Intent notificationIntent = new Intent(context, SubsonicFragmentActivity.class);
 			notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			
+
 			String tab = null, type = null;
 			switch(stringId) {
 				case R.string.sync_new_albums:

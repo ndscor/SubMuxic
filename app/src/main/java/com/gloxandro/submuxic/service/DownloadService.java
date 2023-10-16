@@ -18,30 +18,16 @@
  */
 package com.gloxandro.submuxic.service;
 
-import android.annotation.TargetApi;
-import android.app.Service;
-import android.content.ComponentCallbacks2;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.PlaybackParams;
-import android.media.audiofx.AudioEffect;
-import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.PowerManager;
-import android.util.Log;
-import android.view.KeyEvent;
-
-import androidx.collection.LruCache;
-import androidx.mediarouter.media.MediaRouteSelector;
-import androidx.mediarouter.media.MediaRouter;
+import static com.gloxandro.submuxic.domain.PlayerState.COMPLETED;
+import static com.gloxandro.submuxic.domain.PlayerState.DOWNLOADING;
+import static com.gloxandro.submuxic.domain.PlayerState.IDLE;
+import static com.gloxandro.submuxic.domain.PlayerState.PAUSED;
+import static com.gloxandro.submuxic.domain.PlayerState.PAUSED_TEMP;
+import static com.gloxandro.submuxic.domain.PlayerState.PREPARED;
+import static com.gloxandro.submuxic.domain.PlayerState.PREPARING;
+import static com.gloxandro.submuxic.domain.PlayerState.STARTED;
+import static com.gloxandro.submuxic.domain.PlayerState.STOPPED;
+import static com.gloxandro.submuxic.domain.RemoteControlState.LOCAL;
 
 import com.gloxandro.submuxic.R;
 import com.gloxandro.submuxic.activity.SubsonicActivity;
@@ -59,12 +45,12 @@ import com.gloxandro.submuxic.receiver.AudioNoisyReceiver;
 import com.gloxandro.submuxic.receiver.MediaButtonIntentReceiver;
 import com.gloxandro.submuxic.server.BufferProxy;
 import com.gloxandro.submuxic.util.ArtistRadioBuffer;
-import com.gloxandro.submuxic.util.Constants;
 import com.gloxandro.submuxic.util.ImageLoader;
-import com.gloxandro.submuxic.util.MediaRouteManager;
 import com.gloxandro.submuxic.util.Notifications;
-import com.gloxandro.submuxic.util.ShufflePlayBuffer;
 import com.gloxandro.submuxic.util.SilentBackgroundTask;
+import com.gloxandro.submuxic.util.Constants;
+import com.gloxandro.submuxic.util.MediaRouteManager;
+import com.gloxandro.submuxic.util.ShufflePlayBuffer;
 import com.gloxandro.submuxic.util.SimpleServiceBinder;
 import com.gloxandro.submuxic.util.UpdateHelper;
 import com.gloxandro.submuxic.util.Util;
@@ -84,16 +70,31 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.gloxandro.submuxic.domain.PlayerState.COMPLETED;
-import static com.gloxandro.submuxic.domain.PlayerState.DOWNLOADING;
-import static com.gloxandro.submuxic.domain.PlayerState.IDLE;
-import static com.gloxandro.submuxic.domain.PlayerState.PAUSED;
-import static com.gloxandro.submuxic.domain.PlayerState.PAUSED_TEMP;
-import static com.gloxandro.submuxic.domain.PlayerState.PREPARED;
-import static com.gloxandro.submuxic.domain.PlayerState.PREPARING;
-import static com.gloxandro.submuxic.domain.PlayerState.STARTED;
-import static com.gloxandro.submuxic.domain.PlayerState.STOPPED;
-import static com.gloxandro.submuxic.domain.RemoteControlState.LOCAL;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.Service;
+import android.content.ComponentCallbacks2;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.PlaybackParams;
+import android.media.audiofx.AudioEffect;
+import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.PowerManager;
+import android.util.Log;
+import android.util.LruCache;
+import android.view.KeyEvent;
+
+import androidx.mediarouter.media.MediaRouteSelector;
+import androidx.mediarouter.media.MediaRouter;
 
 /**
  * @author Sindre Mehus
@@ -191,6 +192,11 @@ public class DownloadService extends Service {
 	private long subtractNextPosition = 0;
 	private int subtractPosition = 0;
 
+	/**
+	 * Reference to precreated BASTP Object
+	 */
+	private BastpUtil mBastpUtil;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -200,6 +206,7 @@ public class DownloadService extends Service {
 			public void run() {
 				Looper.prepare();
 
+				mBastpUtil = new BastpUtil();
 				mediaPlayer = new MediaPlayer();
 				mediaPlayer.setWakeMode(DownloadService.this, PowerManager.PARTIAL_WAKE_LOCK);
 
@@ -298,7 +305,7 @@ public class DownloadService extends Service {
 		instance = this;
 		shufflePlayBuffer = new ShufflePlayBuffer(this);
 		artistRadioBuffer = new ArtistRadioBuffer(this);
-		lifecycleSupport.onCreate(getBaseContext());
+		lifecycleSupport.onCreate();
 
 		if(Build.VERSION.SDK_INT >= 26) {
 			Notifications.shutGoogleUpNotification(this);
@@ -309,7 +316,9 @@ public class DownloadService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
 		lifecycleSupport.onStart(intent);
-		if(Build.VERSION.SDK_INT >= 26 && !this.isForeground()) {
+
+		String action = intent.getAction();
+		if(Build.VERSION.SDK_INT >= 26 && !this.isForeground() && !"KEYCODE_MEDIA_START".equals(action)) {
 			Notifications.shutGoogleUpNotification(this);
 		}
 		return START_NOT_STICKY;
@@ -1080,7 +1089,7 @@ public class DownloadService extends Service {
 
 	public synchronized List<DownloadFile> getRecentDownloads() {
 		int from = Math.max(currentPlayingIndex - 10, 0);
-		int songsToKeep = Math.max(Util.getPreloadCount(this), 20);
+		int songsToKeep = Math.min(Math.max(Util.getPreloadCount(this), 20), downloadList.size());
 		int to = Math.min(currentPlayingIndex + songsToKeep, Math.max(downloadList.size() - 1, 0));
 		List<DownloadFile> temp = downloadList.subList(from, to);
 		temp.addAll(backgroundDownloadList);
@@ -1518,12 +1527,14 @@ public class DownloadService extends Service {
 			Util.requestAudioFocus(this, audioManager);
 		}
 
+		SharedPreferences prefs = Util.getPreferences(this);
+		boolean usingMediaStyleNotification = prefs.getBoolean(Constants.PREFERENCES_KEY_MEDIA_STYLE_NOTIFICATION, true);
+
 		if (show) {
-			Notifications.showPlayingNotification(this, this, handler, currentPlaying.getSong());
+			Notifications.showPlayingNotification(this, this, handler, currentPlaying.getSong(), usingMediaStyleNotification);
 		} else if (pause) {
-			SharedPreferences prefs = Util.getPreferences(this);
-			if(prefs.getBoolean(Constants.PREFERENCES_KEY_PERSISTENT_NOTIFICATION, false)) {
-				Notifications.showPlayingNotification(this, this, handler, currentPlaying.getSong());
+			if (prefs.getBoolean(Constants.PREFERENCES_KEY_PERSISTENT_NOTIFICATION, false)) {
+				Notifications.showPlayingNotification(this, this, handler, currentPlaying.getSong(), usingMediaStyleNotification);
 			} else {
 				Notifications.hidePlayingNotification(this, this, handler);
 			}
@@ -2601,7 +2612,7 @@ public class DownloadService extends Service {
 				public Void doInBackground() throws Throwable {
 					MusicService musicService = MusicServiceFactory.getMusicService(context);
 					entry.setBookmark(new Bookmark(position));
-					musicService.createBookmark(entry, position, "Auto created by SubMuxic", context, null);
+					musicService.createBookmark(entry, position, "Auto created by DSub", context, null);
 
 					MusicDirectory.Entry found = UpdateView.findEntry(entry);
 					if(found != null) {
@@ -2640,7 +2651,7 @@ public class DownloadService extends Service {
 		try {
 			float adjust = 0f;
 			if (prefs.getBoolean(Constants.PREFERENCES_KEY_REPLAY_GAIN, false)) {
-				float[] rg = BastpUtil.getReplayGainValues(downloadFile.getFile().getCanonicalPath()); /* track, album */
+				BastpUtil.GainValues rg = mBastpUtil.getReplayGainValues(downloadFile.getFile().getCanonicalPath()); /* track, album */
 				boolean singleAlbum = false;
 
 				String replayGainType = prefs.getString(Constants.PREFERENCES_KEY_REPLAY_GAIN_TYPE, "1");
@@ -2684,15 +2695,15 @@ public class DownloadService extends Service {
 				// Already false, no need to do anything here
 
 
-				// If playing a single album or no track gain, use album gain
-				if((singleAlbum || rg[0] == 0) && rg[1] != 0) {
-					adjust = rg[1];
+				// If playing a single album or no track gain, use album gain (if set)
+				if((singleAlbum || rg.track == 0) && rg.album != 0) {
+					adjust = rg.album;
 				} else {
 					// Otherwise, give priority to track gain
-					adjust = rg[0];
+					adjust = rg.track;
 				}
 
-				if (adjust == 0) {
+				if (!rg.found) {
 					/* No RG value found: decrease volume for untagged song if requested by user */
 					int untagged = Integer.parseInt(prefs.getString(Constants.PREFERENCES_KEY_REPLAY_GAIN_UNTAGGED, "0"));
 					adjust = (untagged - 150) / 10f;

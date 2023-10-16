@@ -27,7 +27,10 @@ public final class Constants {
     // Character encoding used throughout.
     public static final String UTF_8 = "UTF-8";
 
-    // REST protocol version and client ID.
+	public static final String PREFERENCES_KEY_MEDIA_STYLE_NOTIFICATION = "mediaStyleNotification";
+
+
+	// REST protocol version and client ID.
     // Note: Keep it as low as possible to maintain compatibility with older servers.
     public static final String REST_PROTOCOL_VERSION_SUBSONIC = "1.2.0";
 	public static final String REST_PROTOCOL_VERSION_MADSONIC = "2.0.0";
@@ -203,12 +206,12 @@ public final class Constants {
 	public static final String OFFLINE_STAR_ID = "starID";
 	public static final String OFFLINE_STAR_SEARCH = "starTitle";
 	public static final String OFFLINE_STAR_SETTING = "starSetting";
-	
+
 	public static final String CACHE_KEY_IGNORE = "ignoreArticles";
 	public static final String CACHE_AUDIO_SESSION_ID = "audioSessionId";
 	public static final String CACHE_AUDIO_SESSION_VERSION_CODE = "audioSessionVersionCode";
 	public static final String CACHE_BLOCK_TOKEN_USE = "blockTokenUse";
-	
+
 	public static final String MAIN_BACK_STACK = "backStackIds";
 	public static final String MAIN_BACK_STACK_SIZE = "backStackIdsSize";
 	public static final String MAIN_NOW_PLAYING = "nowPlayingId";
